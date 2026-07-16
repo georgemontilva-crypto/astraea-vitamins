@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astraea — Batch 26-0114 Test Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1B2E; --paper:#F7F6F1; --star:#A9C0D8; --verify:#177B54;
+  --hair:#D8D5CC; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Karla',sans-serif;line-height:1.55}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+
+/* header */
+.top{background:var(--ink);color:var(--paper);padding:26px 0}
+.top .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:'Marcellus',serif;letter-spacing:.2em;font-size:18px}
+.top .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--star)}
+
+/* verified banner */
+.banner{background:var(--verify);color:#fff;padding:14px 0}
+.banner .wrap{display:flex;align-items:center;gap:12px}
+.banner .check{width:26px;height:26px;border-radius:50%;background:#fff;color:var(--verify);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.banner .t{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em}
+
+/* product head */
+.head{padding:46px 0 26px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--verify)}
+h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(28px,4.5vw,40px);margin:8px 0 4px}
+.head .dose{color:#5a6478;font-size:15px}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:26px}
+.meta>div{background:#fff;padding:14px 16px}
+.meta .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7a8296}
+.meta .v{font-size:15px;font-weight:600;margin-top:3px}
+
+/* results table */
+.section{padding:30px 0}
+h2{font-family:'Marcellus',serif;font-weight:400;font-size:22px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--hair)}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;text-align:left;color:#7a8296;padding:12px 16px;border-bottom:2px solid var(--ink)}
+td{padding:12px 16px;font-size:14px;border-bottom:1px solid #ecead F}
+td{border-bottom:1px solid #eceae2}
+tr:last-child td{border-bottom:none}
+td.num{font-family:var(--mono);font-size:12.5px}
+.pass{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--verify);border:1px solid var(--verify);padding:2px 8px}
+.note{font-size:12.5px;color:#7a8296;margin-top:10px}
+
+/* download */
+.docrow{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.doc{flex:1;min-width:240px;background:#fff;border:1px solid var(--hair);padding:18px 20px;display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--ink)}
+.doc:hover{border-color:var(--ink)}
+.doc .icon{width:38px;height:46px;border:1.5px solid var(--ink);position:relative;flex:none}
+.doc .icon::after{content:'PDF';position:absolute;bottom:4px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:8px;letter-spacing:.1em}
+.doc .t b{display:block;font-size:14.5px}
+.doc .t span{font-family:var(--mono);font-size:11px;color:#7a8296}
+
+/* how it works */
+.how{background:var(--ink);color:var(--paper);margin-top:34px}
+.how .wrap{padding:44px 24px}
+.how h2{color:var(--paper)}
+.how p{color:#c9d4e2;font-size:14.5px;max-width:62ch;margin-bottom:12px}
+.how .lab{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--star);margin-top:18px}
+
+footer{padding:34px 0 50px;font-family:var(--mono);font-size:10.5px;color:#7a8296;letter-spacing:.08em}
+@media(max-width:640px){.meta{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">ASTRAEA</div>
+    <div class="tag">BATCH VERIFICATION</div>
+  </div>
+</header>
+
+<div class="banner">
+  <div class="wrap">
+    <div class="check">✓</div>
+    <div class="t">THIS BATCH PASSED ALL INDEPENDENT TESTING · 5 OF 5 PANELS</div>
+  </div>
+</div>
+
+<section class="head wrap">
+  <div class="eyebrow">You scanned the bottle of</div>
+  <h1>Ashwagandha KSM-66</h1>
+  <div class="dose">600 mg root extract · 60 capsules · Wellness line</div>
+  <div class="meta">
+    <div><div class="k">Lot</div><div class="v mono">26-0114</div></div>
+    <div><div class="k">Manufactured</div><div class="v mono">28 JAN 2026</div></div>
+    <div><div class="k">Tested</div><div class="v mono">03 FEB 2026</div></div>
+    <div><div class="k">Best by</div><div class="v mono">JAN 2028</div></div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <h2>What the lab found</h2>
+  <table>
+    <thead><tr><th>Panel</th><th>Label claim / limit</th><th>Tested result</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Identity — ashwagandha root (HPTLC)</td><td class="num">Confirmed match</td><td class="num">Withania somnifera ✓</td><td><span class="pass">PASS</span></td></tr>
+      <tr><td>Potency — withanolides (HPLC)</td><td class="num">≥ 5.0%</td><td class="num">5.14%</td><td><span class="pass">PASS</span></td></tr>
+      <tr><td>Heavy metals — lead</td><td class="num">&lt; 0.5 µg/serving</td><td class="num">0.06 µg</td><td><span class="pass">PASS</span></td></tr>
+      <tr><td>Heavy metals — arsenic, cadmium, mercury</td><td class="num">Within USP limits</td><td class="num">All below limit</td><td><span class="pass">PASS</span></td></tr>
+      <tr><td>Microbials — yeast, mold, E. coli, salmonella</td><td class="num">Within USP &lt;2021/2022&gt;</td><td class="num">None detected</td><td><span class="pass">PASS</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">Results shown are for lot 26-0114 only. Every lot is tested separately — a different bottle's QR code shows that bottle's results.</p>
+</section>
+
+<section class="section wrap">
+  <h2>The documents</h2>
+  <div class="docrow">
+    <a class="doc" href="#"><div class="icon"></div><div class="t"><b>Certificate of Analysis</b><span>Full lab report · Lot 26-0114</span></div></a>
+    <a class="doc" href="#"><div class="icon"></div><div class="t"><b>Ingredient supplier COAs</b><span>KSM-66 source documentation</span></div></a>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <h2>Why we show you this</h2>
+    <p>Most supplement brands say "third-party tested" and stop there. We publish the actual results for the actual batch in your hand — the same documents our own team reviews before any lot ships. If a batch ever fails, it doesn't ship, and the lot number is retired.</p>
+    <p>Testing is performed by an independent, ISO 17025-accredited laboratory. Astraea does not own, operate, or compensate the lab based on results.</p>
+    <div class="lab">TESTING PARTNER: [ACCREDITED LAB NAME] · REPORT NO. 26-0114-A</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">ASTRAEA VITAMINS · BATCH VERIFICATION PAGE CONCEPT V1 · LAB NAME, REPORT DATA &amp; DOCUMENTS SHOWN ARE PLACEHOLDERS</div>
+</footer>
+
+</body>
+</html>

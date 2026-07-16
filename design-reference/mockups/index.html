@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astraea — Website Handoff Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0E1B2E;--paper:#F7F6F1;--star:#A9C0D8;--starDark:#41628a;--verify:#177B54;--ember:#C08A3E;--hair:#D8D5CC;--mono:'IBM Plex Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Karla',sans-serif;line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--verify)}
+h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(30px,4.5vw,46px);margin:10px 0 8px}
+h2{font-family:'Marcellus',serif;font-weight:400;font-size:24px;margin:0 0 16px}
+.lede{max-width:62ch;color:#3c4658;font-size:16.5px}
+.section{padding:52px 0;border-top:1px solid var(--hair)}
+.hero{background:var(--ink);color:var(--paper);padding:70px 0 60px}
+.hero .eyebrow{color:var(--star)}.hero .lede{color:#c9d4e2}
+.wordmark{font-family:'Marcellus',serif;letter-spacing:.16em;font-size:clamp(40px,7vw,72px);margin:14px 0 10px}
+
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.chip{border:1px solid var(--hair);background:#fff}
+.chip .sw{height:64px}.chip .m{padding:8px 10px}
+.chip .n{font-size:12.5px;font-weight:600}.chip .h{font-family:var(--mono);font-size:10.5px;color:#5a6478}
+.chip .u{font-size:10.5px;color:#7a8296;margin-top:2px}
+
+.type div{margin-bottom:14px}
+.tD{font-family:'Marcellus',serif;font-size:32px}.tB{font-size:16px}.tM{font-family:var(--mono);font-size:14px;color:var(--verify)}
+.lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#7a8296}
+
+.files{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.f{background:#fff;border:1px solid var(--hair);padding:20px;display:block;text-decoration:none;color:var(--ink)}
+.f:hover{border-color:var(--ink)}
+.f .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--verify);color:var(--verify)}
+.f .tag.ref{border-color:#9aa2b5;color:#7a8296}.f .tag.sys{border-color:var(--starDark);color:var(--starDark)}.f .tag.pkg{border-color:var(--ember);color:var(--ember)}
+.f h3{font-family:'Marcellus',serif;font-weight:400;font-size:20px;margin:12px 0 6px}
+.f p{font-size:13.5px;color:#3c4658}
+.f .open{font-family:var(--mono);font-size:11px;color:var(--verify);margin-top:12px;letter-spacing:.08em}
+footer{padding:30px 0 56px;font-family:var(--mono);font-size:10.5px;color:#7a8296;letter-spacing:.08em}
+@media(max-width:760px){.chips{grid-template-columns:repeat(2,1fr)}.files{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Website design handoff</div>
+    <div class="wordmark">ASTRAEA</div>
+    <p class="lede">The reference mockups below are the visual and interaction spec. Rebuild them one-to-one in Shopify. Open each file to view it; read the source for exact tokens and component markup. Pair with the Shopify Build Brief for scope and architecture.</p>
+  </div>
+</header>
+
+<section class="section wrap">
+  <div class="eyebrow">Design tokens</div>
+  <h2>Color</h2>
+  <div class="chips">
+    <div class="chip"><div class="sw" style="background:#0E1B2E"></div><div class="m"><div class="n">Midnight Ink</div><div class="h">#0E1B2E</div><div class="u">Primary type / dark</div></div></div>
+    <div class="chip"><div class="sw" style="background:#F7F6F1;border-bottom:1px solid #e3e0d7"></div><div class="m"><div class="n">Archival Paper</div><div class="h">#F7F6F1</div><div class="u">Background</div></div></div>
+    <div class="chip"><div class="sw" style="background:#A9C0D8"></div><div class="m"><div class="n">Starlight</div><div class="h">#A9C0D8</div><div class="u">Wellness line</div></div></div>
+    <div class="chip"><div class="sw" style="background:#C08A3E"></div><div class="m"><div class="n">Ember</div><div class="h">#C08A3E</div><div class="u">Sport line</div></div></div>
+    <div class="chip"><div class="sw" style="background:#177B54"></div><div class="m"><div class="n">Verified</div><div class="h">#177B54</div><div class="u">Testing / COA only</div></div></div>
+    <div class="chip"><div class="sw" style="background:#41628a"></div><div class="m"><div class="n">Starlight Dark</div><div class="h">#41628a</div><div class="u">Wellness detail</div></div></div>
+    <div class="chip"><div class="sw" style="background:#5FD6A7"></div><div class="m"><div class="n">Verified Bright</div><div class="h">#5FD6A7</div><div class="u">PASS on dark</div></div></div>
+    <div class="chip"><div class="sw" style="background:#D8D5CC"></div><div class="m"><div class="n">Hairline</div><div class="h">#D8D5CC</div><div class="u">Borders / rules</div></div></div>
+  </div>
+  <p class="lede" style="margin-top:16px;font-size:13.5px;color:#7a8296">Verified green is reserved for testing/COA UI only — never decorative, so it keeps its meaning.</p>
+</section>
+
+<section class="section wrap type">
+  <div class="eyebrow">Typography</div>
+  <h2>Three voices</h2>
+  <div><div class="lab">Display — Marcellus</div><div class="tD">Ashwagandha KSM-66</div></div>
+  <div><div class="lab">Body — Karla</div><div class="tB">Clear, humanist, unfussy — for everything a person actually reads.</div></div>
+  <div><div class="lab">Evidence — IBM Plex Mono</div><div class="tM">LOT 26-0114 · TESTED 03 FEB 2026 · PASS</div></div>
+</section>
+
+<section class="section wrap">
+  <div class="eyebrow">The files</div>
+  <h2>Website pages — build one-to-one</h2>
+  <div class="files">
+    <a class="f" href="pages/lab-tests.html"><span class="tag">Production</span><h3>Lab Tests page</h3><p>Product selector + batch dropdown → pass/fail, label-vs-tested table, COA download. Accepts ?product= (where the per-product QR lands). The interaction logic is in the script block.</p><div class="open">OPEN pages/lab-tests.html →</div></a>
+    <a class="f" href="pages/brand-identity.html"><span class="tag sys">Design system</span><h3>Brand identity board</h3><p>Palette, type, voice, label system, constellation motif. The source of truth for the design language — hero style, dark sections, tone.</p><div class="open">OPEN pages/brand-identity.html →</div></a>
+    <a class="f" href="pages/batch-result.html"><span class="tag ref">Reference</span><h3>Batch result (earlier)</h3><p>Single-batch COA layout, superseded by the Lab Tests page. Kept for results-table styling reference.</p><div class="open">OPEN pages/batch-result.html →</div></a>
+  </div>
+
+  <h2 style="margin-top:34px">Packaging concepts — inform product imagery</h2>
+  <div class="files">
+    <a class="f" href="pages/container-samples.html"><span class="tag pkg">Packaging</span><h3>Container system</h3><p>Seven containers at relative scale with line color-coding.</p><div class="open">OPEN pages/container-samples.html →</div></a>
+    <a class="f" href="pages/master-label.html"><span class="tag pkg">Packaging</span><h3>Master label</h3><p>Unwrapped label with FDA compliance zones.</p><div class="open">OPEN pages/master-label.html →</div></a>
+    <a class="f" href="pages/on-the-go-stickpacks.html"><span class="tag pkg">Packaging</span><h3>On-the-Go stick packs</h3><p>The 28-count box + stick concept.</p><div class="open">OPEN pages/on-the-go-stickpacks.html →</div></a>
+  </div>
+</section>
+
+<footer class="wrap">ASTRAEA VITAMINS · WEBSITE HANDOFF · SEE README.md FOR REBUILD GUIDANCE · SAMPLE COA DATA IS PLACEHOLDER</footer>
+
+</body>
+</html>

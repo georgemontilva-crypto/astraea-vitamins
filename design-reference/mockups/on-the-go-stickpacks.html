@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astraea — On-the-Go Stick Packs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1B2E; --paper:#F7F6F1; --star:#A9C0D8; --starDark:#41628a;
+  --verify:#177B54; --ember:#C08A3E; --hair:#D8D5CC; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Karla',sans-serif;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--verify)}
+h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(28px,4vw,42px);margin:10px 0 8px}
+h2{font-family:'Marcellus',serif;font-weight:400;font-size:24px;margin:0 0 14px}
+.lede{max-width:60ch;color:#3c4658;font-size:16px}
+.section{padding:56px 0;border-top:1px solid var(--hair)}
+.section:first-of-type{border-top:none;padding-top:64px}
+
+.stage{background:#fff;border:1px solid var(--hair);padding:40px 24px 26px;margin-top:32px;overflow-x:auto}
+.stage svg{display:block;margin:0 auto;min-width:820px}
+.caption{font-family:var(--mono);font-size:11px;color:#7a8296;margin-top:14px;letter-spacing:.05em;text-align:center}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.card{background:#fff;border:1px solid var(--hair);padding:20px}
+.card .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--verify);margin-bottom:8px}
+.card h3{font-family:'Marcellus',serif;font-weight:400;font-size:20px;margin-bottom:6px}
+.card p{font-size:13.5px;color:#3c4658}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;padding:3px 8px;border:1px solid var(--ember);color:var(--ember);margin-top:10px}
+
+.notes{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.note{background:#fff;border-left:3px solid var(--verify);border-top:1px solid var(--hair);border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:16px 18px;font-size:14px;color:#3c4658}
+.note b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+@media(max-width:900px){.cards,.notes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="section wrap">
+  <div class="eyebrow">Line extension · On-the-Go stick packs</div>
+  <h1>One serving. Sealed. Twenty-eight to a box.</h1>
+  <p class="lede">A stick-pack sub-SKU of each powder — the jar's rhythm (28 = one lunar cycle) in a format that fits a pocket, a gym bag, or a carry-on. Same testing, same "Check the Testing" QR, now on the box.</p>
+
+  <div class="stage">
+  <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" font-family="Karla,sans-serif">
+    <line x1="40" y1="400" x2="860" y2="400" stroke="#D8D5CC" stroke-width="1"/>
+
+    <!-- ===== THE BOX (28-count carton) ===== -->
+    <g transform="translate(90,70)">
+      <!-- carton body -->
+      <rect x="0" y="0" width="230" height="330" rx="4" fill="#FDFCF9" stroke="#C9C5B8" stroke-width="1"/>
+      <!-- top ember band -->
+      <rect x="0" y="0" width="230" height="10" rx="4" fill="#C08A3E"/>
+      <rect x="0" y="6" width="230" height="4" fill="#C08A3E"/>
+      <!-- brand -->
+      <text x="26" y="52" font-size="15" letter-spacing="4" fill="#0E1B2E">ASTRAEA</text>
+      <text x="26" y="70" font-family="'IBM Plex Mono',monospace" font-size="8" letter-spacing="2" fill="#C08A3E">SPORT · ON-THE-GO</text>
+      <!-- product name -->
+      <text x="26" y="120" font-family="Marcellus,serif" font-size="30" fill="#0E1B2E">Electrolytes</text>
+      <!-- constellation strip -->
+      <g transform="translate(26,140)">
+        <g fill="#C08A3E"><circle cx="6" cy="14" r="2.6"/><circle cx="48" cy="4" r="1.8"/><circle cx="96" cy="16" r="3"/><circle cx="150" cy="3" r="1.7"/><circle cx="188" cy="12" r="2.2"/></g>
+        <g stroke="#C08A3E" stroke-width=".6" opacity=".5"><line x1="6" y1="14" x2="48" y2="4"/><line x1="48" y1="4" x2="96" y2="16"/><line x1="96" y1="16" x2="150" y2="3"/><line x1="150" y1="3" x2="188" y2="12"/></g>
+      </g>
+      <!-- count callout -->
+      <text x="26" y="190" font-family="Marcellus,serif" font-size="17" fill="#0E1B2E">28 Stick Packs</text>
+      <text x="26" y="207" font-size="10" fill="#5A6478">One lunar cycle · 6 g per serving</text>
+      <!-- COA strip -->
+      <rect x="0" y="256" width="230" height="74" fill="#0E1B2E"/>
+      <!-- qr -->
+      <g transform="translate(20,272)">
+        <rect width="44" height="44" fill="#F7F6F1"/>
+        <rect x="4" y="4" width="10" height="10" fill="#0E1B2E"/><rect x="30" y="4" width="10" height="10" fill="#0E1B2E"/>
+        <rect x="4" y="30" width="10" height="10" fill="#0E1B2E"/><rect x="20" y="20" width="6" height="6" fill="#0E1B2E"/>
+        <rect x="32" y="30" width="6" height="6" fill="#0E1B2E"/><rect x="20" y="4" width="4" height="4" fill="#0E1B2E"/>
+      </g>
+      <text x="78" y="284" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#5FD6A7">CHECK THE TESTING</text>
+      <text x="78" y="298" font-family="'IBM Plex Mono',monospace" font-size="6.6" fill="#A9C0D8">EVERY BATCH, INDEPENDENTLY</text>
+      <text x="78" y="308" font-family="'IBM Plex Mono',monospace" font-size="6.6" fill="#A9C0D8">TESTED. SCAN FOR RESULTS</text>
+      <text x="115" y="356" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" fill="#0E1B2E">28-COUNT BOX</text>
+    </g>
+
+    <!-- ===== A STICK PACK leaning ===== -->
+    <g transform="translate(360,120) rotate(8)">
+      <rect x="0" y="0" width="58" height="278" rx="6" fill="#0E1B2E"/>
+      <!-- crimped top -->
+      <rect x="0" y="0" width="58" height="16" fill="#0B1524"/>
+      <g stroke="#22304a" stroke-width="1"><line x1="0" y1="4" x2="58" y2="4"/><line x1="0" y1="8" x2="58" y2="8"/><line x1="0" y1="12" x2="58" y2="12"/></g>
+      <!-- crimped bottom -->
+      <rect x="0" y="262" width="58" height="16" fill="#0B1524"/>
+      <g stroke="#22304a" stroke-width="1"><line x1="0" y1="266" x2="58" y2="266"/><line x1="0" y1="270" x2="58" y2="270"/><line x1="0" y1="274" x2="58" y2="274"/></g>
+      <!-- ember band -->
+      <rect x="0" y="30" width="58" height="4" fill="#C08A3E"/>
+      <!-- vertical brand -->
+      <text x="29" y="70" text-anchor="middle" font-size="8.5" letter-spacing="3" fill="#F7F6F1">ASTRAEA</text>
+      <text x="29" y="150" text-anchor="middle" font-family="Marcellus,serif" font-size="15" fill="#F7F6F1" transform="rotate(90 29 150)">Electrolytes</text>
+      <text x="29" y="238" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="#A9C0D8">6 g · 1 SERVING</text>
+      <!-- small verify dot -->
+      <circle cx="29" cy="250" r="3" fill="#5FD6A7"/>
+    </g>
+
+    <!-- ===== a few loose sticks fanned ===== -->
+    <g transform="translate(560,250)">
+      <g transform="rotate(-18)"><rect x="0" y="0" width="30" height="150" rx="4" fill="#0E1B2E"/><rect x="0" y="18" width="30" height="3" fill="#C08A3E"/><rect x="0" y="0" width="30" height="9" fill="#0B1524"/><rect x="0" y="141" width="30" height="9" fill="#0B1524"/></g>
+      <g transform="translate(34,-6) rotate(-2)"><rect x="0" y="0" width="30" height="150" rx="4" fill="#122239"/><rect x="0" y="18" width="30" height="3" fill="#A9C0D8"/><rect x="0" y="0" width="30" height="9" fill="#0B1524"/><rect x="0" y="141" width="30" height="9" fill="#0B1524"/></g>
+      <g transform="translate(70,4) rotate(14)"><rect x="0" y="0" width="30" height="150" rx="4" fill="#0E1B2E"/><rect x="0" y="18" width="30" height="3" fill="#C08A3E"/><rect x="0" y="0" width="30" height="9" fill="#0B1524"/><rect x="0" y="141" width="30" height="9" fill="#0B1524"/></g>
+    </g>
+
+    <text x="205" y="428" text-anchor="middle" font-size="11" fill="#7A8296">Box + single stick shown; loose sticks illustrate the pocket format</text>
+  </svg>
+  </div>
+  <p class="caption">ELECTROLYTES SHOWN · SPORT LINE (EMBER) · SLIM-STICK FORMAT · IDENTICAL SYSTEM ACROSS EVERY ON-THE-GO SKU</p>
+</section>
+
+<section class="section wrap">
+  <h2>The launch set — five slim-stick heroes</h2>
+  <p class="lede">The powders with the highest on-the-go demand and the cleanest slim-stick format. Others follow once the line proves out.</p>
+  <div class="cards">
+    <div class="card"><div class="k">28 sticks · 6 g</div><h3>Electrolytes</h3><p>The flagship stick — hydration for travel, heat, and training. The category people already reach for in sachet form.</p></div>
+    <div class="card"><div class="k">28 sticks · 5 g</div><h3>Creatine</h3><p>A tidy daily 5 g, no scoop or tub. Creapure-grade; the compact stick reinforces the "one clean dose" idea.</p></div>
+    <div class="card"><div class="k">28 sticks · 12 g</div><h3>Pre-Workout</h3><p>Grab-and-go energy for the gym bag. No measuring, no mess before a session.</p></div>
+    <div class="card"><div class="k">28 sticks · 8 g</div><h3>Greens</h3><p>Daily greens without the tub — ideal for desks, hotels, and travel routines.</p></div>
+    <div class="card"><div class="k">28 sticks · 10 g</div><h3>EAAs / BCAAs</h3><p>Intra-workout aminos in a pocket. Sip anywhere without carrying a shaker of powder.</p></div>
+    <div class="card"><div class="k">Large sachet</div><h3>Whey / Plant / Recovery</h3><p>Full protein doses (~30 g) work as a larger packet, not a slim stick. Include at launch or hold for phase 2. <span class="tag">DECIDE</span></p></div>
+  </div>
+
+  <div class="notes">
+    <div class="note"><b>Why 28, not 30</b>28 sticks = one lunar cycle = the through-line of the whole brand. Keeping every format on 28 makes the system feel intentional, not arbitrary — and syncs the stick box to the jar's refill rhythm.</div>
+    <div class="note"><b>Where it fits the catalog</b>Each stick box is a format option under its parent powder (jar vs. on-the-go), not a separate product — clean catalog, easy cross-sell: "home tub + travel box." A natural subscription and first-trial unit, too.</div>
+  </div>
+</section>
+
+<footer class="wrap" style="padding:30px 28px 60px;font-family:var(--mono);font-size:10.5px;color:#7a8296;letter-spacing:.08em">
+  ASTRAEA VITAMINS · ON-THE-GO STICK PACK CONCEPT V1 · STICK/SACHET FILLING IS A DISTINCT CO-PACKER CAPABILITY — CONFIRM IN RFQ
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astraea — Lab Tests</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1B2E; --paper:#F7F6F1; --star:#A9C0D8; --starDark:#41628a;
+  --verify:#177B54; --ember:#C08A3E; --hair:#D8D5CC; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Karla',sans-serif;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+
+/* nav */
+.nav{background:var(--ink);color:var(--paper);padding:20px 0}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:'Marcellus',serif;letter-spacing:.2em;font-size:18px}
+.nav .links{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--star);text-transform:uppercase}
+.nav .links span{opacity:.6;margin-left:18px}
+.nav .links span.active{opacity:1;color:#fff;border-bottom:1px solid var(--verify);padding-bottom:3px}
+
+/* hero */
+.hero{padding:52px 0 30px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--verify)}
+h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(30px,4.5vw,44px);margin:10px 0 10px}
+.hero p{max-width:56ch;color:#3c4658;font-size:16.5px}
+
+/* scanned banner */
+.scanned{background:#eaf3ee;border:1px solid #bfe0cf;color:#12613f;font-family:var(--mono);font-size:12px;letter-spacing:.06em;padding:10px 14px;margin-top:22px;display:none;align-items:center;gap:10px}
+.scanned.show{display:flex}
+
+/* selector */
+.selector{background:#fff;border:1px solid var(--hair);padding:26px;margin-top:26px}
+.selector .row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.field label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#7a8296;margin-bottom:8px}
+.field select{width:100%;padding:13px 14px;font-family:'Karla',sans-serif;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--hair);border-radius:0;appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' stroke='%230E1B2E' fill='none' stroke-width='1.5'/></svg>");
+  background-repeat:no-repeat;background-position:right 14px center}
+.field select:focus{outline:2px solid var(--star);outline-offset:-2px}
+.field select:disabled{opacity:.5;cursor:not-allowed}
+.hint{font-size:12px;color:#7a8296;margin-top:8px}
+
+/* result */
+.result{margin-top:26px;display:none}
+.result.show{display:block}
+.banner{background:var(--verify);color:#fff;padding:16px 20px;display:flex;align-items:center;gap:14px}
+.banner .chk{width:28px;height:28px;border-radius:50%;background:#fff;color:var(--verify);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.banner .t{font-family:var(--mono);font-size:13px;letter-spacing:.1em}
+.banner.fail{background:#8c2f22}
+.banner.fail .chk{color:#8c2f22}
+
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);border-top:none}
+.meta>div{background:#fff;padding:13px 15px}
+.meta .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#7a8296}
+.meta .v{font-size:14.5px;font-weight:600;margin-top:3px}
+
+h2{font-family:'Marcellus',serif;font-weight:400;font-size:21px;margin:28px 0 12px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--hair)}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-align:left;color:#7a8296;padding:11px 14px;border-bottom:2px solid var(--ink)}
+td{padding:11px 14px;font-size:13.5px;border-bottom:1px solid #eceae2}
+tr:last-child td{border-bottom:none}
+td.num{font-family:var(--mono);font-size:12px}
+.pass{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--verify);border:1px solid var(--verify);padding:2px 7px}
+
+.docrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.doc{flex:1;min-width:220px;background:#fff;border:1px solid var(--hair);padding:15px 16px;display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink)}
+.doc:hover{border-color:var(--ink)}
+.doc .icon{width:32px;height:40px;border:1.5px solid var(--ink);position:relative;flex:none}
+.doc .icon::after{content:'PDF';position:absolute;bottom:3px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:7px}
+.doc b{font-size:14px}.doc span{font-family:var(--mono);font-size:10.5px;color:#7a8296}
+
+.empty{margin-top:26px;padding:40px;text-align:center;border:1px dashed var(--hair);color:#7a8296;font-size:14.5px}
+
+/* how */
+.how{background:var(--ink);color:var(--paper);margin-top:44px}
+.how .wrap{padding:40px 24px}
+.how h2{color:var(--paper);margin-top:0}
+.how p{color:#c9d4e2;font-size:14.5px;max-width:64ch;margin-bottom:10px}
+.how .lab{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--star);margin-top:16px}
+footer{padding:32px 0 54px;font-family:var(--mono);font-size:10.5px;color:#7a8296;letter-spacing:.08em}
+@media(max-width:640px){.selector .row,.meta{grid-template-columns:1fr}.meta{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand">ASTRAEA</div>
+    <div class="links">Shop<span>Our Story</span><span class="active">Lab Tests</span></div>
+  </div>
+</nav>
+
+<section class="hero wrap">
+  <div class="eyebrow">Lab Tests</div>
+  <h1>Check the testing.</h1>
+  <p>Every batch we make is tested by an independent, ISO 17025-accredited laboratory before it ships. Pick your product and your lot number below to see its results — or scan the QR on any bottle to come straight here.</p>
+  <div class="scanned" id="scanned"><span>✓</span><span id="scannedText"></span></div>
+</section>
+
+<section class="wrap">
+  <div class="selector">
+    <div class="row">
+      <div class="field">
+        <label for="product">Product</label>
+        <select id="product"><option value="">Select a product…</option></select>
+      </div>
+      <div class="field">
+        <label for="batch">Batch / Lot</label>
+        <select id="batch" disabled><option value="">Select product first…</option></select>
+        <div class="hint">Find your lot number stamped on the base of the pack. Newest batches listed first.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty" id="empty">Select a product and batch to view its certificate of analysis.</div>
+
+  <div class="result" id="result">
+    <div class="banner" id="banner"><div class="chk">✓</div><div class="t" id="bannerText"></div></div>
+    <div class="meta" id="meta"></div>
+    <h2>What the lab found</h2>
+    <table><thead><tr><th>Panel</th><th>Claim / limit</th><th>Tested</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table>
+    <h2>The documents</h2>
+    <div class="docrow">
+      <a class="doc" href="#" onclick="return false"><div class="icon"></div><div><b>Certificate of Analysis</b><br><span id="coaLot">—</span></div></a>
+      <a class="doc" href="#" onclick="return false"><div class="icon"></div><div><b>Ingredient supplier COAs</b><br><span>Source documentation</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <h2>Why one QR, and why it never changes</h2>
+    <p>The QR on every Astraea package points here — to its product's lab page — and it stays the same for every batch we ever make. It never encodes a specific lot, so it can never send you to the wrong certificate. You choose your batch from the list and see exactly what was in the pack in your hand.</p>
+    <p>Testing is performed by an independent, ISO 17025-accredited laboratory. Astraea does not own, operate, or pay the lab based on results. If a batch fails, it doesn't ship, and its lot number is retired.</p>
+    <div class="lab">TESTING PARTNER: [ACCREDITED LAB NAME] · RESULTS PUBLISHED PER LOT</div>
+  </div>
+</section>
+
+<footer class="wrap">ASTRAEA VITAMINS · LAB TESTS PAGE CONCEPT V1 · SAMPLE DATA SHOWN — LAB NAME &amp; RESULTS ARE PLACEHOLDERS</footer>
+
+<script>
+const DATA = {
+  "electrolytes": { name:"Electrolytes", line:"Sport", dose:"6 g stick · Sport line",
+    batches:[
+      {lot:"26-0131", mfg:"05 FEB 2026", tested:"09 FEB 2026", best:"FEB 2028", pass:true,
+        rows:[["Identity — mineral profile","Confirmed","Match ✓","PASS"],["Potency — sodium/potassium","Label ±10%","+2%","PASS"],["Heavy metals — Pb/As/Cd/Hg","Within USP","All below limit","PASS"],["Microbials","USP <2021/2022>","None detected","PASS"],["Moisture / caking","Spec","Within spec","PASS"]]},
+      {lot:"26-0092", mfg:"14 JAN 2026", tested:"18 JAN 2026", best:"JAN 2028", pass:true,
+        rows:[["Identity — mineral profile","Confirmed","Match ✓","PASS"],["Potency — sodium/potassium","Label ±10%","-1%","PASS"],["Heavy metals — Pb/As/Cd/Hg","Within USP","All below limit","PASS"],["Microbials","USP <2021/2022>","None detected","PASS"],["Moisture / caking","Spec","Within spec","PASS"]]}
+    ]},
+  "creatine": { name:"Creatine Monohydrate", line:"Sport", dose:"5 g stick · Sport line",
+    batches:[
+      {lot:"26-0128", mfg:"03 FEB 2026", tested:"07 FEB 2026", best:"FEB 2028", pass:true,
+        rows:[["Identity — creatine monohydrate","Confirmed","Match ✓","PASS"],["Potency — assay","≥ 99.5%","99.9%","PASS"],["Contaminants — DCD / DHT","Below limit","Not detected","PASS"],["Heavy metals","Within USP","All below limit","PASS"],["Microbials","USP","None detected","PASS"]]},
+      {lot:"25-1140", mfg:"09 DEC 2025", tested:"13 DEC 2025", best:"DEC 2027", pass:true,
+        rows:[["Identity — creatine monohydrate","Confirmed","Match ✓","PASS"],["Potency — assay","≥ 99.5%","99.8%","PASS"],["Contaminants — DCD / DHT","Below limit","Not detected","PASS"],["Heavy metals","Within USP","All below limit","PASS"],["Microbials","USP","None detected","PASS"]]}
+    ]},
+  "ashwagandha": { name:"Ashwagandha KSM-66", line:"Wellness", dose:"600 mg capsule · Wellness line",
+    batches:[
+      {lot:"26-0114", mfg:"28 JAN 2026", tested:"03 FEB 2026", best:"JAN 2028", pass:true,
+        rows:[["Identity — ashwagandha (HPTLC)","Confirmed","W. somnifera ✓","PASS"],["Potency — withanolides (HPLC)","≥ 5.0%","5.14%","PASS"],["Heavy metals — lead","< 0.5 µg/serv","0.06 µg","PASS"],["Heavy metals — As/Cd/Hg","Within USP","All below limit","PASS"],["Microbials","USP <2021/2022>","None detected","PASS"]]}
+    ]},
+  "multi": { name:"Daily Foundation Multi", line:"Wellness", dose:"2 tablets · Wellness line",
+    batches:[
+      {lot:"26-0102", mfg:"16 JAN 2026", tested:"21 JAN 2026", best:"JAN 2028", pass:true,
+        rows:[["Identity — actives","Confirmed","Match ✓","PASS"],["Potency — vitamin assay","Label ±10%","Within","PASS"],["Heavy metals","Within USP","All below limit","PASS"],["Microbials","USP <2021/2022>","None detected","PASS"]]}
+    ]}
+};
+
+const productSel=document.getElementById('product');
+const batchSel=document.getElementById('batch');
+const result=document.getElementById('result');
+const empty=document.getElementById('empty');
+
+// build product dropdown grouped by line
+const groups={};
+Object.entries(DATA).forEach(([k,v])=>{(groups[v.line]=groups[v.line]||[]).push([k,v.name]);});
+Object.entries(groups).forEach(([line,items])=>{
+  const og=document.createElement('optgroup'); og.label=line;
+  items.forEach(([k,name])=>{const o=document.createElement('option');o.value=k;o.textContent=name;og.appendChild(o);});
+  productSel.appendChild(og);
+});
+
+function loadBatches(pk){
+  batchSel.innerHTML='';
+  const p=DATA[pk];
+  if(!p){batchSel.disabled=true;batchSel.innerHTML='<option>Select product first…</option>';return;}
+  batchSel.disabled=false;
+  const ph=document.createElement('option');ph.value='';ph.textContent='Select a batch…';batchSel.appendChild(ph);
+  p.batches.forEach((b,i)=>{
+    const o=document.createElement('option');o.value=i;
+    o.textContent=`Lot ${b.lot} · tested ${b.tested}${i===0?'  (latest)':''}`;
+    batchSel.appendChild(o);
+  });
+}
+function render(pk,bi){
+  const p=DATA[pk]; const b=p.batches[bi];
+  result.classList.add('show'); empty.style.display='none';
+  const banner=document.getElementById('banner');
+  banner.className='banner'+(b.pass?'':' fail');
+  document.getElementById('bannerText').textContent=b.pass?`THIS BATCH PASSED ALL TESTING · ${b.rows.length} OF ${b.rows.length} PANELS`:'THIS BATCH DID NOT SHIP';
+  banner.querySelector('.chk').textContent=b.pass?'✓':'!';
+  document.getElementById('meta').innerHTML=
+    `<div><div class="k">Product</div><div class="v">${p.name}</div></div>`+
+    `<div><div class="k">Lot</div><div class="v mono">${b.lot}</div></div>`+
+    `<div><div class="k">Tested</div><div class="v mono">${b.tested}</div></div>`+
+    `<div><div class="k">Best by</div><div class="v mono">${b.best}</div></div>`;
+  document.getElementById('rows').innerHTML=b.rows.map(r=>
+    `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num">${r[2]}</td><td><span class="pass">${r[3]}</span></td></tr>`).join('');
+  document.getElementById('coaLot').textContent=`Full report · Lot ${b.lot}`;
+}
+productSel.addEventListener('change',e=>{
+  loadBatches(e.target.value);
+  result.classList.remove('show');
+  empty.style.display='block';
+});
+batchSel.addEventListener('change',e=>{
+  if(e.target.value==='')  {result.classList.remove('show');empty.style.display='block';return;}
+  render(productSel.value,parseInt(e.target.value));
+});
+
+// simulate per-product QR deep-link: ?product=electrolytes
+const params=new URLSearchParams(location.search);
+const pk=params.get('product');
+if(pk && DATA[pk]){
+  productSel.value=pk; loadBatches(pk);
+  const s=document.getElementById('scanned');
+  s.classList.add('show');
+  document.getElementById('scannedText').textContent=`You scanned an ${DATA[pk].name} pack — showing its lab results. Pick your lot below.`;
+  // auto-select latest batch for convenience
+  batchSel.value='0'; render(pk,0);
+}
+</script>
+</body>
+</html>

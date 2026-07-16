@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astraea — Storefront Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1B2E; --ink2:#122239; --paper:#F7F6F1; --paper2:#FDFCF9;
+  --star:#A9C0D8; --starDark:#41628a; --verify:#177B54; --verifyBright:#5FD6A7;
+  --ember:#C08A3E; --hair:#D8D5CC; --muted:#5a6478; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Karla',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono)}
+img{max-width:100%}
+button{font-family:inherit;cursor:pointer}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--verify)}
+
+/* ---------- PROTOTYPE BAR ---------- */
+.protobar{background:#000;color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-align:center;padding:6px;text-transform:uppercase;opacity:.9}
+
+/* ---------- NAV ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(247,246,241,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.brand{font-family:'Marcellus',serif;letter-spacing:.22em;font-size:20px;background:none;border:none;color:var(--ink)}
+.navlinks{display:flex;gap:28px;align-items:center}
+.navlinks button{background:none;border:none;font-family:'Karla',sans-serif;font-size:14px;color:var(--ink);letter-spacing:.02em;padding:4px 0;position:relative;opacity:.75}
+.navlinks button:hover{opacity:1}
+.navlinks button.on{opacity:1}
+.navlinks button.on::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:1.5px;background:var(--verify)}
+.navcart{font-family:var(--mono);font-size:12px;border:1px solid var(--ink);padding:7px 13px;background:none;color:var(--ink)}
+.navcart:hover{background:var(--ink);color:var(--paper)}
+
+/* views */
+.view{display:none}
+.view.active{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---------- HERO ---------- */
+.hero{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
+.hero .constellation{position:absolute;inset:0;opacity:.55;z-index:1}
+.hero .wrap{position:relative;z-index:2;padding:96px 32px 104px}
+.hero .eyebrow{color:var(--star)}
+.hero h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(40px,6.6vw,82px);line-height:1.02;letter-spacing:.01em;margin:20px 0 22px;max-width:16ch}
+.hero p.sub{max-width:46ch;color:#c9d4e2;font-size:18px;font-weight:300}
+.hero .cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
+.btn{font-family:'Karla',sans-serif;font-size:15px;letter-spacing:.02em;padding:14px 26px;border:1px solid var(--paper);background:var(--paper);color:var(--ink);transition:.15s}
+.btn:hover{background:transparent;color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--paper)}
+.btn.ghost:hover{background:var(--paper);color:var(--ink)}
+.hero .proofstrip{margin-top:52px;display:inline-flex;align-items:center;gap:16px;border:1px solid rgba(169,192,216,.3);padding:12px 18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--star)}
+.hero .proofstrip .dot{width:8px;height:8px;border-radius:50%;background:var(--verifyBright);box-shadow:0 0 0 3px rgba(95,214,167,.22)}
+
+/* ---------- PROMISE ---------- */
+.promise{padding:76px 0;border-bottom:1px solid var(--hair)}
+.promise h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(26px,3.4vw,38px);max-width:20ch;line-height:1.2}
+.promise .cols{display:grid;grid-template-columns:1.1fr 1fr;gap:54px;align-items:start;margin-top:8px}
+.promise p{color:#3c4658;font-size:16.5px;max-width:52ch}
+.promise .stat{border-left:2px solid var(--verify);padding-left:18px;margin-top:22px}
+.promise .stat .n{font-family:'Marcellus',serif;font-size:34px}
+.promise .stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- HOW ---------- */
+.how{padding:76px 0;background:var(--paper2);border-bottom:1px solid var(--hair)}
+.how .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border:1px solid var(--hair);background:#fff}
+.how .step{padding:30px 28px;border-right:1px solid var(--hair)}
+.how .step:last-child{border-right:none}
+.how .step .num{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--verify)}
+.how .step h3{font-family:'Marcellus',serif;font-weight:400;font-size:21px;margin:12px 0 8px}
+.how .step p{font-size:14px;color:#3c4658}
+.how .scanvis{margin-top:18px;display:flex;align-items:center;gap:12px}
+.how .qr{width:46px;height:46px;flex:none;background:
+  conic-gradient(var(--ink) 0 25%,transparent 0 50%,var(--ink) 0 75%,transparent 0) 0 0/15px 15px, #fff;
+  outline:3px solid var(--ink);outline-offset:-6px}
+.how .scanvis .vt{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--verify);line-height:1.5}
+
+/* ---------- SECTION SHELL ---------- */
+.sec{padding:74px 0}
+.sec .head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px;flex-wrap:wrap;gap:12px}
+.sec h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(24px,3vw,34px)}
+.sec .head a{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--verify);text-decoration:none;border:none;background:none}
+.sec .head a:hover{text-decoration:underline}
+
+/* ---------- PRODUCT GRID / CARD ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:#fff;border:1px solid var(--hair);text-align:left;padding:0;display:flex;flex-direction:column;transition:.16s;overflow:hidden}
+.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+.card .thumb{background:var(--paper2);border-bottom:1px solid var(--hair);padding:22px 0;display:flex;justify-content:center}
+.card .meta{padding:16px 16px 18px}
+.card .line{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase}
+.card.wellness .line{color:var(--starDark)}
+.card.sport .line{color:var(--ember)}
+.card h3{font-family:'Marcellus',serif;font-weight:400;font-size:19px;margin:7px 0 3px;line-height:1.12}
+.card .dose{font-size:12px;color:var(--muted)}
+.card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.card .price{font-family:var(--mono);font-size:14px}
+.card .tested{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--verify);border:1px solid var(--verify);padding:2px 6px}
+
+/* ---------- FILTERS ---------- */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.filters button{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:8px 15px;border:1px solid var(--hair);background:#fff;color:var(--ink)}
+.filters button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* ---------- SPLIT LINES ---------- */
+.lines{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.lineblk{padding:44px 40px;color:#fff;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end}
+.lineblk.w{background:linear-gradient(160deg,#2a3f5c,#0E1B2E)}
+.lineblk.s{background:linear-gradient(160deg,#7a5423,#0E1B2E)}
+.lineblk .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.lineblk.w .k{color:var(--star)} .lineblk.s .k{color:#e8c48f}
+.lineblk h3{font-family:'Marcellus',serif;font-weight:400;font-size:30px;margin:8px 0 6px}
+.lineblk p{color:#d7dee8;font-size:14px;max-width:34ch}
+.lineblk button{align-self:flex-start;margin-top:18px;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:9px 16px}
+.lineblk button:hover{background:#fff;color:var(--ink)}
+
+/* ---------- WHY WE TEST band ---------- */
+.testband{background:var(--ink);color:var(--paper)}
+.testband .wrap{padding:70px 32px}
+.testband .eyebrow{color:var(--star)}
+.testband h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(24px,3vw,34px);max-width:24ch;margin:12px 0 14px}
+.testband p{color:#c9d4e2;max-width:58ch;font-size:15.5px}
+.testband .mini{margin-top:26px;background:var(--ink2);border:1px solid #24344d;padding:18px 20px;display:flex;gap:16px;align-items:center;max-width:520px}
+.testband .mini .b{font-family:var(--mono);font-size:11px;color:var(--verifyBright);letter-spacing:.1em}
+.testband .mini .r{font-family:var(--mono);font-size:11px;color:var(--star);line-height:1.7}
+
+/* ---------- EMAIL ---------- */
+.email{padding:70px 0;text-align:center}
+.email h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(24px,3vw,32px)}
+.email p{color:#3c4658;margin:10px auto 0;max-width:44ch}
+.email .form{margin-top:24px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.email input{font-family:'Karla',sans-serif;font-size:15px;padding:13px 16px;border:1px solid var(--hair);background:#fff;min-width:280px}
+.email input:focus{outline:2px solid var(--star);outline-offset:-2px}
+.email .btn{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.email .btn:hover{background:transparent;color:var(--ink)}
+
+/* ---------- PRODUCT DETAIL ---------- */
+.pdp{padding:48px 0 70px}
+.pdp .back{font-family:var(--mono);font-size:12px;color:var(--muted);background:none;border:none;letter-spacing:.06em;margin-bottom:24px}
+.pdp .back:hover{color:var(--ink)}
+.pdp .top{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.pdp .gallery{background:var(--paper2);border:1px solid var(--hair);padding:48px 0;display:flex;justify-content:center;position:sticky;top:90px}
+.pdp .ptag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;display:inline-block;padding:3px 9px;border:1px solid currentColor}
+.pdp.wellness-c .ptag{color:var(--starDark)} .pdp.sport-c .ptag{color:var(--ember)}
+.pdp h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(30px,4vw,44px);margin:14px 0 6px;line-height:1.08}
+.pdp .dose{color:var(--muted);font-size:14.5px}
+.pdp .blurb{font-size:16px;color:#3c4658;margin:18px 0;max-width:46ch}
+.pdp .price{font-family:var(--mono);font-size:22px;margin:6px 0 20px}
+
+/* purchase */
+.buy{border:1px solid var(--hair);background:#fff;padding:6px}
+.buyopt{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px solid transparent;cursor:pointer}
+.buyopt.on{border-color:var(--ink);background:var(--paper2)}
+.buyopt .radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--ink);flex:none;position:relative}
+.buyopt.on .radio::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--verify)}
+.buyopt .t b{font-size:14.5px}
+.buyopt .t span{font-size:12.5px;color:var(--muted)}
+.buyopt .save{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--verify);border:1px solid var(--verify);padding:2px 7px}
+.addcart{width:100%;margin-top:14px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);font-size:15px;padding:15px;letter-spacing:.02em}
+.addcart:hover{background:transparent;color:var(--ink)}
+.checktest{width:100%;margin-top:10px;background:none;border:1px solid var(--verify);color:var(--verify);font-family:var(--mono);font-size:12px;letter-spacing:.08em;padding:12px}
+.checktest:hover{background:var(--verify);color:#fff}
+
+/* facts + info */
+.pdp .info{margin-top:16px}
+.factbox{border:1.6px solid #000;background:#fff;color:#000;padding:12px 14px;font-family:Arial,Helvetica,sans-serif;max-width:340px}
+.factbox h4{font-size:19px;font-weight:800;border-bottom:7px solid #000;padding-bottom:4px;margin-bottom:4px}
+.factbox .sv{font-size:10px;border-bottom:3px solid #000;padding:3px 0}
+.factbox table{width:100%;border-collapse:collapse;font-size:11px}
+.factbox td{padding:4px 0;border-bottom:.5px solid #000}
+.factbox td.r{text-align:right}
+.factbox .fine{font-size:8.5px;padding-top:4px}
+.infogrid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:34px}
+.infocard h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--verify);margin-bottom:10px}
+.infocard p{font-size:14px;color:#3c4658}
+.infocard ul{list-style:none;margin-top:6px}
+.infocard li{font-size:13.5px;color:#3c4658;padding:5px 0;border-bottom:1px solid #eceae2;display:flex;justify-content:space-between}
+.freefrom span{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;border:1px solid var(--hair);padding:4px 9px;margin:0 6px 6px 0;color:var(--muted)}
+
+/* reviews */
+.reviews{margin-top:44px;border-top:1px solid var(--hair);padding-top:34px}
+.review{border-bottom:1px solid var(--hair);padding:18px 0}
+.review .rh{display:flex;justify-content:space-between;align-items:center}
+.review .name{font-weight:600;font-size:14px}
+.review .vb{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--verify);border:1px solid var(--verify);padding:2px 6px}
+.review p{font-size:14px;color:#3c4658;margin-top:8px}
+.stars{color:var(--ember);font-size:13px;letter-spacing:2px}
+
+/* ---------- LAB TESTS (compact) ---------- */
+.lab{padding:48px 0 70px}
+.lab .selector{background:#fff;border:1px solid var(--hair);padding:24px;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.lab label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.lab select{width:100%;padding:13px 14px;font-family:'Karla';font-size:15px;background:var(--paper);border:1px solid var(--hair);color:var(--ink);appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12'><path d='M2 4l4 4 4-4' stroke='%230E1B2E' fill='none' stroke-width='1.5'/></svg>");background-repeat:no-repeat;background-position:right 14px center}
+.lab .result{margin-top:24px;display:none}
+.lab .result.show{display:block}
+.lab .banner{background:var(--verify);color:#fff;padding:15px 20px;display:flex;gap:12px;align-items:center;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em}
+.lab .banner .chk{width:26px;height:26px;border-radius:50%;background:#fff;color:var(--verify);display:flex;align-items:center;justify-content:center;font-weight:700}
+.lab table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--hair);margin-top:16px}
+.lab th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:left;color:var(--muted);padding:11px 14px;border-bottom:2px solid var(--ink)}
+.lab td{padding:11px 14px;font-size:13.5px;border-bottom:1px solid #eceae2}
+.lab td.n{font-family:var(--mono);font-size:12px}
+.lab .pass{font-family:var(--mono);font-size:10px;color:var(--verify);border:1px solid var(--verify);padding:2px 7px}
+
+/* ---------- FOOTER ---------- */
+footer.site{background:var(--ink);color:var(--paper);padding:56px 0 40px;margin-top:0}
+footer.site .grid{grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+footer.site .brand{color:var(--paper);font-size:22px;display:block;margin-bottom:10px}
+footer.site p{color:#9fb0c6;font-size:13px;max-width:32ch}
+footer.site h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--star);margin-bottom:12px}
+footer.site a{display:block;color:#c9d4e2;font-size:13.5px;text-decoration:none;padding:4px 0}
+footer.site a:hover{color:#fff}
+footer.site .base{border-top:1px solid #24344d;margin-top:34px;padding-top:20px;font-family:var(--mono);font-size:10.5px;color:#7a8ba3;letter-spacing:.06em}
+
+@media(max-width:920px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .promise .cols,.pdp .top,.lines,.infogrid,.lab .selector,footer.site .grid{grid-template-columns:1fr}
+  .how .steps{grid-template-columns:1fr}
+  .how .step{border-right:none;border-bottom:1px solid var(--hair)}
+  .navlinks{display:none}
+  .pdp .gallery{position:static}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="protobar">Interactive prototype · sample data · click the nav and product cards to move around</div>
+
+<nav class="nav">
+  <div class="wrap">
+    <button class="brand" onclick="go('home')">ASTRAEA</button>
+    <div class="navlinks">
+      <button data-nav="home" class="on" onclick="go('home')">Home</button>
+      <button data-nav="shop" onclick="go('shop')">Shop</button>
+      <button data-nav="shop" onclick="go('shop','wellness')">Wellness</button>
+      <button data-nav="shop" onclick="go('shop','sport')">Sport</button>
+      <button data-nav="lab" onclick="go('lab')">Lab Tests</button>
+    </div>
+    <button class="navcart" onclick="go('shop')">Cart · 0</button>
+  </div>
+</nav>
+
+<!-- ============ HOME ============ -->
+<div class="view active" id="view-home">
+  <header class="hero">
+    <svg class="constellation" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g stroke="#A9C0D8" stroke-width="0.7" opacity="0.5">
+        <line x1="880" y1="90" x2="960" y2="150"/><line x1="960" y1="150" x2="1030" y2="120"/>
+        <line x1="960" y1="150" x2="1005" y2="250"/><line x1="1005" y1="250" x2="1100" y2="300"/>
+        <line x1="1005" y1="250" x2="915" y2="330"/><line x1="915" y1="330" x2="970" y2="430"/>
+        <line x1="915" y1="330" x2="815" y2="370"/>
+      </g>
+      <g fill="#A9C0D8">
+        <circle cx="880" cy="90" r="2.4"/><circle cx="960" cy="150" r="3.6"/><circle cx="1030" cy="120" r="2"/>
+        <circle cx="1005" cy="250" r="2.8"/><circle cx="1100" cy="300" r="2"/><circle cx="915" cy="330" r="4"/>
+        <circle cx="970" cy="430" r="2.2"/><circle cx="815" cy="370" r="2"/>
+        <circle cx="150" cy="130" r="1.4"/><circle cx="250" cy="440" r="1.4"/><circle cx="430" cy="90" r="1.2"/>
+        <circle cx="620" cy="470" r="1.4"/><circle cx="90" cy="320" r="1.2"/><circle cx="540" cy="270" r="1"/>
+      </g>
+    </svg>
+    <div class="wrap">
+      <div class="eyebrow">26 supplements · every batch tested</div>
+      <h1>We don't ask you to trust us. We show you.</h1>
+      <p class="sub">Every Astraea batch is tested by an independent lab — and every bottle carries a code to its actual results. No proprietary blends. No hidden fillers. Nothing you can't check.</p>
+      <div class="cta">
+        <button class="btn" onclick="go('shop')">Shop the line</button>
+        <button class="btn ghost" onclick="go('lab')">Check the testing</button>
+      </div>
+      <div class="proofstrip"><span class="dot"></span>CHECK THE TESTING · EVERY BATCH, INDEPENDENTLY TESTED · SCAN FOR RESULTS</div>
+    </div>
+  </header>
+
+  <section class="promise"><div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="eyebrow">The problem we exist for</div>
+        <h2>The supplement aisle asks for your trust and shows you nothing.</h2>
+      </div>
+      <div>
+        <p>Proprietary blends hide doses. Labels don't always match what's inside. "Third-party tested" gets printed on bottles with nothing behind it. Astraea was built to end the guessing: we publish the actual lab results for the actual batch in your hand.</p>
+        <div class="stat"><div class="n">100%</div><div class="l">of batches tested &amp; published before they ship</div></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="how"><div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2 style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(24px,3vw,34px);margin-top:8px">Proof in three steps.</h2>
+    <div class="steps">
+      <div class="step"><div class="num">STEP 01</div><h3>Scan the bottle</h3><p>Every Astraea package has a QR code on the front. One scan opens that product's lab page — no app, no account.</p>
+        <div class="scanvis"><div class="qr"></div><div class="vt">CHECK THE<br>TESTING</div></div>
+      </div>
+      <div class="step"><div class="num">STEP 02</div><h3>Find your batch</h3><p>Match the lot number on your pack. You'll see exactly what was tested in the batch you're holding — not a generic sample.</p></div>
+      <div class="step"><div class="num">STEP 03</div><h3>Read the results</h3><p>Every panel, pass or fail, with the label claim next to the tested value — and the full certificate to download.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="head"><div><div class="eyebrow">Start here</div><h2>The essentials</h2></div><a href="#" onclick="go('shop');return false">View all 26 →</a></div>
+    <div class="grid" id="homeGrid"></div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="lines">
+      <div class="lineblk w"><div class="k">Wellness</div><h3>For the daily foundation</h3><p>Multivitamins, minerals, and single-ingredient capsules in forms your body can actually use.</p><button onclick="go('shop','wellness')">Shop Wellness</button></div>
+      <div class="lineblk s"><div class="k">Sport</div><h3>For the work you put in</h3><p>Creatine, protein, and pre-workout — tested for what's in them, and what isn't.</p><button onclick="go('shop','sport')">Shop Sport</button></div>
+    </div>
+  </div></section>
+
+  <section class="testband"><div class="wrap">
+    <div class="eyebrow">Why one code, and why it never changes</div>
+    <h2>The QR on every bottle shows every batch — so we can't hand-pick a flattering one.</h2>
+    <p>Our testing is done by an independent, ISO 17025-accredited lab. We don't own it, and we don't pay it based on results. If a batch fails, it doesn't ship, and its lot number is retired. That's the whole promise, and you can check it any time.</p>
+    <div class="mini">
+      <div class="qr" style="outline-color:var(--star);background:conic-gradient(var(--star) 0 25%,transparent 0 50%,var(--star) 0 75%,transparent 0) 0 0/15px 15px,var(--ink2)"></div>
+      <div><div class="b">ASHWAGANDHA · LOT 26-0114</div><div class="r">WITHANOLIDES · CLAIM ≥5.0% · TESTED 5.14% · PASS<br>HEAVY METALS · PASS &nbsp;·&nbsp; MICROBIALS · PASS</div></div>
+    </div>
+  </div></section>
+
+  <section class="email"><div class="wrap">
+    <div class="eyebrow" style="text-align:center">Before we launch</div>
+    <h2>Be first to check the testing.</h2>
+    <p>Join the list for launch access and a look behind our first published batches.</p>
+    <div class="form">
+      <input type="email" placeholder="you@email.com" aria-label="Email address">
+      <button class="btn" onclick="this.textContent='Thanks — you're on the list'">Notify me</button>
+    </div>
+  </div></section>
+</div>
+
+<!-- ============ SHOP ============ -->
+<div class="view" id="view-shop">
+  <section class="sec"><div class="wrap">
+    <div class="head"><div><div class="eyebrow">The catalogue</div><h2 id="shopTitle">All products</h2></div></div>
+    <div class="filters" id="filters">
+      <button data-f="all" class="on" onclick="filter('all',this)">All 26</button>
+      <button data-f="wellness" onclick="filter('wellness',this)">Wellness</button>
+      <button data-f="sport" onclick="filter('sport',this)">Sport</button>
+      <button data-f="capsule" onclick="filter('capsule',this)">Capsules</button>
+      <button data-f="tablet" onclick="filter('tablet',this)">Tablets</button>
+      <button data-f="powder" onclick="filter('powder',this)">Powders</button>
+    </div>
+    <div class="grid" id="shopGrid"></div>
+  </div></section>
+</div>
+
+<!-- ============ PRODUCT ============ -->
+<div class="view" id="view-product">
+  <section class="pdp" id="pdpSec"><div class="wrap">
+    <button class="back" onclick="go('shop')">← Back to shop</button>
+    <div class="top">
+      <div class="gallery" id="pdpGallery"></div>
+      <div class="detail" id="pdpDetail"></div>
+    </div>
+    <div class="reviews" id="pdpReviews"></div>
+  </div></section>
+</div>
+
+<!-- ============ LAB TESTS ============ -->
+<div class="view" id="view-lab">
+  <section class="lab"><div class="wrap">
+    <div class="eyebrow">Lab Tests</div>
+    <h2 style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(28px,4vw,42px);margin:10px 0 8px">Check the testing.</h2>
+    <p style="max-width:56ch;color:#3c4658;font-size:16px">Pick a product and your lot number to see its results — or scan the QR on any bottle to land here automatically.</p>
+    <div class="selector">
+      <div><label for="labProduct">Product</label><select id="labProduct"><option value="">Select a product…</option></select></div>
+      <div><label for="labBatch">Batch / Lot</label><select id="labBatch" disabled><option>Select product first…</option></select></div>
+    </div>
+    <div class="result" id="labResult">
+      <div class="banner" id="labBanner"><div class="chk">✓</div><span id="labBannerText"></span></div>
+      <table><thead><tr><th>Panel</th><th>Claim / limit</th><th>Tested</th><th>Status</th></tr></thead><tbody id="labRows"></tbody></table>
+    </div>
+  </div></section>
+</div>
+
+<footer class="site"><div class="wrap">
+  <div class="grid">
+    <div><span class="brand" style="font-family:'Marcellus',serif;letter-spacing:.2em">ASTRAEA</span><p>Supplements you can verify. Every batch independently tested, every result published.</p></div>
+    <div><h5>Shop</h5><a href="#" onclick="go('shop','wellness');return false">Wellness</a><a href="#" onclick="go('shop','sport');return false">Sport</a><a href="#" onclick="go('shop');return false">All products</a></div>
+    <div><h5>Trust</h5><a href="#" onclick="go('lab');return false">Lab tests</a><a href="#" onclick="go('lab');return false">How we test</a><a href="#">Our story</a></div>
+    <div><h5>Support</h5><a href="#">Subscriptions</a><a href="#">Shipping</a><a href="#">Contact</a></div>
+  </div>
+  <div class="base">© 2026 ASTRAEA VITAMINS · THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FDA · NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE · PROTOTYPE</div>
+</div></footer>
+
+<script>
+const P=[
+ {h:'multi',n:'Daily Foundation Multi',line:'wellness',fmt:'tablet',dose:'2 tablets · 28-day supply',price:'$28',blurb:'Honest daily gap-insurance in forms your body can use — no oxide shortcuts, every dose disclosed.',
+   facts:[['Vitamin C','180 mg'],['Vitamin D3','—'],['Vitamin E (natural)','—'],['B-Complex','—'],['Zinc bisglycinate','15 mg'],['Magnesium bisglycinate','200 mg']],
+   free:['No proprietary blends','No magnesium oxide','No synthetic dyes','Gluten-free'],
+   why:'We use chelated minerals and active vitamin forms, so the amount on the label is the amount your body can actually absorb.'},
+ {h:'d3k2',n:'Vitamin D3 / K2',line:'wellness',fmt:'capsule',dose:'1 capsule · 28-day supply',price:'$22',blurb:'The sunshine pairing, dosed right and tested for potency you can confirm.',
+   facts:[['Vitamin D3','2,000 IU'],['Vitamin K2 (MK-7)','90 mcg']],free:['No fillers','No proprietary blends','Vegan capsule'],why:'MK-7 is the most bioavailable, stable form of K2 — and we publish the tested potency of every lot.'},
+ {h:'mag',n:'Magnesium Bisglycinate',line:'wellness',fmt:'capsule',dose:'2 capsules · 28-day supply',price:'$26',blurb:'The gentle, absorbable chelate — not the oxide most brands hide behind.',
+   facts:[['Magnesium (bisglycinate)','200 mg']],free:['No oxide','No stearates','No proprietary blends'],why:'Bisglycinate is chelated to an amino acid for absorption and gentleness — a real dose, not a number on paper.'},
+ {h:'ashwa',n:'Ashwagandha KSM-66',line:'wellness',fmt:'capsule',dose:'1 capsule · 28-day supply',price:'$30',blurb:'The clinically-studied root extract, verified at 5%+ withanolides every batch.',
+   facts:[['Ashwagandha (KSM-66®)','600 mg'],['Withanolides','5%+']],free:['Root only','No leaf','No proprietary blends'],why:'A category full of adulteration — so we publish HPLC potency and identity for every lot you can scan.'},
+ {h:'bcomplex',n:'Active B-Complex',line:'wellness',fmt:'capsule',dose:'1 capsule · 28-day supply',price:'$24',blurb:'Methylated, active B-vitamin forms — ready to use, fully disclosed.',
+   facts:[['Methylfolate','—'],['Methylcobalamin (B12)','—'],['P-5-P (B6)','—']],free:['Active forms','No folic acid','No proprietary blends'],why:'We use the active, methylated forms your body doesn\'t have to convert.'},
+ {h:'ltheanine',n:'L-Theanine',line:'wellness',fmt:'capsule',dose:'1 capsule · 28-day supply',price:'$20',blurb:'Calm focus from pure L-isomer theanine, tested for identity.',
+   facts:[['L-Theanine','200 mg']],free:['Pure L-isomer','No fillers'],why:'Generic theanine quality varies; we verify the isomer and purity.'},
+ {h:'creatine',n:'Creatine Monohydrate',line:'sport',fmt:'powder',dose:'5 g scoop · 28 servings',price:'$25',blurb:'Creapure-grade creatine, tested at 99.9% and under-dosing exposed.',
+   facts:[['Creatine monohydrate','5,000 mg']],free:['No fillers','No flavor systems','Unflavored'],why:'The most-tested sport supplement for under-dosing — so we publish the assay of every batch.'},
+ {h:'whey',n:'Whey Protein Isolate',line:'sport',fmt:'powder',dose:'30 g scoop · 28 servings',price:'$54',blurb:'A named, traceable protein base — tested for heavy metals and protein spiking.',
+   facts:[['Protein','25 g'],['Whey isolate','30 g']],free:['No amino spiking','No proprietary blends','Named source'],why:'Protein is a spiking and heavy-metal scandal category, so every lot\'s metals and content are published.'},
+ {h:'preworkout',n:'Pre-Workout',line:'sport',fmt:'powder',dose:'12 g scoop · 28 servings',price:'$39',blurb:'Fully-dosed, fully-disclosed energy — no proprietary blend hiding the caffeine.',
+   facts:[['Citrulline','6 g'],['Beta-alanine (CarnoSyn®)','3.2 g'],['Caffeine','200 mg']],free:['No proprietary blends','Every dose disclosed'],why:'You see every active and its exact dose — the opposite of a "blend."'},
+ {h:'electrolytes',n:'Electrolytes',line:'sport',fmt:'powder',dose:'6 g stick · 28 servings',price:'$32',blurb:'Clean hydration in a pocket stick — sodium, potassium, magnesium, tested.',
+   facts:[['Sodium','500 mg'],['Potassium','200 mg'],['Magnesium','60 mg']],free:['No added sugar','No dyes','No proprietary blends'],why:'A simple, honest electrolyte ratio with tested mineral content per stick.'},
+ {h:'collagen',n:'Collagen Peptides',line:'sport',fmt:'powder',dose:'11 g scoop · 28 servings',price:'$42',blurb:'Hydrolyzed peptides from a named source, tested batch to batch.',
+   facts:[['Collagen peptides','11 g']],free:['Single ingredient','Named source','Unflavored'],why:'One ingredient, fully traceable, tested for identity and metals.'},
+ {h:'greens',n:'Greens Blend',line:'sport',fmt:'powder',dose:'8 g scoop · 28 servings',price:'$45',blurb:'A greens blend that lists every gram — no "proprietary" curtain.',
+   facts:[['Greens blend','8 g']],free:['Full disclosure','No proprietary blends'],why:'Every ingredient and amount is named, and each lot is tested for contaminants.'},
+];
+
+const REVIEWS=[
+ {name:'Marcus T.',v:true,s:5,t:'First brand where I could actually pull up the lab report for my exact bottle. Sold.'},
+ {name:'Priya R.',v:true,s:5,t:'Switched from a "blend" product. Seeing the real doses made the difference obvious.'},
+ {name:'Devon L.',v:true,s:4,t:'Creatine mixes clean and the published assay puts my mind at ease. Wish it came in bigger tubs.'},
+];
+
+const LAB={
+ ashwa:{n:'Ashwagandha KSM-66',line:'Wellness',batches:[
+   {lot:'26-0114',tested:'03 FEB 2026',pass:true,rows:[['Identity (HPTLC)','Confirmed','W. somnifera ✓','PASS'],['Withanolides (HPLC)','≥ 5.0%','5.14%','PASS'],['Lead','< 0.5 µg','0.06 µg','PASS'],['As / Cd / Hg','USP','Below limit','PASS'],['Microbials','USP','None','PASS']]}]},
+ creatine:{n:'Creatine Monohydrate',line:'Sport',batches:[
+   {lot:'26-0128',tested:'07 FEB 2026',pass:true,rows:[['Identity','Confirmed','Match ✓','PASS'],['Assay','≥ 99.5%','99.9%','PASS'],['DCD / DHT','Below limit','Not detected','PASS'],['Heavy metals','USP','Below limit','PASS']]},
+   {lot:'25-1140',tested:'13 DEC 2025',pass:true,rows:[['Identity','Confirmed','Match ✓','PASS'],['Assay','≥ 99.5%','99.8%','PASS'],['DCD / DHT','Below limit','Not detected','PASS'],['Heavy metals','USP','Below limit','PASS']]}]},
+ multi:{n:'Daily Foundation Multi',line:'Wellness',batches:[
+   {lot:'26-0102',tested:'21 JAN 2026',pass:true,rows:[['Identity','Confirmed','Match ✓','PASS'],['Vitamin assay','Label ±10%','Within','PASS'],['Heavy metals','USP','Below limit','PASS'],['Microbials','USP','None','PASS']]}]},
+};
+
+/* ---------- bottle render ---------- */
+function bottle(p,big){
+  const accent = p.line==='wellness' ? '#41628a' : '#C08A3E';
+  const w = big?150:104, h=big?250:150;
+  const isP = p.fmt==='powder';
+  if(isP){
+    return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true">
+      <rect x="${w*0.12}" y="${h*0.10}" width="${w*0.76}" height="${h*0.14}" rx="4" fill="#0E1B2E"/>
+      <rect x="${w*0.08}" y="${h*0.24}" width="${w*0.84}" height="${h*0.68}" rx="6" fill="#FDFCF9" stroke="#C9C5B8"/>
+      <rect x="${w*0.08}" y="${h*0.24}" width="${w*0.84}" height="4" fill="${accent}"/>
+      <text x="${w*0.5}" y="${h*0.42}" text-anchor="middle" font-family="Marcellus,serif" font-size="${big?13:9}" fill="#0E1B2E">${p.n.split(' ')[0]}</text>
+      <text x="${w*0.5}" y="${h*0.52}" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="${big?7:5}" fill="#5a6478">TESTED</text>
+      <rect x="${w*0.08}" y="${h*0.74}" width="${w*0.84}" height="${h*0.18}" fill="#0E1B2E"/>
+      <text x="${w*0.5}" y="${h*0.845}" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="${big?6.5:4.6}" fill="#5FD6A7">CHECK THE TESTING</text>
+    </svg>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true">
+    <rect x="${w*0.32}" y="${h*0.02}" width="${w*0.36}" height="${h*0.10}" rx="3" fill="#0E1B2E"/>
+    <path d="M${w*0.30} ${h*0.12} Q${w*0.30} ${h*0.08} ${w*0.36} ${h*0.08} L${w*0.64} ${h*0.08} Q${w*0.70} ${h*0.08} ${w*0.70} ${h*0.12} L${w*0.72} ${h*0.20} Q${w*0.78} ${h*0.24} ${w*0.78} ${h*0.32} L${w*0.78} ${h*0.94} Q${w*0.78} ${h*0.99} ${w*0.72} ${h*0.99} L${w*0.28} ${h*0.99} Q${w*0.22} ${h*0.99} ${w*0.22} ${h*0.94} L${w*0.22} ${h*0.32} Q${w*0.22} ${h*0.24} ${w*0.28} ${h*0.20} Z" fill="#FDFCF9" stroke="#C9C5B8"/>
+    <rect x="${w*0.22}" y="${h*0.34}" width="${w*0.56}" height="${h*0.44}" fill="#F7F6F1" stroke="#e3e0d7" stroke-width="0.5"/>
+    <rect x="${w*0.22}" y="${h*0.34}" width="${w*0.56}" height="3" fill="${accent}"/>
+    <text x="${w*0.5}" y="${h*0.46}" text-anchor="middle" font-family="Marcellus,serif" font-size="${big?7.5:5.6}" letter-spacing="1.5" fill="#0E1B2E">ASTRAEA</text>
+    <text x="${w*0.5}" y="${h*0.57}" text-anchor="middle" font-family="Marcellus,serif" font-size="${big?9:6.4}" fill="#0E1B2E">${p.n.split(' ')[0]}</text>
+    <rect x="${w*0.22}" y="${h*0.66}" width="${w*0.56}" height="${h*0.12}" fill="#0E1B2E"/>
+    <text x="${w*0.5}" y="${h*0.735}" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="${big?5.4:3.9}" fill="#5FD6A7">CHECK THE TESTING</text>
+  </svg>`;
+}
+
+function cardHTML(p){
+  return `<button class="card ${p.line}" onclick="openPDP('${p.h}')">
+    <div class="thumb">${bottle(p,false)}</div>
+    <div class="meta">
+      <div class="line">${p.line}</div>
+      <h3>${p.n}</h3>
+      <div class="dose">${p.dose}</div>
+      <div class="foot"><span class="price">${p.price}</span><span class="tested">TESTED</span></div>
+    </div></button>`;
+}
+
+function renderGrids(){
+  document.getElementById('homeGrid').innerHTML = ['multi','mag','creatine','ashwa'].map(h=>cardHTML(P.find(p=>p.h===h))).join('');
+  document.getElementById('shopGrid').innerHTML = P.map(cardHTML).join('');
+}
+let curFilter='all';
+function filter(f,btn){
+  curFilter=f;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const items = P.filter(p=> f==='all'?true : (p.line===f||p.fmt===f));
+  document.getElementById('shopGrid').innerHTML = items.map(cardHTML).join('');
+}
+
+function openPDP(h){
+  const p=P.find(x=>x.h===h);
+  const sec=document.getElementById('pdpSec');
+  sec.className='pdp '+(p.line==='wellness'?'wellness-c':'sport-c');
+  document.getElementById('pdpGallery').innerHTML=bottle(p,true);
+  document.getElementById('pdpDetail').innerHTML=`
+    <span class="ptag">${p.line}</span>
+    <h1>${p.n}</h1>
+    <div class="dose">${p.dose}</div>
+    <p class="blurb">${p.blurb}</p>
+    <div class="price">${p.price}</div>
+    <div class="buy">
+      <div class="buyopt on" onclick="pick(this)"><div class="radio"></div><div class="t"><b>Subscribe — every 28 days</b><br><span>One lunar cycle. Skip or cancel anytime.</span></div><span class="save">SAVE 15%</span></div>
+      <div class="buyopt" onclick="pick(this)"><div class="radio"></div><div class="t"><b>One-time purchase</b><br><span>${p.price}</span></div></div>
+    </div>
+    <button class="addcart" onclick="this.textContent='Added ✓'">Add to cart</button>
+    <button class="checktest" onclick="go('lab','${p.h}')">Check this product's testing →</button>
+    <div class="info">
+      <div class="infogrid">
+        <div class="infocard"><h4>Supplement Facts</h4>
+          <div class="factbox"><h4>Supplement Facts</h4><div class="sv">Serving Size: ${p.dose.split('·')[0].trim()}</div>
+          <table>${p.facts.map(f=>`<tr><td>${f[0]}</td><td class="r">${f[1]}</td></tr>`).join('')}</table>
+          <div class="fine">Full disclosure — no proprietary blends.</div></div>
+        </div>
+        <div class="infocard"><h4>Why this form</h4><p>${p.why}</p>
+          <h4 style="margin-top:22px">Free from</h4><div class="freefrom">${p.free.map(f=>`<span>${f}</span>`).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('pdpReviews').innerHTML=`
+    <div class="head" style="display:flex;justify-content:space-between;align-items:baseline"><h2 style="font-family:Marcellus,serif;font-weight:400;font-size:24px">What people say</h2><span class="stars">★★★★★ <span style="font-family:var(--mono);font-size:11px;color:var(--muted)">4.8 · verified buyers</span></span></div>
+    ${REVIEWS.map(r=>`<div class="review"><div class="rh"><span class="name">${r.name} <span class="stars">${'★'.repeat(r.s)}${'☆'.repeat(5-r.s)}</span></span><span class="vb">VERIFIED BUYER</span></div><p>${r.t}</p></div>`).join('')}`;
+  go('product');
+  window.scrollTo(0,0);
+}
+function pick(el){document.querySelectorAll('#pdpDetail .buyopt').forEach(o=>o.classList.remove('on'));el.classList.add('on');}
+
+/* lab */
+const labProduct=()=>document.getElementById('labProduct');
+const labBatch=()=>document.getElementById('labBatch');
+function initLab(){
+  const sel=labProduct(); sel.innerHTML='<option value="">Select a product…</option>';
+  Object.entries(LAB).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.n;sel.appendChild(o);});
+  sel.onchange=()=>{loadLabBatches(sel.value);document.getElementById('labResult').classList.remove('show');};
+  labBatch().onchange=()=>{const v=labBatch().value;if(v==='')return;renderLab(labProduct().value,parseInt(v));};
+}
+function loadLabBatches(k){
+  const b=labBatch();b.innerHTML='';
+  if(!LAB[k]){b.disabled=true;b.innerHTML='<option>Select product first…</option>';return;}
+  b.disabled=false;const ph=document.createElement('option');ph.value='';ph.textContent='Select a batch…';b.appendChild(ph);
+  LAB[k].batches.forEach((bt,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`Lot ${bt.lot} · tested ${bt.tested}${i===0?'  (latest)':''}`;b.appendChild(o);});
+}
+function renderLab(k,i){
+  const bt=LAB[k].batches[i];
+  document.getElementById('labResult').classList.add('show');
+  document.getElementById('labBannerText').textContent=`THIS BATCH PASSED ALL TESTING · ${bt.rows.length} OF ${bt.rows.length} PANELS`;
+  document.getElementById('labRows').innerHTML=bt.rows.map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td><td><span class="pass">${r[3]}</span></td></tr>`).join('');
+}
+
+/* nav */
+function go(view,arg){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+view).classList.add('active');
+  document.querySelectorAll('.navlinks button').forEach(b=>b.classList.remove('on'));
+  const navBtn=document.querySelector(`.navlinks button[data-nav="${view==='product'?'shop':view}"]`);
+  if(navBtn) navBtn.classList.add('on');
+  if(view==='shop'){
+    if(arg){const fb=document.querySelector(`#filters button[data-f="${arg}"]`); if(fb) filter(arg,fb); document.getElementById('shopTitle').textContent=arg.charAt(0).toUpperCase()+arg.slice(1);}
+    else {const fb=document.querySelector('#filters button[data-f="all"]'); filter('all',fb); document.getElementById('shopTitle').textContent='All products';}
+  }
+  if(view==='lab'){
+    if(arg && LAB[arg]){labProduct().value=arg;loadLabBatches(arg);labBatch().value='0';renderLab(arg,0);}
+  }
+  if(view!=='product') window.scrollTo(0,0);
+}
+renderGrids(); initLab();
+</script>
+</body>
+</html>

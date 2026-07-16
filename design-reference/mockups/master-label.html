@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astraea — Master Label Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1B2E; --paper:#F7F6F1; --star:#A9C0D8; --starDark:#41628a;
+  --verify:#177B54; --hair:#D8D5CC; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Karla',sans-serif;line-height:1.5}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--verify)}
+h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(26px,3.6vw,38px);margin:10px 0 8px}
+h2{font-family:'Marcellus',serif;font-weight:400;font-size:22px;margin:0 0 12px}
+.lede{max-width:62ch;color:#3c4658;font-size:15.5px}
+.section{padding:50px 0;border-top:1px solid var(--hair)}
+.section:first-of-type{border-top:none;padding-top:60px}
+
+/* ---- label stage ---- */
+.stage{background:#fff;border:1px solid var(--hair);padding:46px 30px 30px;margin-top:30px;overflow-x:auto}
+.ruler{font-family:var(--mono);font-size:9.5px;color:#9aa2b5;display:flex;justify-content:space-between;max-width:980px;margin:0 auto 6px}
+.labelframe{max-width:980px;margin:0 auto;border:1px dashed #b8bfd0;position:relative}
+.label{display:grid;grid-template-columns:38.5% 27% 27% 7.5%;background:var(--paper);outline:1px solid #d0cdc2}
+
+/* front panel */
+.front{border-right:1px solid #e3e0d5;padding:14px 16px 0;display:flex;flex-direction:column;position:relative}
+.front .band{position:absolute;top:0;left:0;right:0;height:5px;background:var(--star)}
+.front .tag{font-family:var(--mono);font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--starDark);border:1px solid var(--starDark);display:inline-block;padding:2px 6px;align-self:flex-start;margin-top:8px}
+.front .brand{font-family:'Marcellus',serif;letter-spacing:.22em;font-size:15px;margin-top:12px}
+.front .product{font-family:'Marcellus',serif;font-size:23px;line-height:1.12;margin:7px 0 3px}
+.front .dose{font-size:10px;color:#5a6478}
+.front .idline{font-size:8.5px;color:#5a6478;margin-top:5px;letter-spacing:.04em}
+.front svg.stars{margin:10px 0 6px;height:26px}
+.front .netq{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ink);margin-top:auto;padding-bottom:8px}
+.front .coa{margin:0 -16px;background:var(--ink);color:var(--star);padding:9px 14px;display:flex;gap:10px;align-items:center}
+.front .qr{width:34px;height:34px;flex:none;background:
+  conic-gradient(var(--paper) 0 25%,transparent 0 50%,var(--paper) 0 75%,transparent 0) 0 0/11px 11px,var(--ink);
+  outline:2.5px solid var(--paper);outline-offset:-5px}
+.front .coa .t{font-family:var(--mono);font-size:7.4px;letter-spacing:.09em;line-height:1.55}
+.front .coa .v{color:#5FD6A7}
+
+/* facts panel */
+.facts{border-right:1px solid #e3e0d5;padding:10px 12px;background:#FDFCF9}
+.sf{border:1.5px solid #000;padding:4px 6px;background:#fff;color:#000;font-family:Arial,Helvetica,sans-serif}
+.sf h3{font-size:15px;font-weight:800;letter-spacing:-.2px;line-height:1;margin:1px 0 3px}
+.sf .serv{font-size:8px;border-bottom:6px solid #000;padding-bottom:3px}
+.sf table{width:100%;border-collapse:collapse;font-size:8px}
+.sf td{padding:2.5px 0;border-bottom:.5px solid #000}
+.sf td.r{text-align:right;white-space:nowrap}
+.sf .thick td{border-bottom:3px solid #000}
+.sf .fine{font-size:6.6px;padding-top:3px;line-height:1.35}
+.other{font-size:7.6px;margin-top:7px;line-height:1.45;color:#1c2536}
+.other b{font-size:7.6px}
+
+/* directions / distributor panel */
+.dirs{padding:10px 14px;font-size:8px;color:#1c2536;display:flex;flex-direction:column;gap:7px}
+.dirs h4{font-family:var(--mono);font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--verify);margin-bottom:2px}
+.dirs p{line-height:1.5}
+.dirs .claim{font-style:italic}
+.dirs .disclaimer{border:1px solid #1c2536;padding:4px 5px;font-size:6.8px;line-height:1.4}
+.dirs .dist{margin-top:auto;font-size:7.2px;line-height:1.5;color:#5a6478}
+.dirs .dist b{color:var(--ink)}
+
+/* seam / stamp zone */
+.seam{background:repeating-linear-gradient(45deg,#f1efe8,#f1efe8 6px,#e9e6dc 6px,#e9e6dc 12px);display:flex;align-items:center;justify-content:center}
+.seam .stamp{transform:rotate(90deg);white-space:nowrap;font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;color:#8a92a6}
+
+/* annotations */
+.annos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:980px;margin:10px auto 0;font-family:var(--mono);font-size:9.5px;color:#7a8296;letter-spacing:.04em}
+.annos div{padding:6px 8px;border-top:2px solid var(--verify)}
+.annos div:nth-child(4){border-top-color:#b8bfd0}
+
+/* rationale cards */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.card{background:#fff;border:1px solid var(--hair);padding:18px 20px;font-size:14px;color:#3c4658}
+.card b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:7px}
+.checklist{background:#fff;border:1px solid var(--hair);margin-top:26px;padding:22px 24px}
+.checklist li{list-style:none;font-size:13.5px;color:#3c4658;padding:6px 0 6px 26px;position:relative;border-bottom:1px solid #efede6}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:'✓';position:absolute;left:2px;color:var(--verify);font-weight:700}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="section wrap">
+  <div class="eyebrow">Master label · dieline view · v1</div>
+  <h1>One label, unwrapped.</h1>
+  <p class="lede">The full wrap label for the 75 cc bottle (Ashwagandha KSM-66 shown), flattened. Four zones, left to right: the front panel a shopper sees, the FDA-format Supplement Facts, the use-and-source panel, and the seam where each lot's code is inkjet-stamped at filling. All 15 bottle SKUs use this exact architecture — only the text, star strip, and panel content change.</p>
+
+  <div class="stage">
+    <div class="ruler"><span>0 mm</span><span>WRAP LABEL · 140 × 58 mm · 75 cc BOTTLE (45 mm DIA)</span><span>140 mm</span></div>
+    <div class="labelframe">
+      <div class="label">
+
+        <!-- ZONE 1: FRONT -->
+        <div class="front">
+          <div class="band"></div>
+          <span class="tag">Wellness</span>
+          <div class="brand">ASTRAEA</div>
+          <div class="product">Ashwagandha<br>KSM-66</div>
+          <div class="dose">600 mg root extract · 5% withanolides</div>
+          <div class="idline">HERBAL DIETARY SUPPLEMENT</div>
+          <svg class="stars" viewBox="0 0 220 30" aria-hidden="true"><g fill="#41628a"><circle cx="16" cy="20" r="2.4"/><circle cx="58" cy="9" r="1.7"/><circle cx="102" cy="22" r="2.8"/><circle cx="150" cy="8" r="1.5"/><circle cx="196" cy="16" r="2"/></g><g stroke="#41628a" stroke-width=".55" opacity=".55"><line x1="16" y1="20" x2="58" y2="9"/><line x1="58" y1="9" x2="102" y2="22"/><line x1="102" y1="22" x2="150" y2="8"/><line x1="150" y1="8" x2="196" y2="16"/></g></svg>
+          <div class="netq">28 CAPSULES · 28-DAY SUPPLY · ONE LUNAR CYCLE</div>
+          <div class="coa">
+            <div class="qr"></div>
+            <div class="t"><span class="v">CHECK THE TESTING</span><br>EVERY BATCH, INDEPENDENTLY TESTED.<br>SCAN FOR THIS BATCH'S LAB RESULTS</div>
+          </div>
+        </div>
+
+        <!-- ZONE 2: SUPPLEMENT FACTS -->
+        <div class="facts">
+          <div class="sf">
+            <h3>Supplement Facts</h3>
+            <div class="serv">Serving Size 1 Capsule<br>Servings Per Container 28</div>
+            <table>
+              <tr><td style="border-bottom:.5px solid #000;font-size:6.8px" colspan="2"><b>Amount Per Serving&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% Daily Value</b></td></tr>
+              <tr class="thick"><td>Organic Ashwagandha Root Extract (KSM-66®) (Withania somnifera) std. to 5% withanolides — 600 mg</td><td class="r">†</td></tr>
+            </table>
+            <div class="fine">† Daily Value not established.</div>
+          </div>
+          <div class="other"><b>Other ingredients:</b> hypromellose (vegetable capsule), organic rice hulls.<br><br><b>Free from:</b> gelatin, gluten, dairy, soy, artificial colors, magnesium stearate. No proprietary blends — every ingredient and amount disclosed.</div>
+        </div>
+
+        <!-- ZONE 3: DIRECTIONS / SOURCE -->
+        <div class="dirs">
+          <div>
+            <h4>Suggested Use</h4>
+            <p>One capsule daily, with food, at the same time each day. One bottle is one lunar cycle — 28 days.</p>
+          </div>
+          <div>
+            <h4>Our Promise</h4>
+            <p class="claim">This lot was tested by an independent, ISO 17025-accredited lab before it shipped. Scan the front of this bottle to read the results.</p>
+          </div>
+          <div class="disclaimer">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</div>
+          <p style="font-size:6.9px;line-height:1.4"><b>Warning:</b> Consult a physician if pregnant, nursing, taking medication, or under 18. Keep out of reach of children. Do not use if seal is broken.</p>
+          <div class="dist"><b>Distributed by Astraea Vitamins</b><br>[Street Address] · [City, State ZIP]<br>astraea.com · Store cool &amp; dry.</div>
+        </div>
+
+        <!-- ZONE 4: SEAM -->
+        <div class="seam"><div class="stamp">LOT ____ · BEST BY ____</div></div>
+
+      </div>
+    </div>
+    <div class="annos">
+      <div>ZONE 1 · FRONT PANEL — brand, product, star strip, net qty, QR testing strip (never moves)</div>
+      <div>ZONE 2 · SUPPLEMENT FACTS — 21 CFR 101.36 format, full disclosure, no blends</div>
+      <div>ZONE 3 · USE + PROMISE — directions, testing promise, FDA disclaimer, distributor</div>
+      <div>ZONE 4 · SEAM — inkjet lot &amp; date stamp zone at filling; label art never changes</div>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <h2>Design decisions</h2>
+  <div class="grid2">
+    <div class="card"><b>The facts panel is the hero of zone 2</b>Set in regulation black-on-white Helvetica inside its rule box — deliberately untouched by brand styling. Surrounding it with warm paper and letting it sit stark signals: this part isn't marketing. The "Free from / no proprietary blends" block sits directly beneath it, where label-readers' eyes already are.</div>
+    <div class="card"><b>"Our Promise" replaces puffery</b>Where competitors put adjectives, zone 3 carries one falsifiable sentence about this lot's testing — and points back to the QR. Every claim on the label is either a regulated fact or checkable via the scan.</div>
+    <div class="card"><b>The lunar line does double duty</b>"28 capsules · 28-day supply · one lunar cycle" is simultaneously the FDA net-quantity statement territory, the subscription rhythm, and the only poetic flourish on the label. One line, three jobs.</div>
+    <div class="card"><b>Evergreen art, stamped variables</b>Nothing batch-specific is printed in the label art — lot and best-by are inkjet-stamped in the seam zone at filling. One label SKU serves every production run; the QR resolves server-side to the current lot's page via the stamped code entry.</div>
+  </div>
+
+  <h2 style="margin-top:40px">Compliance checklist (per label)</h2>
+  <div class="checklist"><ul>
+    <li>Statement of identity ("Herbal Dietary Supplement") on the principal display panel — 21 CFR 101.3</li>
+    <li>Net quantity of contents ("28 Capsules") on the front panel — 21 CFR 101.105</li>
+    <li>Supplement Facts panel in prescribed format: serving size, servings per container, amounts, %DV or † — 21 CFR 101.36</li>
+    <li>Other-ingredients list in descending order below the facts box</li>
+    <li>Structure/function claims accompanied by the FDA disclaimer, verbatim, in a bordered box</li>
+    <li>Distributor name and full place of business</li>
+    <li>Allergen declaration per FALCPA (or "free from" statement where truthful)</li>
+    <li>Lot identification on every unit (stamped) — 21 CFR 111 traceability</li>
+    <li>Final compliance pass by a regulatory consultant before print — required for all 26 SKUs</li>
+  </ul></div>
+</section>
+
+<footer class="wrap" style="padding:28px 28px 56px;font-family:var(--mono);font-size:10.5px;color:#7a8296;letter-spacing:.08em">
+  ASTRAEA VITAMINS · MASTER LABEL V1 · KSM-66® IS A REGISTERED TRADEMARK OF IXOREAL BIOMED — LICENSED USE REQUIRES SUPPLIER AGREEMENT · NOT FINAL REGULATORY ART
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astraea — Container System Samples</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1B2E; --paper:#F7F6F1; --star:#A9C0D8; --verify:#177B54;
+  --ember:#C08A3E; --hair:#D8D5CC; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Karla',sans-serif;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--verify)}
+h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(28px,4vw,42px);margin:10px 0 8px}
+h2{font-family:'Marcellus',serif;font-weight:400;font-size:24px;margin:0 0 14px}
+.lede{max-width:60ch;color:#3c4658;font-size:16px}
+.section{padding:56px 0;border-top:1px solid var(--hair)}
+.section:first-of-type{border-top:none;padding-top:64px}
+
+.lineup{background:#fff;border:1px solid var(--hair);margin-top:34px;padding:34px 20px 10px;overflow-x:auto}
+.lineup svg{display:block;margin:0 auto;min-width:940px}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
+.card{background:#fff;border:1px solid var(--hair);padding:20px}
+.card .cc{font-family:'Marcellus',serif;font-size:26px}
+.card .kind{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--verify);margin-bottom:10px}
+.card .dim{font-family:var(--mono);font-size:11px;color:#5a6478;margin:4px 0 10px}
+.card ul{list-style:none}
+.card li{font-size:13px;color:#3c4658;padding:3px 0;border-bottom:1px solid #efede6}
+.card li:last-child{border-bottom:none}
+.caption{font-family:var(--mono);font-size:11px;color:#7a8296;margin-top:14px;letter-spacing:.05em}
+.notes{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.note{background:#fff;border-left:3px solid var(--verify);border-top:1px solid var(--hair);border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:16px 18px;font-size:14px;color:#3c4658}
+.note b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.notes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="section wrap">
+  <div class="eyebrow">Packaging system · container samples</div>
+  <h1>Seven containers. Twenty-six products. One system.</h1>
+  <p class="lede">Every container standardized to the 28-day supply. Matte ink closures, archival-paper labels, and the "Check the Testing" QR strip anchored at the same position on every unit — so the shelf reads as one brand at any size.</p>
+
+  <div class="lineup">
+  <svg viewBox="0 0 1180 380" xmlns="http://www.w3.org/2000/svg" font-family="Karla,sans-serif">
+    <defs>
+      <g id="qr">
+        <rect width="16" height="16" fill="#F7F6F1"/>
+        <rect x="2" y="2" width="4" height="4" fill="#0E1B2E"/><rect x="10" y="2" width="4" height="4" fill="#0E1B2E"/>
+        <rect x="2" y="10" width="4" height="4" fill="#0E1B2E"/><rect x="8" y="8" width="2" height="2" fill="#0E1B2E"/>
+        <rect x="12" y="12" width="2" height="2" fill="#0E1B2E"/><rect x="10" y="10" width="2" height="2" fill="#F7F6F1"/>
+      </g>
+    </defs>
+
+    <!-- ground line -->
+    <line x1="20" y1="320" x2="1160" y2="320" stroke="#D8D5CC" stroke-width="1"/>
+
+    <!-- ===== 75cc bottle (28ct) ===== -->
+    <g transform="translate(50,0)">
+      <rect x="16" y="180" width="40" height="16" rx="2" fill="#0E1B2E"/>
+      <path d="M20 196 Q20 190 26 190 L46 190 Q52 190 52 196 L52 200 Q56 204 56 212 L56 312 Q56 320 48 320 L24 320 Q16 320 16 312 L16 212 Q16 204 20 200 Z" fill="#FDFCF9" stroke="#C9C5B8" stroke-width="1"/>
+      <rect x="16" y="222" width="40" height="70" fill="#F7F6F1" stroke="#D8D5CC" stroke-width=".5"/>
+      <rect x="16" y="222" width="40" height="3" fill="#A9C0D8"/>
+      <text x="36" y="238" text-anchor="middle" font-size="6.5" letter-spacing="2" fill="#0E1B2E">ASTRAEA</text>
+      <text x="36" y="252" text-anchor="middle" font-family="Marcellus,serif" font-size="7.5" fill="#0E1B2E">D3 / K2</text>
+      <text x="36" y="261" text-anchor="middle" font-size="4.5" fill="#5A6478">28-day supply</text>
+      <rect x="16" y="270" width="40" height="22" fill="#0E1B2E"/>
+      <use href="#qr" transform="translate(20,273) scale(0.95)"/>
+      <text x="40" y="280" font-size="3.6" fill="#5FD6A7" font-family="'IBM Plex Mono',monospace">CHECK THE</text>
+      <text x="40" y="285" font-size="3.6" fill="#A9C0D8" font-family="'IBM Plex Mono',monospace">TESTING</text>
+      <text x="36" y="342" text-anchor="middle" font-size="10" font-family="'IBM Plex Mono',monospace" fill="#0E1B2E">75 cc</text>
+      <text x="36" y="356" text-anchor="middle" font-size="8.5" fill="#7A8296">28-count bottle</text>
+    </g>
+
+    <!-- ===== 120cc bottle (56ct) ===== -->
+    <g transform="translate(160,0)">
+      <rect x="18" y="158" width="44" height="17" rx="2" fill="#0E1B2E"/>
+      <path d="M22 175 Q22 169 28 169 L52 169 Q58 169 58 175 L58 180 Q64 185 64 194 L64 311 Q64 320 55 320 L25 320 Q16 320 16 311 L16 194 Q16 185 22 180 Z" fill="#FDFCF9" stroke="#C9C5B8" stroke-width="1"/>
+      <rect x="16" y="206" width="48" height="84" fill="#F7F6F1" stroke="#D8D5CC" stroke-width=".5"/>
+      <rect x="16" y="206" width="48" height="3" fill="#A9C0D8"/>
+      <text x="40" y="224" text-anchor="middle" font-size="7" letter-spacing="2.4" fill="#0E1B2E">ASTRAEA</text>
+      <text x="40" y="240" text-anchor="middle" font-family="Marcellus,serif" font-size="8" fill="#0E1B2E">Foundation</text>
+      <text x="40" y="250" text-anchor="middle" font-family="Marcellus,serif" font-size="8" fill="#0E1B2E">Multi</text>
+      <text x="40" y="259" text-anchor="middle" font-size="4.6" fill="#5A6478">56 tablets · 28 days</text>
+      <rect x="16" y="266" width="48" height="24" fill="#0E1B2E"/>
+      <use href="#qr" transform="translate(21,269) scale(1.1)"/>
+      <text x="48" y="277" font-size="4" fill="#5FD6A7" font-family="'IBM Plex Mono',monospace">CHECK THE</text>
+      <text x="48" y="283" font-size="4" fill="#A9C0D8" font-family="'IBM Plex Mono',monospace">TESTING</text>
+      <text x="40" y="342" text-anchor="middle" font-size="10" font-family="'IBM Plex Mono',monospace" fill="#0E1B2E">120 cc</text>
+      <text x="40" y="356" text-anchor="middle" font-size="8.5" fill="#7A8296">56-count bottle</text>
+    </g>
+
+    <!-- ===== 175cc bottle (84ct) ===== -->
+    <g transform="translate(280,0)">
+      <rect x="20" y="136" width="48" height="18" rx="2" fill="#0E1B2E"/>
+      <path d="M24 154 Q24 148 30 148 L58 148 Q64 148 64 154 L64 160 Q72 166 72 176 L72 310 Q72 320 62 320 L26 320 Q16 320 16 310 L16 176 Q16 166 24 160 Z" fill="#FDFCF9" stroke="#C9C5B8" stroke-width="1"/>
+      <rect x="16" y="192" width="56" height="96" fill="#F7F6F1" stroke="#D8D5CC" stroke-width=".5"/>
+      <rect x="16" y="192" width="56" height="3" fill="#A9C0D8"/>
+      <text x="44" y="212" text-anchor="middle" font-size="7.5" letter-spacing="2.6" fill="#0E1B2E">ASTRAEA</text>
+      <text x="44" y="230" text-anchor="middle" font-family="Marcellus,serif" font-size="8.5" fill="#0E1B2E">Magnesium</text>
+      <text x="44" y="240" text-anchor="middle" font-family="Marcellus,serif" font-size="8.5" fill="#0E1B2E">Bisglycinate</text>
+      <text x="44" y="250" text-anchor="middle" font-size="4.8" fill="#5A6478">84 capsules · 28 days</text>
+      <rect x="16" y="260" width="56" height="26" fill="#0E1B2E"/>
+      <use href="#qr" transform="translate(22,263) scale(1.2)"/>
+      <text x="52" y="272" font-size="4.4" fill="#5FD6A7" font-family="'IBM Plex Mono',monospace">CHECK THE</text>
+      <text x="52" y="278" font-size="4.4" fill="#A9C0D8" font-family="'IBM Plex Mono',monospace">TESTING</text>
+      <text x="44" y="342" text-anchor="middle" font-size="10" font-family="'IBM Plex Mono',monospace" fill="#0E1B2E">175 cc</text>
+      <text x="44" y="356" text-anchor="middle" font-size="8.5" fill="#7A8296">84-count bottle</text>
+    </g>
+
+    <!-- ===== 150cc jar (creatine) ===== -->
+    <g transform="translate(410,0)">
+      <rect x="14" y="228" width="100" height="20" rx="3" fill="#0E1B2E"/>
+      <path d="M18 248 L110 248 Q118 248 118 256 L118 310 Q118 320 108 320 L20 320 Q10 320 10 310 L10 256 Q10 248 18 248 Z" fill="#FDFCF9" stroke="#C9C5B8" stroke-width="1"/>
+      <rect x="10" y="258" width="108" height="52" fill="#F7F6F1" stroke="#D8D5CC" stroke-width=".5"/>
+      <rect x="10" y="258" width="108" height="3" fill="#C08A3E"/>
+      <text x="42" y="274" font-size="6.5" letter-spacing="2.2" fill="#0E1B2E">ASTRAEA</text>
+      <text x="42" y="286" font-family="Marcellus,serif" font-size="8.5" fill="#0E1B2E">Creatine</text>
+      <text x="42" y="295" font-size="4.6" fill="#5A6478">140 g · 28 servings</text>
+      <rect x="10" y="258" width="30" height="52" fill="#0E1B2E"/>
+      <use href="#qr" transform="translate(17,270) scale(1.0)"/>
+      <text x="25" y="294" text-anchor="middle" font-size="3.4" fill="#5FD6A7" font-family="'IBM Plex Mono',monospace">CHECK THE</text>
+      <text x="25" y="299" text-anchor="middle" font-size="3.4" fill="#A9C0D8" font-family="'IBM Plex Mono',monospace">TESTING</text>
+      <text x="64" y="342" text-anchor="middle" font-size="10" font-family="'IBM Plex Mono',monospace" fill="#0E1B2E">150 cc</text>
+      <text x="64" y="356" text-anchor="middle" font-size="8.5" fill="#7A8296">compact jar</text>
+    </g>
+
+    <!-- ===== 350cc jar ===== -->
+    <g transform="translate(560,0)">
+      <rect x="14" y="188" width="116" height="22" rx="3" fill="#0E1B2E"/>
+      <path d="M18 210 L126 210 Q134 210 134 218 L134 308 Q134 320 122 320 L22 320 Q10 320 10 308 L10 218 Q10 210 18 210 Z" fill="#FDFCF9" stroke="#C9C5B8" stroke-width="1"/>
+      <rect x="10" y="222" width="124" height="88" fill="#F7F6F1" stroke="#D8D5CC" stroke-width=".5"/>
+      <rect x="10" y="222" width="124" height="3" fill="#C08A3E"/>
+      <text x="52" y="242" font-size="7" letter-spacing="2.4" fill="#0E1B2E">ASTRAEA</text>
+      <text x="52" y="258" font-family="Marcellus,serif" font-size="9.5" fill="#0E1B2E">Electrolytes</text>
+      <text x="52" y="268" font-size="5" fill="#5A6478">224 g · 28 servings</text>
+      <rect x="10" y="222" width="34" height="88" fill="#0E1B2E"/>
+      <use href="#qr" transform="translate(17,248) scale(1.25)"/>
+      <text x="27" y="284" text-anchor="middle" font-size="3.8" fill="#5FD6A7" font-family="'IBM Plex Mono',monospace">CHECK THE</text>
+      <text x="27" y="290" text-anchor="middle" font-size="3.8" fill="#A9C0D8" font-family="'IBM Plex Mono',monospace">TESTING</text>
+      <text x="72" y="342" text-anchor="middle" font-size="10" font-family="'IBM Plex Mono',monospace" fill="#0E1B2E">350 cc</text>
+      <text x="72" y="356" text-anchor="middle" font-size="8.5" fill="#7A8296">mid jar</text>
+    </g>
+
+    <!-- ===== 600cc jar ===== -->
+    <g transform="translate(730,0)">
+      <rect x="16" y="158" width="128 " height="24" rx="3" fill="#0E1B2E"/>
+      <path d="M20 182 L140 182 Q148 182 148 190 L148 306 Q148 320 134 320 L26 320 Q12 320 12 306 L12 190 Q12 182 20 182 Z" fill="#FDFCF9" stroke="#C9C5B8" stroke-width="1"/>
+      <rect x="12" y="196" width="136" height="110" fill="#F7F6F1" stroke="#D8D5CC" stroke-width=".5"/>
+      <rect x="12" y="196" width="136" height="3" fill="#C08A3E"/>
+      <text x="58" y="220" font-size="7.5" letter-spacing="2.6" fill="#0E1B2E">ASTRAEA</text>
+      <text x="58" y="238" font-family="Marcellus,serif" font-size="10" fill="#0E1B2E">Pre-Workout</text>
+      <text x="58" y="249" font-size="5.2" fill="#5A6478">392 g · 28 servings</text>
+      <rect x="12" y="196" width="38" height="110" fill="#0E1B2E"/>
+      <use href="#qr" transform="translate(20,228) scale(1.4)"/>
+      <text x="31" y="270" text-anchor="middle" font-size="4.2" fill="#5FD6A7" font-family="'IBM Plex Mono',monospace">CHECK THE</text>
+      <text x="31" y="276" text-anchor="middle" font-size="4.2" fill="#A9C0D8" font-family="'IBM Plex Mono',monospace">TESTING</text>
+      <text x="80" y="342" text-anchor="middle" font-size="10" font-family="'IBM Plex Mono',monospace" fill="#0E1B2E">600 cc</text>
+      <text x="80" y="356" text-anchor="middle" font-size="8.5" fill="#7A8296">large jar</text>
+    </g>
+
+    <!-- ===== 1000cc / 2lb tub ===== -->
+    <g transform="translate(930,0)">
+      <rect x="18" y="112" width="160" height="28" rx="4" fill="#0E1B2E"/>
+      <path d="M24 140 L172 140 Q182 140 182 150 L182 304 Q182 320 166 320 L30 320 Q14 320 14 304 L14 150 Q14 140 24 140 Z" fill="#FDFCF9" stroke="#C9C5B8" stroke-width="1"/>
+      <rect x="14" y="158" width="168" height="146" fill="#F7F6F1" stroke="#D8D5CC" stroke-width=".5"/>
+      <rect x="14" y="158" width="168" height="4" fill="#C08A3E"/>
+      <text x="70" y="188" font-size="9" letter-spacing="3" fill="#0E1B2E">ASTRAEA</text>
+      <text x="70" y="212" font-family="Marcellus,serif" font-size="12.5" fill="#0E1B2E">Whey Isolate</text>
+      <text x="70" y="226" font-size="6" fill="#5A6478">840 g · 28 servings · 28 days</text>
+      <rect x="14" y="162" width="46" height="142" fill="#0E1B2E"/>
+      <use href="#qr" transform="translate(23,206) scale(1.75)"/>
+      <text x="37" y="258" text-anchor="middle" font-size="5" fill="#5FD6A7" font-family="'IBM Plex Mono',monospace">CHECK THE</text>
+      <text x="37" y="266" text-anchor="middle" font-size="5" fill="#A9C0D8" font-family="'IBM Plex Mono',monospace">TESTING</text>
+      <text x="98" y="342" text-anchor="middle" font-size="10" font-family="'IBM Plex Mono',monospace" fill="#0E1B2E">1000 cc</text>
+      <text x="98" y="356" text-anchor="middle" font-size="8.5" fill="#7A8296">2 lb tub</text>
+    </g>
+  </svg>
+  </div>
+  <p class="caption">SHOWN AT RELATIVE SCALE · WELLNESS LINE CARRIES STARLIGHT BAND · SPORT LINE CARRIES EMBER BAND · QR STRIP ANCHORED IDENTICALLY ON EVERY FORMAT</p>
+</section>
+
+<section class="section wrap">
+  <h2>Container specifications</h2>
+  <div class="cards">
+    <div class="card"><div class="kind">Bottle · Wellness</div><div class="cc">75 cc</div><div class="dim">~45 × 85 mm · 38-400 neck</div>
+      <ul><li>D3/K2 · B-Complex · Ashwagandha</li><li>L-Theanine · Vitamin C · Zinc</li><li>Probiotic (amber variant + desiccant)</li><li>7 SKUs · 28-count</li></ul></div>
+    <div class="card"><div class="kind">Bottle · Wellness</div><div class="cc">120 cc</div><div class="dim">~50 × 100 mm · 45-400 neck</div>
+      <ul><li>Foundation Multi · Women's · Men's</li><li>Lion's Mane · Curcumin</li><li>5 SKUs · 56-count</li></ul></div>
+    <div class="card"><div class="kind">Bottle · Wellness</div><div class="cc">175 cc</div><div class="dim">~55 × 115 mm · 45-400 neck</div>
+      <ul><li>Magnesium Bisglycinate</li><li>Digestive Enzymes · ZMA</li><li>3 SKUs · 84-count</li></ul></div>
+    <div class="card"><div class="kind">Jar · Sport</div><div class="cc">150 cc</div><div class="dim">~70 × 75 mm · wide mouth</div>
+      <ul><li>Creatine (140 g)</li><li>Beta-Alanine (90 g)</li><li>2 SKUs · scoop included</li></ul></div>
+    <div class="card"><div class="kind">Jar · Sport</div><div class="cc">350 cc</div><div class="dim">~85 × 95 mm · wide mouth</div>
+      <ul><li>Electrolytes (224 g)</li><li>Citrulline (196 g)</li><li>2 SKUs</li></ul></div>
+    <div class="card"><div class="kind">Jar · Sport</div><div class="cc">600 cc</div><div class="dim">~95 × 120 mm · wide mouth</div>
+      <ul><li>Pre-Workout (392 g) · Greens (280 g)</li><li>Collagen (336 g) · EAAs (336 g)</li><li>4 SKUs</li></ul></div>
+    <div class="card"><div class="kind">Tub · Sport</div><div class="cc">1000 cc</div><div class="dim">~120 × 150 mm · wide mouth</div>
+      <ul><li>Whey Isolate (840 g)</li><li>Plant Protein (896 g)</li><li>Post-Workout (700 g)</li><li>3 SKUs · 2 lb format</li></ul></div>
+    <div class="card"><div class="kind">System total</div><div class="cc">7</div><div class="dim">container formats · 26 SKUs</div>
+      <ul><li>3 bottle sizes · 15 SKUs</li><li>3 jar sizes · 8 SKUs</li><li>1 tub · 3 SKUs</li><li>4 label dielines total</li></ul></div>
+  </div>
+
+  <div class="notes">
+    <div class="note"><b>Material direction</b>White HDPE or PET bottles with matte-finish ink-navy closures; jars and tubs in white HDPE with matching matte lids. Matte labels on uncoated-look stock (or matte lamination) to hold the archival-paper feel. Probiotic runs amber PET as the single exception — stability over system purity.</div>
+    <div class="note"><b>Why this wins operationally</b>Seven stock containers and four label dielines cover the entire 26-SKU line. Every format carries the QR strip in the same anchored position, so the "Check the Testing" gesture is identical whether the customer holds a 75 cc bottle or a 2 lb tub.</div>
+  </div>
+</section>
+
+<footer class="wrap" style="padding:30px 28px 60px;font-family:var(--mono);font-size:10.5px;color:#7a8296;letter-spacing:.08em">
+  ASTRAEA VITAMINS · CONTAINER SYSTEM CONCEPT V1 · DIMENSIONS APPROXIMATE — CONFIRM AGAINST CO-PACKER STOCK CATALOG BEFORE DIELINE WORK
+</footer>
+
+</body>
+</html>

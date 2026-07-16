@@ -1,0 +1,35 @@
+/* Astraea design tokens — copied verbatim from COMPONENT-SPEC.md (client handoff) */
+:root {
+  --ink: #0E1B2E;        /* primary type, dark sections, closures */
+  --ink2: #122239;       /* raised dark panels */
+  --paper: #F7F6F1;      /* page background / label ground */
+  --paper2: #FDFCF9;     /* card / raised light ground */
+  --star: #A9C0D8;       /* Wellness accent */
+  --starDark: #41628a;   /* Wellness text/detail on light */
+  --verify: #177B54;     /* testing / COA ONLY — never decorative */
+  --verifyBright: #5FD6A7;/* PASS on dark */
+  --ember: #C08A3E;      /* Sport accent */
+  --hair: #D8D5CC;       /* borders, rules */
+  --muted: #5a6478;      /* secondary text */
+  --mono: 'IBM Plex Mono', monospace;
+  --display: 'Marcellus', serif;
+  --body: 'Karla', sans-serif;
+}
+
+/* Zero border-radius on structural elements; radius only on soft product/bottle art. */
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  line-height: 1.55;
+  margin: 0;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--verify);
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; }
