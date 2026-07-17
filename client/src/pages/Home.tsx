@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Constellation from "../components/Constellation";
+import ParticleBackground from "../components/ParticleBackground";
 import ProductCard from "../components/ProductCard";
 import { trpc } from "../lib/trpc";
 
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div>
       <header className="hero">
-        <Constellation />
+        <ParticleBackground color="169, 192, 216" className="particles" />
         <div className="wrap">
           <div className="eyebrow">37 supplements · every batch tested</div>
           <h1>We don't ask you to trust us. We show you.</h1>

@@ -1,10 +1,10 @@
-import Constellation from "../components/Constellation";
+import ParticleBackground from "../components/ParticleBackground";
 
 export default function OurStory() {
   return (
     <div>
       <header className="hero" style={{ padding: "76px 0" }}>
-        <Constellation />
+        <ParticleBackground color="169, 192, 216" className="particles" />
         <div className="wrap">
           <div className="eyebrow">Our story</div>
           <h1 style={{ maxWidth: "18ch" }}>Why "Astraea"</h1>
