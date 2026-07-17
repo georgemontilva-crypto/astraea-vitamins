@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { appRouter } from "./router";
+import { appRouter } from "./router/index.js";
 import path from "path";
 import { fileURLToPath } from "url";
 

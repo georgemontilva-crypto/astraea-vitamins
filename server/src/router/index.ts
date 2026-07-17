@@ -1,7 +1,7 @@
 import { initTRPC } from "@trpc/server";
 import { z } from "zod";
-import { db } from "../db/client";
-import { products, batches, waitlist } from "../db/schema";
+import { db } from "../db/client.js";
+import { products, batches, waitlist } from "../db/schema.js";
 import { eq, desc } from "drizzle-orm";
 
 const t = initTRPC.create();

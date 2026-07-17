@@ -4,8 +4,8 @@
 // the client and must be filled in before launch (see README "Pending from client").
 import "dotenv/config";
 import fs from "fs";
-import { db } from "./client";
-import { products } from "./schema";
+import { db } from "./client.js";
+import { products } from "./schema.js";
 
 type PdpRow = {
   "#": number;
