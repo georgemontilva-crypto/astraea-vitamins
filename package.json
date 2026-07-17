@@ -13,6 +13,7 @@
     "start": "node server/dist/index.js",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx server/src/db/migrate.ts",
+    "db:seed": "tsx server/src/db/seed.ts && tsx server/src/db/seed-batches.ts",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {

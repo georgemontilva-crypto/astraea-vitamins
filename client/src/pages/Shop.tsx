@@ -1,35 +1,64 @@
+import { useSearchParams } from "react-router-dom";
+import ProductCard from "../components/ProductCard";
 import { trpc } from "../lib/trpc";
-import { Link } from "react-router-dom";
+
+const FILTERS = [
+  { key: "all", label: "All" },
+  { key: "Wellness", label: "Wellness" },
+  { key: "Sport", label: "Sport" },
+  { key: "capsule", label: "Capsules" },
+  { key: "tablet", label: "Tablets" },
+  { key: "powder", label: "Powders" },
+  { key: "gummy", label: "Gummies" },
+] as const;
 
 export default function Shop() {
+  const [params, setParams] = useSearchParams();
+  const active = params.get("line") ?? params.get("format") ?? "all";
+
   const { data: products, isLoading } = trpc.products.list.useQuery();
 
+  const items =
+    active === "all"
+      ? products
+      : products?.filter((p) => p.line === active || p.format === active);
+
+  function setFilter(key: string) {
+    if (key === "all") {
+      setParams({});
+    } else if (key === "Wellness" || key === "Sport") {
+      setParams({ line: key });
+    } else {
+      setParams({ format: key });
+    }
+  }
+
+  const title = active === "all" ? "All products" : active;
+
   return (
-    <div style={{ padding: 24 }}>
-      <div className="eyebrow">Shop</div>
-      <h1>All products</h1>
-      {isLoading && <p>Loading…</p>}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 16, marginTop: 24 }}>
-        {products?.map((p) => (
-          <Link
-            key={p.id}
-            to={`/products/${p.handle}`}
-            style={{
-              background: "var(--paper2)",
-              border: "1px solid var(--hair)",
-              padding: 16,
-              textDecoration: "none",
-              color: "var(--ink)",
-            }}
-          >
-            <div className="eyebrow" style={{ color: p.line === "Wellness" ? "var(--starDark)" : "var(--ember)" }}>
-              {p.line}
-            </div>
-            <h3>{p.name}</h3>
-            <div style={{ fontFamily: "var(--mono)", fontSize: 13 }}>{p.servingSupply}</div>
-          </Link>
-        ))}
+    <section className="sec">
+      <div className="wrap">
+        <div className="head">
+          <div>
+            <div className="eyebrow">The catalogue</div>
+            <h2>{title}</h2>
+          </div>
+        </div>
+        <div className="filters">
+          {FILTERS.map((f) => (
+            <button key={f.key} className={active === f.key ? "on" : ""} onClick={() => setFilter(f.key)}>
+              {f.key === "all" ? `All ${products?.length ?? ""}` : f.label}
+            </button>
+          ))}
+        </div>
+        {isLoading && <p>Loading…</p>}
+        <div className="grid">
+          {items?.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+        {items && items.length === 0 && <p style={{ color: "var(--muted)" }}>No products match this filter.</p>}
       </div>
-    </div>
+    </section>
   );
 }

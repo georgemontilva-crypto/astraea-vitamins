@@ -72,7 +72,9 @@ npm run dev                 # server :3000 + vite :5173 (proxy /api -> :3000)
 4. Build: Nixpacks detecta `npm run build` / `npm run start` automáticamente
    (ver `railway.json`). Build command real: `npm run build`, start: `npm run start`.
 5. Correr migraciones una vez desplegado: `railway run npm run db:migrate`, luego
-   `railway run tsx server/src/db/seed.ts` para cargar los 37 productos.
+   `railway run npm run db:seed` para cargar los 37 productos + un puñado de
+   batches de muestra (los mismos datos placeholder que ya trae `storefront.html`,
+   para que Lab Tests sea demostrable de una).
 
 ## Siguiente paso recomendado
 

@@ -5,7 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { trpc } from "./lib/trpc";
 import "./styles/tokens.css";
+import "./styles/site.css";
 
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
@@ -22,10 +24,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/products/:handle" element={<ProductDetail />} />
-            <Route path="/lab-tests" element={<LabTests />} />
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/products/:handle" element={<ProductDetail />} />
+              <Route path="/lab-tests" element={<LabTests />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

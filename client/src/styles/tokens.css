@@ -17,13 +17,14 @@
 }
 
 /* Zero border-radius on structural elements; radius only on soft product/bottle art. */
-* { box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--body);
   line-height: 1.55;
-  margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 .eyebrow {
   font-family: var(--mono);

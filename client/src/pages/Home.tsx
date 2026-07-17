@@ -1,20 +1,178 @@
 import { Link } from "react-router-dom";
+import Constellation from "../components/Constellation";
+import ProductCard from "../components/ProductCard";
+import { trpc } from "../lib/trpc";
 
 export default function Home() {
+  const { data: products } = trpc.products.list.useQuery();
+  const essentials = products?.slice(0, 4) ?? [];
+
   return (
     <div>
-      <header style={{ background: "var(--ink)", color: "var(--paper)", padding: "88px 24px" }}>
-        <div className="eyebrow" style={{ color: "var(--star)" }}>Astraea Vitamins</div>
-        <h1 style={{ fontSize: "clamp(32px,5vw,52px)", margin: "12px 0" }}>
-          We don't ask you to trust us. We show you.
-        </h1>
-        <p style={{ maxWidth: "52ch", color: "#c9d4e2", fontWeight: 300 }}>
-          Every batch, independently tested. Results one scan away.
-        </p>
-        <Link to="/shop" style={{ color: "var(--verifyBright)" }}>Shop the line →</Link>
+      <header className="hero">
+        <Constellation />
+        <div className="wrap">
+          <div className="eyebrow">37 supplements · every batch tested</div>
+          <h1>We don't ask you to trust us. We show you.</h1>
+          <p className="sub">
+            Every Astraea batch is tested by an independent lab — and every bottle carries a code
+            to its actual results. No proprietary blends. No hidden fillers. Nothing you can't check.
+          </p>
+          <div className="cta">
+            <Link className="btn" to="/shop">Shop the line</Link>
+            <Link className="btn ghost" to="/lab-tests">Check the testing</Link>
+          </div>
+          <div className="proofstrip">
+            <span className="dot" />
+            CHECK THE TESTING · EVERY BATCH, INDEPENDENTLY TESTED · SCAN FOR RESULTS
+          </div>
+        </div>
       </header>
-      {/* TODO: port hero constellation SVG, how-it-works steps, line-split blocks,
-          and "why we test" band from design-reference/mockups/storefront.html */}
+
+      <section className="promise">
+        <div className="wrap">
+          <div className="cols">
+            <div>
+              <div className="eyebrow">The problem we exist for</div>
+              <h2>The supplement aisle asks for your trust and shows you nothing.</h2>
+            </div>
+            <div>
+              <p>
+                Proprietary blends hide doses. Labels don't always match what's inside.
+                "Third-party tested" gets printed on bottles with nothing behind it. Astraea was
+                built to end the guessing: we publish the actual lab results for the actual batch
+                in your hand.
+              </p>
+              <div className="stat">
+                <div className="n">100%</div>
+                <div className="l">of batches tested &amp; published before they ship</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="how">
+        <div className="wrap">
+          <div className="eyebrow">How it works</div>
+          <h2 className="heading">Proof in three steps.</h2>
+          <div className="steps">
+            <div className="step">
+              <div className="num">STEP 01</div>
+              <h3>Scan the bottle</h3>
+              <p>Every Astraea package has a QR code on the front. One scan opens that product's lab page — no app, no account.</p>
+              <div className="scanvis">
+                <div className="qr" />
+                <div className="vt">CHECK THE<br />TESTING</div>
+              </div>
+            </div>
+            <div className="step">
+              <div className="num">STEP 02</div>
+              <h3>Find your batch</h3>
+              <p>Match the lot number on your pack. You'll see exactly what was tested in the batch you're holding — not a generic sample.</p>
+            </div>
+            <div className="step">
+              <div className="num">STEP 03</div>
+              <h3>Read the results</h3>
+              <p>Every panel, pass or fail, with the label claim next to the tested value — and the full certificate to download.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec">
+        <div className="wrap">
+          <div className="head">
+            <div>
+              <div className="eyebrow">Start here</div>
+              <h2>The essentials</h2>
+            </div>
+            <Link to="/shop">View all 37 →</Link>
+          </div>
+          <div className="grid">
+            {essentials.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sec" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="lines">
+            <div className="lineblk w">
+              <div className="k">Wellness</div>
+              <h3>For the daily foundation</h3>
+              <p>Multivitamins, minerals, and single-ingredient capsules in forms your body can actually use.</p>
+              <Link to="/shop?line=Wellness">Shop Wellness</Link>
+            </div>
+            <div className="lineblk s">
+              <div className="k">Sport</div>
+              <h3>For the work you put in</h3>
+              <p>Creatine, protein, and pre-workout — tested for what's in them, and what isn't.</p>
+              <Link to="/shop?line=Sport">Shop Sport</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="testband">
+        <div className="wrap">
+          <div className="eyebrow">Why one code, and why it never changes</div>
+          <h2>The QR on every bottle shows every batch — so we can't hand-pick a flattering one.</h2>
+          <p>
+            Our testing is done by an independent, ISO 17025-accredited lab. We don't own it, and
+            we don't pay it based on results. If a batch fails, it doesn't ship, and its lot number
+            is retired. That's the whole promise, and you can check it any time.
+          </p>
+          <div className="mini">
+            <div
+              className="qr"
+              style={{
+                outlineColor: "var(--star)",
+                background:
+                  "conic-gradient(var(--star) 0 25%,transparent 0 50%,var(--star) 0 75%,transparent 0) 0 0/15px 15px,var(--ink2)",
+              }}
+            />
+            <div>
+              <div className="b">ASHWAGANDHA · LOT 26-0114</div>
+              <div className="r">
+                WITHANOLIDES · CLAIM ≥5.0% · TESTED 5.14% · PASS
+                <br />
+                HEAVY METALS · PASS &nbsp;·&nbsp; MICROBIALS · PASS
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="email">
+        <div className="wrap">
+          <div className="eyebrow" style={{ textAlign: "center" }}>Before we launch</div>
+          <h2>Be first to check the testing.</h2>
+          <p>Join the list for launch access and a look behind our first published batches.</p>
+          <WaitlistForm />
+        </div>
+      </section>
     </div>
+  );
+}
+
+function WaitlistForm() {
+  const join = trpc.waitlist.join.useMutation();
+  return (
+    <form
+      className="form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        const email = (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value;
+        join.mutate({ email });
+      }}
+    >
+      <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required />
+      <button className="btn" type="submit">
+        {join.isSuccess ? "Thanks — you're on the list" : "Notify me"}
+      </button>
+    </form>
   );
 }
