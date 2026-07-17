@@ -1,7 +1,10 @@
+import Constellation from "../components/Constellation";
+
 export default function OurStory() {
   return (
     <div>
       <header className="hero" style={{ padding: "76px 0" }}>
+        <Constellation />
         <div className="wrap">
           <div className="eyebrow">Our story</div>
           <h1 style={{ maxWidth: "18ch" }}>Why "Astraea"</h1>
