@@ -39,7 +39,13 @@ export const siteImages = mysqlTable("site_images", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// ---- Products (37 SKUs: 26 core + 5 On-the-Go + 6 gummies) ----
+// ---- Site settings — named slots (e.g. "which image is the home hero
+// background"). Simple key/value so new slots don't need a migration. ----
+export const siteSettings = mysqlTable("site_settings", {
+  key: varchar("key", { length: 100 }).primaryKey(),
+  value: text("value"),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
+});
 export const products = mysqlTable("products", {
   id: int("id").autoincrement().primaryKey(),
   handle: varchar("handle", { length: 191 }).notNull().unique(), // e.g. "ashwagandha-ksm-66"

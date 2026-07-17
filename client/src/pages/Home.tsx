@@ -5,11 +5,19 @@ import { trpc } from "../lib/trpc";
 
 export default function Home() {
   const { data: products } = trpc.products.list.useQuery();
+  const { data: heroBg } = trpc.settings.get.useQuery("home_hero_bg");
   const essentials = products?.slice(0, 4) ?? [];
 
   return (
     <div>
-      <header className="hero">
+      <header
+        className="hero"
+        style={
+          heroBg
+            ? { backgroundImage: `linear-gradient(rgba(14,27,46,.75), rgba(14,27,46,.85)), url(${heroBg})`, backgroundSize: "cover", backgroundPosition: "center" }
+            : undefined
+        }
+      >
         <ParticleBackground color="169, 192, 216" className="particles" />
         <div className="wrap">
           <div className="eyebrow">37 supplements · every batch tested</div>
@@ -116,35 +124,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="testband">
-        <div className="wrap">
-          <div className="eyebrow">Why one code, and why it never changes</div>
-          <h2>The QR on every bottle shows every batch — so we can't hand-pick a flattering one.</h2>
-          <p>
-            Our testing is done by an independent, ISO 17025-accredited lab. We don't own it, and
-            we don't pay it based on results. If a batch fails, it doesn't ship, and its lot number
-            is retired. That's the whole promise, and you can check it any time.
-          </p>
-          <div className="mini">
-            <div
-              className="qr"
-              style={{
-                outlineColor: "var(--star)",
-                background:
-                  "conic-gradient(var(--star) 0 25%,transparent 0 50%,var(--star) 0 75%,transparent 0) 0 0/15px 15px,var(--ink2)",
-              }}
-            />
-            <div>
-              <div className="b">ASHWAGANDHA · LOT 26-0114</div>
-              <div className="r">
-                WITHANOLIDES · CLAIM ≥5.0% · TESTED 5.14% · PASS
-                <br />
-                HEAVY METALS · PASS &nbsp;·&nbsp; MICROBIALS · PASS
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TestBand />
 
       <section className="email">
         <div className="wrap">
@@ -155,6 +135,53 @@ export default function Home() {
         </div>
       </section>
     </div>
+  );
+}
+
+function TestBand() {
+  const { data: bgUrl } = trpc.settings.get.useQuery("home_testband_bg");
+
+  return (
+    <section
+      className="testband"
+      style={
+        bgUrl
+          ? {
+              backgroundImage: `linear-gradient(rgba(14,27,46,.82), rgba(14,27,46,.88)), url(${bgUrl})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+          : undefined
+      }
+    >
+      <div className="wrap">
+        <div className="eyebrow">Why one code, and why it never changes</div>
+        <h2>The QR on every bottle shows every batch — so we can't hand-pick a flattering one.</h2>
+        <p>
+          Our testing is done by an independent, ISO 17025-accredited lab. We don't own it, and
+          we don't pay it based on results. If a batch fails, it doesn't ship, and its lot number
+          is retired. That's the whole promise, and you can check it any time.
+        </p>
+        <div className="mini">
+          <div
+            className="qr"
+            style={{
+              outlineColor: "var(--star)",
+              background:
+                "conic-gradient(var(--star) 0 25%,transparent 0 50%,var(--star) 0 75%,transparent 0) 0 0/15px 15px,var(--ink2)",
+            }}
+          />
+          <div>
+            <div className="b">ASHWAGANDHA · LOT 26-0114</div>
+            <div className="r">
+              WITHANOLIDES · CLAIM ≥5.0% · TESTED 5.14% · PASS
+              <br />
+              HEAVY METALS · PASS &nbsp;·&nbsp; MICROBIALS · PASS
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

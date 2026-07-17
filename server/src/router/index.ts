@@ -6,11 +6,13 @@ import { eq, desc } from "drizzle-orm";
 import { authRouter } from "./auth.js";
 import { adminRouter } from "./admin.js";
 import { contactRouter } from "./contact.js";
+import { settingsRouter } from "./settings.js";
 
 export const appRouter = router({
   auth: authRouter,
   admin: adminRouter,
   contact: contactRouter,
+  settings: settingsRouter,
 
   products: router({
     list: publicProcedure

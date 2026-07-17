@@ -1,9 +1,20 @@
 import ParticleBackground from "../components/ParticleBackground";
+import { trpc } from "../lib/trpc";
 
 export default function OurStory() {
+  const { data: heroBg } = trpc.settings.get.useQuery("our_story_hero_bg");
+
   return (
     <div>
-      <header className="hero" style={{ padding: "76px 0" }}>
+      <header
+        className="hero"
+        style={{
+          padding: "76px 0",
+          ...(heroBg
+            ? { backgroundImage: `linear-gradient(rgba(14,27,46,.75), rgba(14,27,46,.85)), url(${heroBg})`, backgroundSize: "cover", backgroundPosition: "center" }
+            : {}),
+        }}
+      >
         <ParticleBackground color="169, 192, 216" className="particles" />
         <div className="wrap">
           <div className="eyebrow">Our story</div>
