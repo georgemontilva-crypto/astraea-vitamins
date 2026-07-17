@@ -4,13 +4,14 @@
 // the client and must be filled in before launch (see README "Pending from client").
 import "dotenv/config";
 import fs from "fs";
+import { sql } from "drizzle-orm";
 import { db } from "./client.js";
 import { products } from "./schema.js";
 
 type PdpRow = {
   "#": number;
   SKU: string;
-  Cat: "Core" | "On-the-Go" | "Gummy";
+  Cat: "Core" | "Stick" | "Gummy"; // raw value from the client's xlsx — "Stick", not "On-the-Go"
   Line: "Wellness" | "Sport";
   "Serving / supply": string;
   "Headline (PDP H1 sub)": string;
@@ -26,9 +27,14 @@ function slugify(name: string) {
     .replace(/(^-|-$)/g, "");
 }
 
-function formatFor(cat: string, servingSupply: string) {
+// Normalize the client's raw "Stick" label to the nicer "On-the-Go" DB enum value.
+function categoryFor(cat: PdpRow["Cat"]) {
+  return cat === "Stick" ? ("On-the-Go" as const) : cat;
+}
+
+function formatFor(cat: PdpRow["Cat"], servingSupply: string) {
   if (cat === "Gummy") return "gummy" as const;
-  if (cat === "On-the-Go") return "stick" as const;
+  if (cat === "Stick") return "stick" as const;
   if (/scoop/i.test(servingSupply)) return "powder" as const;
   if (/tablet/i.test(servingSupply)) return "tablet" as const;
   return "capsule" as const;
@@ -37,13 +43,19 @@ function formatFor(cat: string, servingSupply: string) {
 async function main() {
   const rows: PdpRow[] = JSON.parse(fs.readFileSync("data/pdp-copy.json", "utf-8"));
 
+  // Idempotent: safe to re-run (e.g. after a previous partial failure). No FK
+  // constraints are defined on batches.productId, so this won't cascade-delete
+  // batches — and since insertion order below is deterministic, re-seeding
+  // reproduces the same IDs, keeping any already-seeded batches valid.
+  await db.execute(sql`TRUNCATE TABLE products`);
+
   for (const r of rows) {
     await db.insert(products).values({
       handle: slugify(r.SKU),
       sku: `AST-${String(r["#"]).padStart(2, "0")}`,
       name: r.SKU,
       line: r.Line,
-      category: r.Cat,
+      category: categoryFor(r.Cat),
       format: formatFor(r.Cat, r["Serving / supply"]),
       servingSupply: r["Serving / supply"],
       headline: r["Headline (PDP H1 sub)"],
