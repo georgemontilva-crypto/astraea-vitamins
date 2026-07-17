@@ -90,6 +90,15 @@ button { font-family: inherit; cursor: pointer; }
 .card { background: #fff; border: 1px solid var(--hair); text-align: left; padding: 0; display: flex; flex-direction: column; transition: .16s; overflow: hidden; text-decoration: none; color: inherit; }
 .card:hover { border-color: var(--ink); transform: translateY(-2px); }
 .card .thumb { background: var(--paper2); border-bottom: 1px solid var(--hair); padding: 22px 0; display: flex; justify-content: center; }
+.quick-add {
+  position: absolute; top: 10px; right: 10px; width: 30px; height: 30px;
+  border-radius: var(--radius-pill); border: none; background: #fff;
+  color: var(--ink); box-shadow: 0 3px 10px rgba(14,27,46,.16);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background .18s, color .18s, transform .18s;
+}
+.quick-add:hover { background: var(--verify); color: #fff; transform: scale(1.08); }
+.quick-add.added { background: var(--verify); color: #fff; transform: scale(1.1); }
 .card .meta { padding: 16px 16px 18px; }
 .card .line { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; }
 .card.wellness .line { color: var(--starDark); }
