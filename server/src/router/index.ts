@@ -1,29 +1,31 @@
-import { initTRPC } from "@trpc/server";
 import { z } from "zod";
+import { publicProcedure, router } from "../trpc.js";
 import { db } from "../db/client.js";
 import { products, batches, waitlist } from "../db/schema.js";
 import { eq, desc } from "drizzle-orm";
+import { authRouter } from "./auth.js";
+import { adminRouter } from "./admin.js";
 
-const t = initTRPC.create();
+export const appRouter = router({
+  auth: authRouter,
+  admin: adminRouter,
 
-export const appRouter = t.router({
-  products: t.router({
-    list: t.procedure
+  products: router({
+    list: publicProcedure
       .input(z.object({ line: z.enum(["Wellness", "Sport"]).optional() }).optional())
       .query(async ({ input }) => {
-        const rows = await db.query.products.findMany({
+        return db.query.products.findMany({
           where: input?.line ? eq(products.line, input.line) : undefined,
         });
-        return rows;
       }),
-    byHandle: t.procedure.input(z.string()).query(async ({ input }) => {
+    byHandle: publicProcedure.input(z.string()).query(async ({ input }) => {
       return db.query.products.findFirst({ where: eq(products.handle, input) });
     }),
   }),
 
-  labTests: t.router({
+  labTests: router({
     // Powers the QR deep-link: /lab-tests?product=<handle>
-    batchesForProduct: t.procedure.input(z.string()).query(async ({ input }) => {
+    batchesForProduct: publicProcedure.input(z.string()).query(async ({ input }) => {
       const product = await db.query.products.findFirst({
         where: eq(products.handle, input),
       });
@@ -37,8 +39,8 @@ export const appRouter = t.router({
     }),
   }),
 
-  waitlist: t.router({
-    join: t.procedure.input(z.object({ email: z.string().email() })).mutation(async ({ input }) => {
+  waitlist: router({
+    join: publicProcedure.input(z.object({ email: z.string().email() })).mutation(async ({ input }) => {
       await db.insert(waitlist).values({ email: input.email }).onDuplicateKeyUpdate({
         set: { email: input.email },
       });

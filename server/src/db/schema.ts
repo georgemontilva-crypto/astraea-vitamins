@@ -11,6 +11,16 @@ import {
 } from "drizzle-orm/mysql-core";
 import { relations } from "drizzle-orm";
 
+// ---- Users (customers + admins — same table, distinguished by role) ----
+export const users = mysqlTable("users", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 191 }).notNull().unique(),
+  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  name: varchar("name", { length: 191 }),
+  role: mysqlEnum("role", ["customer", "admin"]).notNull().default("customer"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // ---- Products (37 SKUs: 26 core + 5 On-the-Go + 6 gummies) ----
 export const products = mysqlTable("products", {
   id: int("id").autoincrement().primaryKey(),
@@ -70,12 +80,20 @@ export const batchesRelations = relations(batches, ({ one }) => ({
 // ---- Orders (minimal — extend per checkout/subscription provider chosen later) ----
 export const orders = mysqlTable("orders", {
   id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id"), // nullable — guest checkout allowed
   email: varchar("email", { length: 191 }).notNull(),
   items: json("items"), // [{productId, qty, mode: 'subscribe'|'one_time', priceAtPurchase}]
   subtotal: decimal("subtotal", { precision: 10, scale: 2 }),
   status: mysqlEnum("status", ["pending", "paid", "fulfilled", "cancelled"]).default("pending"),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+export const ordersRelations = relations(orders, ({ one }) => ({
+  user: one(users, {
+    fields: [orders.userId],
+    references: [users.id],
+  }),
+}));
 
 // ---- Waitlist / email capture (Phase 1 launch campaign) ----
 export const waitlist = mysqlTable("waitlist", {

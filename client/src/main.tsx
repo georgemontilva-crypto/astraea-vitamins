@@ -12,6 +12,11 @@ import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import LabTests from "./pages/LabTests";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Account from "./pages/Account";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 const queryClient = new QueryClient();
 const trpcClient = trpc.createClient({
@@ -29,7 +34,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path="/shop" element={<Shop />} />
               <Route path="/products/:handle" element={<ProductDetail />} />
               <Route path="/lab-tests" element={<LabTests />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/account" element={<Account />} />
             </Route>
+            {/* Admin has its own minimal shell — no storefront nav/footer */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

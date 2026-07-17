@@ -12,7 +12,10 @@ export default function Nav() {
           <NavLink to="/shop?line=Sport">Sport</NavLink>
           <NavLink to="/lab-tests" className={({ isActive }) => (isActive ? "on" : "")}>Lab Tests</NavLink>
         </div>
-        <Link className="navcart" to="/shop">Cart · 0</Link>
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <NavLink to="/account" className={({ isActive }) => (isActive ? "on" : "")} style={{ opacity: 0.75 }}>Account</NavLink>
+          <Link className="navcart" to="/shop">Cart · 0</Link>
+        </div>
       </div>
     </nav>
   );

@@ -1,14 +1,17 @@
 import "dotenv/config";
 import express from "express";
+import cookieParser from "cookie-parser";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "./router/index.js";
+import { createContext } from "./trpc.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
-app.use("/api/trpc", createExpressMiddleware({ router: appRouter }));
+app.use(cookieParser());
+app.use("/api/trpc", createExpressMiddleware({ router: appRouter, createContext }));
 
 app.get("/healthz", (_req, res) => res.json({ ok: true }));
 
