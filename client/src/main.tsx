@@ -15,6 +15,11 @@ import LabTests from "./pages/LabTests";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
+import OurStory from "./pages/OurStory";
+import Contact from "./pages/Contact";
+import Shipping from "./pages/policies/Shipping";
+import Privacy from "./pages/policies/Privacy";
+import Terms from "./pages/policies/Terms";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminProducts from "./pages/admin/AdminProducts";
@@ -42,6 +47,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/account" element={<Account />} />
+              <Route path="/our-story" element={<OurStory />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
             </Route>
             {/* Admin has its own minimal shell — no storefront nav/footer */}
             <Route path="/admin/login" element={<AdminLogin />} />

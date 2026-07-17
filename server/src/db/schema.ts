@@ -119,3 +119,13 @@ export const waitlist = mysqlTable("waitlist", {
   email: varchar("email", { length: 191 }).notNull().unique(),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+// ---- Contact form submissions ----
+export const contactMessages = mysqlTable("contact_messages", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 191 }).notNull(),
+  email: varchar("email", { length: 191 }).notNull(),
+  message: text("message").notNull(),
+  emailSent: boolean("email_sent").default(false), // best-effort Resend delivery; the DB row is the source of truth either way
+  createdAt: timestamp("created_at").defaultNow(),
+});

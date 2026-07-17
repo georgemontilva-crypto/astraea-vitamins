@@ -17,6 +17,7 @@
   --radius: 10px;  /* NOTE: client's COMPONENT-SPEC.md specifies zero radius on
                       structural elements — this is a deliberate deviation,
                       requested directly, not part of the original approved spec. */
+  --radius-pill: 999px; /* tags/badges/chips — fully rounded */
 }
 
 /* Zero border-radius on structural elements; radius only on soft product/bottle art. */
@@ -29,6 +30,7 @@ body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
+a { color: inherit; text-decoration: none; }
 .eyebrow {
   font-family: var(--mono);
   font-size: 11px;

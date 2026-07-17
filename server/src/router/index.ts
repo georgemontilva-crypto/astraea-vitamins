@@ -5,10 +5,12 @@ import { products, batches, waitlist } from "../db/schema.js";
 import { eq, desc } from "drizzle-orm";
 import { authRouter } from "./auth.js";
 import { adminRouter } from "./admin.js";
+import { contactRouter } from "./contact.js";
 
 export const appRouter = router({
   auth: authRouter,
   admin: adminRouter,
+  contact: contactRouter,
 
   products: router({
     list: publicProcedure

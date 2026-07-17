@@ -19,17 +19,21 @@ export default function Footer() {
             <h5>Trust</h5>
             <Link to="/lab-tests">Lab tests</Link>
             <Link to="/lab-tests">How we test</Link>
-            <a href="#">Our story</a>
+            <Link to="/our-story">Our story</Link>
           </div>
           <div>
             <h5>Support</h5>
-            <a href="#">Subscriptions</a>
-            <a href="#">Shipping</a>
-            <a href="#">Contact</a>
+            <Link to="/account">Subscriptions</Link>
+            <Link to="/shipping">Shipping & returns</Link>
+            <Link to="/contact">Contact</Link>
           </div>
         </div>
-        <div className="base">
-          © 2026 ASTRAEA VITAMINS · THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FDA · NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE
+        <div className="base" style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
+          <span>© 2026 ASTRAEA VITAMINS · THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FDA · NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE</span>
+          <span style={{ display: "flex", gap: 14 }}>
+            <Link to="/privacy" style={{ color: "inherit" }}>Privacy</Link>
+            <Link to="/terms" style={{ color: "inherit" }}>Terms</Link>
+          </span>
         </div>
       </div>
     </footer>
