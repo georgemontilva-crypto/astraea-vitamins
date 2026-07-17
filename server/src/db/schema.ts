@@ -21,6 +21,24 @@ export const users = mysqlTable("users", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// ---- Categories (admin-managed — replaces the old fixed enum so new
+// categories can be added without a schema change) ----
+export const categories = mysqlTable("categories", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull().unique(), // "Core", "On-the-Go", "Gummy", ...
+  line: mysqlEnum("line", ["Wellness", "Sport", "Both"]).notNull().default("Both"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// ---- Site images (hero art, category headers, etc. — not tied to a product) ----
+export const siteImages = mysqlTable("site_images", {
+  id: int("id").autoincrement().primaryKey(),
+  key: varchar("key", { length: 500 }).notNull(), // R2 object key
+  url: varchar("url", { length: 500 }).notNull(),
+  label: varchar("label", { length: 191 }), // "Home hero background", "Wellness category header"...
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // ---- Products (37 SKUs: 26 core + 5 On-the-Go + 6 gummies) ----
 export const products = mysqlTable("products", {
   id: int("id").autoincrement().primaryKey(),
@@ -28,7 +46,7 @@ export const products = mysqlTable("products", {
   sku: varchar("sku", { length: 32 }).notNull().unique(), // e.g. "AST-05"
   name: varchar("name", { length: 191 }).notNull(),
   line: mysqlEnum("line", ["Wellness", "Sport"]).notNull(),
-  category: mysqlEnum("category", ["Core", "On-the-Go", "Gummy"]).notNull(),
+  category: varchar("category", { length: 100 }).notNull(), // matches categories.name
   format: mysqlEnum("format", ["capsule", "tablet", "powder", "stick", "gummy"]).notNull(),
   servingSupply: varchar("serving_supply", { length: 191 }), // "2 tablets · 28-day"
   headline: varchar("headline", { length: 255 }),

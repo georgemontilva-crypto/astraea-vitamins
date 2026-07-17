@@ -14,6 +14,9 @@
   --mono: 'IBM Plex Mono', monospace;
   --display: 'Marcellus', serif;
   --body: 'Karla', sans-serif;
+  --radius: 10px;  /* NOTE: client's COMPONENT-SPEC.md specifies zero radius on
+                      structural elements — this is a deliberate deviation,
+                      requested directly, not part of the original approved spec. */
 }
 
 /* Zero border-radius on structural elements; radius only on soft product/bottle art. */

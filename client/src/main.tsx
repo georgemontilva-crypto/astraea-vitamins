@@ -16,7 +16,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
 import AdminLogin from "./pages/admin/AdminLogin";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminProducts from "./pages/admin/AdminProducts";
+import AdminCategories from "./pages/admin/AdminCategories";
+import AdminCustomers from "./pages/admin/AdminCustomers";
+import AdminLabReports from "./pages/admin/AdminLabReports";
+import AdminImages from "./pages/admin/AdminImages";
 
 const queryClient = new QueryClient();
 const trpcClient = trpc.createClient({
@@ -40,7 +45,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             </Route>
             {/* Admin has its own minimal shell — no storefront nav/footer */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminProducts />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="categories" element={<AdminCategories />} />
+              <Route path="customers" element={<AdminCustomers />} />
+              <Route path="lab-reports" element={<AdminLabReports />} />
+              <Route path="images" element={<AdminImages />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
