@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import BottleArt from "../components/BottleArt";
 import { trpc } from "../lib/trpc";
+import { useCart } from "../contexts/CartContext";
 
 type SupplementFact = { name: string; amount: string; unit?: string; dv?: string };
 
@@ -9,6 +10,7 @@ export default function ProductDetail() {
   const { handle } = useParams();
   const { data: product, isLoading } = trpc.products.byHandle.useQuery(handle!, { enabled: !!handle });
   const [mode, setMode] = useState<"subscribe" | "one_time">("subscribe");
+  const { addItem } = useCart();
 
   if (isLoading) return <p style={{ padding: 48 }}>Loading…</p>;
   if (!product) return <p style={{ padding: 48 }}>Producto no encontrado.</p>;
@@ -19,8 +21,23 @@ export default function ProductDetail() {
     .map((t) => t.trim())
     .filter(Boolean);
   const lineClass = product.line === "Wellness" ? "wellness-c" : "sport-c";
+  const rawPrice = mode === "subscribe" ? product.priceSubscribe : product.priceOneTime;
   const priceOneTime = product.priceOneTime ? `$${product.priceOneTime}` : "Price TBD";
   const priceSubscribe = product.priceSubscribe ? `$${product.priceSubscribe}` : "Price TBD";
+  const canAddToCart = !!rawPrice;
+
+  function handleAddToCart() {
+    if (!product || !rawPrice) return;
+    addItem({
+      productId: product.id,
+      productName: product.name,
+      unitPrice: parseFloat(rawPrice),
+      quantity: 1,
+      image: product.imageUrl ?? undefined,
+      handle: product.handle,
+      mode,
+    });
+  }
 
   return (
     <section className={`pdp ${lineClass}`}>
@@ -57,7 +74,9 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            <button className="addcart">Add to cart</button>
+            <button className="addcart" onClick={handleAddToCart} disabled={!canAddToCart} style={!canAddToCart ? { opacity: 0.5, cursor: "not-allowed" } : undefined}>
+              {canAddToCart ? "Add to cart" : "Price not set yet"}
+            </button>
             <Link className="checktest" to={`/lab-tests?product=${product.handle}`}>
               Check this product's testing →
             </Link>

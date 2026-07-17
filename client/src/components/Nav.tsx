@@ -1,9 +1,11 @@
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 
 export default function Nav() {
   const location = useLocation();
   const [params] = useSearchParams();
   const line = params.get("line");
+  const { itemCount, openCart } = useCart();
 
   const onShop = location.pathname === "/shop" || location.pathname.startsWith("/products/");
   const onWellness = onShop && line === "Wellness";
@@ -32,7 +34,7 @@ export default function Nav() {
           <NavLink to="/our-story" className={({ isActive }) => (isActive ? "on" : "")}>Our Story</NavLink>
           <NavLink to="/account" className={({ isActive }) => (isActive ? "on" : "")}>Account</NavLink>
         </div>
-        <Link className="navcart" to="/shop">Cart · 0</Link>
+        <button className="navcart" onClick={openCart}>Cart · {itemCount}</button>
       </div>
     </nav>
   );
