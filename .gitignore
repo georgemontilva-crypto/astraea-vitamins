@@ -3,6 +3,5 @@ client-dist/
 server/dist/
 .env
 .env.local
-drizzle/
 *.log
 .DS_Store
