@@ -32,7 +32,7 @@ export default function Home() {
           </div>
           <div className="proofstrip">
             <span className="dot" />
-            CHECK THE TESTING · EVERY BATCH, INDEPENDENTLY TESTED · SCAN FOR RESULTS
+            VIEW LAB RESULTS · EVERY BATCH, INDEPENDENTLY TESTED · SCAN FOR RESULTS
           </div>
         </div>
       </header>
