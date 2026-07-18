@@ -24,14 +24,14 @@ export default function ProductDetail() {
   const rawPrice = mode === "subscribe" ? product.priceSubscribe : product.priceOneTime;
   const priceOneTime = product.priceOneTime ? `$${product.priceOneTime}` : "Price TBD";
   const priceSubscribe = product.priceSubscribe ? `$${product.priceSubscribe}` : "Price TBD";
-  const canAddToCart = !!rawPrice;
 
   function handleAddToCart() {
-    if (!product || !rawPrice) return;
+    if (!product) return;
     addItem({
       productId: product.id,
       productName: product.name,
-      unitPrice: parseFloat(rawPrice),
+      unitPrice: rawPrice ? parseFloat(rawPrice) : 0,
+      priceKnown: !!rawPrice,
       quantity: 1,
       image: product.imageUrl ?? undefined,
       handle: product.handle,
@@ -74,8 +74,8 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            <button className="addcart" onClick={handleAddToCart} disabled={!canAddToCart} style={!canAddToCart ? { opacity: 0.5, cursor: "not-allowed" } : undefined}>
-              {canAddToCart ? "Add to cart" : "Price not set yet"}
+            <button className="addcart" onClick={handleAddToCart}>
+              Add to cart
             </button>
             <Link className="checktest" to={`/lab-tests?product=${product.handle}`}>
               Check this product's testing →

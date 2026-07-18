@@ -5,6 +5,7 @@ export interface LocalCartItem {
   productId: number;
   productName: string;
   unitPrice: number;
+  priceKnown: boolean; // false when the product has no real price set yet — item still adds, just shown as "Price TBD" and excluded from the subtotal
   quantity: number;
   image?: string;
   handle: string;
@@ -22,6 +23,7 @@ interface CartContextValue {
   clearCart: () => void;
   total: number;
   itemCount: number;
+  unpricedCount: number;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -58,12 +60,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = useCallback(() => setItems([]), []);
 
-  const total = items.reduce((sum, i) => sum + i.unitPrice * i.quantity, 0);
+  const total = items.filter((i) => i.priceKnown).reduce((sum, i) => sum + i.unitPrice * i.quantity, 0);
+  const unpricedCount = items.filter((i) => !i.priceKnown).reduce((sum, i) => sum + i.quantity, 0);
   const itemCount = items.reduce((sum, i) => sum + i.quantity, 0);
 
   return (
     <CartContext.Provider
-      value={{ items, isOpen, openCart, closeCart, addItem, updateQuantity, removeItem, clearCart, total, itemCount }}
+      value={{ items, isOpen, openCart, closeCart, addItem, updateQuantity, removeItem, clearCart, total, itemCount, unpricedCount }}
     >
       {children}
     </CartContext.Provider>

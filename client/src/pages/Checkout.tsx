@@ -38,7 +38,9 @@ export default function Checkout() {
                 </div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                <span style={{ fontFamily: "var(--mono)", fontSize: 14 }}>${(item.unitPrice * item.quantity).toFixed(2)}</span>
+                <span style={{ fontFamily: "var(--mono)", fontSize: 14 }}>
+                  {item.priceKnown ? `$${(item.unitPrice * item.quantity).toFixed(2)}` : "Price TBD"}
+                </span>
                 <button onClick={() => removeItem(item.id)} style={{ background: "none", border: "none", color: "#8c2f22", fontSize: 12, cursor: "pointer" }}>
                   Remove
                 </button>

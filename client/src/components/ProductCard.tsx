@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Plus, Check } from "lucide-react";
 import BottleArt from "./BottleArt";
 import { useCart } from "../contexts/CartContext";
@@ -17,24 +17,17 @@ export type ProductCardData = {
 
 export default function ProductCard({ product }: { product: ProductCardData }) {
   const { addItem } = useCart();
-  const navigate = useNavigate();
   const [added, setAdded] = useState(false);
 
   function handleQuickAdd(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
 
-    // No price set yet — can't add a real line item, so take them to the PDP instead
-    // of silently adding a $0 product.
-    if (!product.priceOneTime) {
-      navigate(`/products/${product.handle}`);
-      return;
-    }
-
     addItem({
       productId: product.id,
       productName: product.name,
-      unitPrice: parseFloat(product.priceOneTime),
+      unitPrice: product.priceOneTime ? parseFloat(product.priceOneTime) : 0,
+      priceKnown: !!product.priceOneTime,
       quantity: 1,
       image: product.imageUrl ?? undefined,
       handle: product.handle,

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../contexts/CartContext";
 
 export default function CartDrawer() {
-  const { items, isOpen, closeCart, updateQuantity, removeItem, total, itemCount } = useCart();
+  const { items, isOpen, closeCart, updateQuantity, removeItem, total, itemCount, unpricedCount } = useCart();
 
   return (
     <AnimatePresence>
@@ -66,7 +66,9 @@ export default function CartDrawer() {
                       <div className="cart-item-info">
                         <p className="cart-item-name">{item.productName}</p>
                         <p className="cart-item-mode">{item.mode === "subscribe" ? "Subscribe · every 28 days" : "One-time"}</p>
-                        <p className="cart-item-price">${(item.unitPrice * item.quantity).toFixed(2)}</p>
+                        <p className="cart-item-price">
+                          {item.priceKnown ? `$${(item.unitPrice * item.quantity).toFixed(2)}` : "Price TBD"}
+                        </p>
                       </div>
                       <div className="cart-item-actions">
                         <button className="cart-item-remove" onClick={() => removeItem(item.id)} aria-label="Remove">
@@ -94,7 +96,11 @@ export default function CartDrawer() {
                   <span>Subtotal</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
-                <p className="cart-subtotal-note">Shipping and taxes calculated at checkout</p>
+                <p className="cart-subtotal-note">
+                  {unpricedCount > 0
+                    ? `Shipping and taxes calculated at checkout · ${unpricedCount} item${unpricedCount !== 1 ? "s" : ""} still pending pricing`
+                    : "Shipping and taxes calculated at checkout"}
+                </p>
                 <Link to="/checkout" className="btn" style={{ width: "100%", justifyContent: "center", display: "flex", alignItems: "center", gap: 8, background: "var(--ink)", color: "var(--paper)", borderColor: "var(--ink)" }} onClick={closeCart}>
                   Proceed to checkout <ArrowRight size={16} />
                 </Link>
