@@ -234,6 +234,24 @@ footer.site .base { border-top: 1px solid #24344d; margin-top: 34px; padding-top
   .navlinks { display: none; }
   .pdp .gallery { position: static; }
 }
+/* ---------- ESSENTIALS CAROUSEL (mobile only) ---------- */
+.essentials-dots { display: none; justify-content: center; gap: 8px; margin-top: 18px; }
+.essentials-dots button { width: 7px; height: 7px; border-radius: var(--radius-pill); border: none; background: var(--hair); padding: 0; cursor: pointer; transition: width .18s, background .18s; }
+.essentials-dots button.on { background: var(--ink); width: 20px; }
+@media (max-width: 640px) {
+  .essentials-scroll {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .essentials-scroll::-webkit-scrollbar { display: none; }
+  .essentials-scroll .card { flex: 0 0 100%; scroll-snap-align: start; }
+  .essentials-dots { display: flex; }
+}
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; scroll-behavior: auto; } }
 
 /* ---------- CART DRAWER ---------- */

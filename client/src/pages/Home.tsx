@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ParticleBackground from "../components/ParticleBackground";
-import ProductCard from "../components/ProductCard";
+import ProductCarousel from "../components/ProductCarousel";
 import { trpc } from "../lib/trpc";
 
 export default function Home() {
@@ -97,11 +97,7 @@ export default function Home() {
             </div>
             <Link to="/shop">View all 37 →</Link>
           </div>
-          <div className="grid">
-            {essentials.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
+          <ProductCarousel products={essentials} />
         </div>
       </section>
 
