@@ -3,6 +3,7 @@ import { trpc } from "../lib/trpc";
 
 export default function OurStory() {
   const { data: heroBg } = trpc.settings.get.useQuery("our_story_hero_bg");
+  const { data: promiseImg } = trpc.settings.get.useQuery("our_story_promise_img");
 
   return (
     <div>
@@ -23,21 +24,32 @@ export default function OurStory() {
       </header>
 
       <section className="promise">
-        <div className="wrap" style={{ maxWidth: 720 }}>
-          <p style={{ fontSize: 17, color: "#3c4658", lineHeight: 1.7 }}>
-            Astraea was the goddess of purity and justice — the last immortal to walk among humans,
-            and the one who refused to abandon truth as the world around her did. When she left, she
-            became the constellation Virgo, still watching.
-          </p>
-          <p style={{ fontSize: 17, color: "#3c4658", lineHeight: 1.7, marginTop: 20 }}>
-            We took her name because the supplement industry left truth behind a long time ago:
-            blends that hide doses, labels that don't match contents, "tested" claims with nothing
-            behind them. Astraea is our way of bringing her back down to earth — every batch tested
-            by an independent lab, every result published.
-          </p>
-          <p style={{ fontSize: 19, fontFamily: "Marcellus,serif", color: "var(--ink)", marginTop: 28 }}>
-            We don't ask you to trust us. We show you.
-          </p>
+        <div className="wrap">
+          <div className="cols" style={{ alignItems: "start" }}>
+            <div>
+              <p style={{ fontSize: 17, color: "#3c4658", lineHeight: 1.7 }}>
+                Astraea was the goddess of purity and justice — the last immortal to walk among humans,
+                and the one who refused to abandon truth as the world around her did. When she left, she
+                became the constellation Virgo, still watching.
+              </p>
+              <p style={{ fontSize: 17, color: "#3c4658", lineHeight: 1.7, marginTop: 20 }}>
+                We took her name because the supplement industry left truth behind a long time ago:
+                blends that hide doses, labels that don't match contents, "tested" claims with nothing
+                behind them. Astraea is our way of bringing her back down to earth — every batch tested
+                by an independent lab, every result published.
+              </p>
+              <p style={{ fontSize: 19, fontFamily: "Marcellus,serif", color: "var(--ink)", marginTop: 28 }}>
+                We don't ask you to trust us. We show you.
+              </p>
+            </div>
+            <div
+              style={
+                promiseImg
+                  ? { backgroundImage: `url(${promiseImg})`, backgroundSize: "cover", backgroundPosition: "center", minHeight: 380, borderRadius: "var(--radius)" }
+                  : { background: "#d9d9d4", minHeight: 380, borderRadius: "var(--radius)" }
+              }
+            />
+          </div>
         </div>
       </section>
 
