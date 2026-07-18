@@ -31,7 +31,7 @@ export default function Account() {
         <div style={{ marginTop: 32 }}>
           <h3 style={{ fontFamily: "Marcellus,serif", fontWeight: 400, fontSize: 20 }}>Order history</h3>
           <p style={{ color: "var(--muted)", fontSize: 14, marginTop: 8 }}>
-            No orders yet — checkout isn't wired to a payment provider yet.
+            No orders yet. Checkout isn't wired to a payment provider yet.
           </p>
         </div>
 

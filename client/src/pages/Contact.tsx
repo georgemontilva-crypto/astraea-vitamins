@@ -15,13 +15,13 @@ export default function Contact() {
           Get in touch
         </h1>
         <p style={{ color: "var(--muted)", fontSize: 15, marginBottom: 28 }}>
-          Questions about an order, a product, or a batch result — we read every message.
+          Questions about an order, a product, or a batch result? We read every message.
         </p>
 
         {send.isSuccess ? (
           <div className="infocard" style={{ borderLeft: "3px solid var(--verify)", paddingLeft: 18 }}>
             <h4>Message sent</h4>
-            <p>Thanks — we'll get back to you as soon as we can.</p>
+            <p>Thanks! We'll get back to you as soon as we can.</p>
           </div>
         ) : (
           <form

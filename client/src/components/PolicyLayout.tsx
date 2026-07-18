@@ -18,7 +18,7 @@ export default function PolicyLayout({ title, children }: { title: string; child
             color: "#6b4e23",
           }}
         >
-          This page hasn't been finalized with legal/compliance review yet — treat it as a
+          This page hasn't been finalized with legal/compliance review yet. Treat it as a
           placeholder, not a published policy.
         </div>
       </div>

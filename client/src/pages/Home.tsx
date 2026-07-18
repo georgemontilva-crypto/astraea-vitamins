@@ -23,12 +23,12 @@ export default function Home() {
           <div className="eyebrow">37 supplements · every batch tested</div>
           <h1>We don't ask you to trust us. We show you.</h1>
           <p className="sub">
-            Every Astraea batch is tested by an independent lab — and every bottle carries a code
+            Every Astraea batch is tested by an independent lab, and every bottle carries a code
             to its actual results. No proprietary blends. No hidden fillers. Nothing you can't check.
           </p>
           <div className="cta">
-            <Link className="btn" to="/shop">Shop the line</Link>
-            <Link className="btn ghost" to="/lab-tests">Check the testing</Link>
+            <Link className="btn" to="/shop">Shop Collection</Link>
+            <Link className="btn ghost" to="/lab-tests">View Lab Results</Link>
           </div>
           <div className="proofstrip">
             <span className="dot" />
@@ -68,7 +68,7 @@ export default function Home() {
             <div className="step">
               <div className="num">STEP 01</div>
               <h3>Scan the bottle</h3>
-              <p>Every Astraea package has a QR code on the front. One scan opens that product's lab page — no app, no account.</p>
+              <p>Every Astraea package has a QR code on the front. One scan opens that product's lab page. No app, no account.</p>
               <div className="scanvis">
                 <div className="qr" />
                 <div className="vt">CHECK THE<br />TESTING</div>
@@ -77,12 +77,12 @@ export default function Home() {
             <div className="step">
               <div className="num">STEP 02</div>
               <h3>Find your batch</h3>
-              <p>Match the lot number on your pack. You'll see exactly what was tested in the batch you're holding — not a generic sample.</p>
+              <p>Match the lot number on your pack. You'll see exactly what was tested in the batch you're holding, not a generic sample.</p>
             </div>
             <div className="step">
               <div className="num">STEP 03</div>
               <h3>Read the results</h3>
-              <p>Every panel, pass or fail, with the label claim next to the tested value — and the full certificate to download.</p>
+              <p>Every panel, pass or fail, with the label claim next to the tested value, and the full certificate to download.</p>
             </div>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function Home() {
             <div className="lineblk s">
               <div className="k">Sport</div>
               <h3>For the work you put in</h3>
-              <p>Creatine, protein, and pre-workout — tested for what's in them, and what isn't.</p>
+              <p>Creatine, protein, and pre-workout. Tested for what's in them, and what isn't.</p>
               <Link to="/shop?line=Sport">Shop Sport</Link>
             </div>
           </div>
@@ -144,7 +144,7 @@ function TestBand() {
     >
       <div className="wrap">
         <div className="eyebrow">Why one code, and why it never changes</div>
-        <h2>The QR on every bottle shows every batch — so we can't hand-pick a flattering one.</h2>
+        <h2>The QR on every bottle shows every batch, so we can't hand-pick a flattering one.</h2>
         <p>
           Our testing is done by an independent, ISO 17025-accredited lab. We don't own it, and
           we don't pay it based on results. If a batch fails, it doesn't ship, and its lot number

@@ -19,7 +19,7 @@ export default function Newsletter() {
         >
           <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required />
           <button className="btn" type="submit">
-            {join.isSuccess ? "Thanks — you're subscribed" : "Subscribe"}
+            {join.isSuccess ? "Thanks, you're subscribed" : "Subscribe"}
           </button>
         </form>
       </div>

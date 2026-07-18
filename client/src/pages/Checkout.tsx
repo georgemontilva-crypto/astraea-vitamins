@@ -64,7 +64,7 @@ export default function Checkout() {
             color: "#6b4e23",
           }}
         >
-          There's no payment provider connected yet — this is a real cart, but checkout can't take a
+          There's no payment provider connected yet. This is a real cart, but checkout can't take a
           payment until that's wired up. Your items stay in the cart for now.
         </div>
 

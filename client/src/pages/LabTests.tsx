@@ -32,7 +32,7 @@ export default function LabTests() {
           Check the testing.
         </h2>
         <p style={{ maxWidth: "56ch", color: "#3c4658", fontSize: 16 }}>
-          Pick a product and your lot number to see its results — or scan the QR on any bottle to
+          Pick a product and your lot number to see its results, or scan the QR on any bottle to
           land here automatically.
         </p>
 
@@ -77,7 +77,7 @@ export default function LabTests() {
 
         {productHandle && !isLoading && labData?.batches.length === 0 && (
           <div className="empty">
-            No published batches for this product yet — a lot only appears here once it passes
+            No published batches for this product yet. A lot only appears here once it passes
             testing and clears the publishing SOP.
           </div>
         )}

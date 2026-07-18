@@ -58,7 +58,7 @@ export default function ProductDetail() {
               <div className={`buyopt ${mode === "subscribe" ? "on" : ""}`} onClick={() => setMode("subscribe")}>
                 <div className="radio" />
                 <div className="t">
-                  <b>Subscribe — every 28 days</b>
+                  <b>Subscribe · every 28 days</b>
                   <br />
                   <span>One lunar cycle. Skip or cancel anytime.</span>
                 </div>
@@ -101,11 +101,11 @@ export default function ProductDetail() {
                       </table>
                     ) : (
                       <p style={{ fontSize: 11, padding: "8px 0" }}>
-                        Full facts pending regulatory sign-off — see the label artwork
+                        Full facts pending regulatory sign-off. See the label artwork
                         (design-reference/labels) for this SKU's real values.
                       </p>
                     )}
-                    <div className="fine">Full disclosure — no proprietary blends.</div>
+                    <div className="fine">Full disclosure. No proprietary blends.</div>
                   </div>
                 </div>
                 <div className="infocard">
@@ -133,7 +133,7 @@ export default function ProductDetail() {
           </div>
           <p style={{ color: "var(--muted)", fontSize: 14, marginTop: 12 }}>
             No verified reviews yet for this product. Per the brand guide, reviews here must be
-            genuine, verified-buyer submissions — nothing gets fabricated.
+            genuine, verified-buyer submissions. Nothing gets fabricated.
           </p>
         </div>
       </div>

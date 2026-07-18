@@ -28,14 +28,14 @@ export default function OurStory() {
           <div className="cols" style={{ alignItems: "start" }}>
             <div>
               <p style={{ fontSize: 17, color: "#3c4658", lineHeight: 1.7 }}>
-                Astraea was the goddess of purity and justice — the last immortal to walk among humans,
+                Astraea was the goddess of purity and justice: the last immortal to walk among humans,
                 and the one who refused to abandon truth as the world around her did. When she left, she
                 became the constellation Virgo, still watching.
               </p>
               <p style={{ fontSize: 17, color: "#3c4658", lineHeight: 1.7, marginTop: 20 }}>
                 We took her name because the supplement industry left truth behind a long time ago:
                 blends that hide doses, labels that don't match contents, "tested" claims with nothing
-                behind them. Astraea is our way of bringing her back down to earth — every batch tested
+                behind them. Astraea is our way of bringing her back down to earth: every batch tested
                 by an independent lab, every result published.
               </p>
               <p style={{ fontSize: 19, fontFamily: "Marcellus,serif", color: "var(--ink)", marginTop: 28 }}>
@@ -62,21 +62,21 @@ export default function OurStory() {
               <h4>Verifiable, not claimed</h4>
               <p>
                 Everyone says "third-party tested." We publish the actual document for the actual
-                batch. The QR that never changes shows every lot — so we can't hand-pick a
+                batch. The QR that never changes shows every lot, so we can't hand-pick a
                 flattering one.
               </p>
             </div>
             <div className="infocard">
               <h4>The right forms, disclosed</h4>
               <p>
-                Chelated minerals, active vitamin forms, clinically-studied branded ingredients —
+                Chelated minerals, active vitamin forms, clinically-studied branded ingredients,
                 named on the front, with exact amounts. No "proprietary blend" curtain.
               </p>
             </div>
             <div className="infocard">
               <h4>One cycle, one bottle</h4>
               <p>
-                Every product is a 28-day supply — one lunar cycle. It syncs your routine and your
+                Every product is a 28-day supply: one lunar cycle. It syncs your routine and your
                 refill, and it ties the whole line to the goddess in the stars.
               </p>
             </div>
