@@ -122,14 +122,6 @@ export default function Home() {
 
       <TestBand />
 
-      <section className="email">
-        <div className="wrap">
-          <div className="eyebrow" style={{ textAlign: "center" }}>Before we launch</div>
-          <h2>Be first to check the testing.</h2>
-          <p>Join the list for launch access and a look behind our first published batches.</p>
-          <WaitlistForm />
-        </div>
-      </section>
     </div>
   );
 }
@@ -181,21 +173,4 @@ function TestBand() {
   );
 }
 
-function WaitlistForm() {
-  const join = trpc.waitlist.join.useMutation();
-  return (
-    <form
-      className="form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        const email = (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value;
-        join.mutate({ email });
-      }}
-    >
-      <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required />
-      <button className="btn" type="submit">
-        {join.isSuccess ? "Thanks — you're on the list" : "Notify me"}
-      </button>
-    </form>
-  );
-}
+

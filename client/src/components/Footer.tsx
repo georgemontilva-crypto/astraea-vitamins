@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
           <div>
             <h5>Support</h5>
-            <Link to="/account">Subscriptions</Link>
+            <a href="#newsletter">Subscriptions</a>
             <Link to="/shipping">Shipping & returns</Link>
             <Link to="/contact">Contact</Link>
           </div>
