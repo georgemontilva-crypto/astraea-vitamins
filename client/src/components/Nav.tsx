@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
+import { useMe } from "../lib/useMe";
 
 export default function Nav() {
   const location = useLocation();
   const [params] = useSearchParams();
   const line = params.get("line");
   const { itemCount, openCart } = useCart();
+  const { user } = useMe();
+  const isAdmin = user?.role === "admin";
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const onShop = location.pathname === "/shop" || location.pathname.startsWith("/products/");
@@ -38,6 +41,11 @@ export default function Nav() {
           <NavLink to="/lab-tests" className={({ isActive }) => (isActive ? "on" : "")}>Lab Tests</NavLink>
           <NavLink to="/our-story" className={({ isActive }) => (isActive ? "on" : "")}>Our Story</NavLink>
           <NavLink to="/account" className={({ isActive }) => (isActive ? "on" : "")}>Account</NavLink>
+          {isAdmin && (
+            <NavLink to="/admin" className={({ isActive }) => (isActive ? "on" : "")} style={{ color: "var(--verify)" }}>
+              Admin
+            </NavLink>
+          )}
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -62,6 +70,11 @@ export default function Nav() {
           <NavLink to="/lab-tests" className={({ isActive }) => (isActive ? "on" : "")}>Lab Tests</NavLink>
           <NavLink to="/our-story" className={({ isActive }) => (isActive ? "on" : "")}>Our Story</NavLink>
           <NavLink to="/account" className={({ isActive }) => (isActive ? "on" : "")}>Account</NavLink>
+          {isAdmin && (
+            <NavLink to="/admin" className={({ isActive }) => (isActive ? "on" : "")} style={{ color: "var(--verify)" }}>
+              Admin
+            </NavLink>
+          )}
         </div>
       )}
     </nav>

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useMe } from "../lib/useMe";
 import { trpc } from "../lib/trpc";
 
@@ -34,6 +34,30 @@ export default function Account() {
             No orders yet. Checkout isn't wired to a payment provider yet.
           </p>
         </div>
+
+        {user.role === "admin" && (
+          <div
+            style={{
+              marginTop: 32,
+              background: "var(--ink)",
+              padding: "16px 20px",
+              borderRadius: "var(--radius)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
+            }}
+          >
+            <span style={{ color: "var(--paper)", fontSize: 14 }}>This account has admin access.</span>
+            <Link
+              to="/admin"
+              className="btn"
+              style={{ background: "var(--paper)", color: "var(--ink)", borderColor: "var(--paper)", whiteSpace: "nowrap" }}
+            >
+              Go to Admin Panel
+            </Link>
+          </div>
+        )}
 
         <button
           className="btn"
