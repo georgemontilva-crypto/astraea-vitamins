@@ -11,8 +11,13 @@ import "./styles/site.css";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import Wellness from "./pages/Wellness";
+import Sport from "./pages/Sport";
 import ProductDetail from "./pages/ProductDetail";
 import LabTests from "./pages/LabTests";
+import CheckTheTesting from "./pages/CheckTheTesting";
+import Subscriptions from "./pages/Subscriptions";
+import FAQ from "./pages/FAQ";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
@@ -22,6 +27,7 @@ import Checkout from "./pages/Checkout";
 import Shipping from "./pages/policies/Shipping";
 import Privacy from "./pages/policies/Privacy";
 import Terms from "./pages/policies/Terms";
+import Disclaimer from "./pages/Disclaimer";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminProducts from "./pages/admin/AdminProducts";
@@ -45,8 +51,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/shop" element={<Shop />} />
+                <Route path="/wellness" element={<Wellness />} />
+                <Route path="/sport" element={<Sport />} />
                 <Route path="/products/:handle" element={<ProductDetail />} />
                 <Route path="/lab-tests" element={<LabTests />} />
+                <Route path="/check-the-testing" element={<CheckTheTesting />} />
+                <Route path="/subscriptions" element={<Subscriptions />} />
+                <Route path="/faq" element={<FAQ />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/account" element={<Account />} />
@@ -56,6 +67,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <Route path="/shipping" element={<Shipping />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/disclaimer" element={<Disclaimer />} />
               </Route>
               {/* Admin has its own minimal shell — no storefront nav/footer */}
               <Route path="/admin/login" element={<AdminLogin />} />

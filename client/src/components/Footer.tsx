@@ -11,20 +11,21 @@ export default function Footer() {
           </div>
           <div>
             <h5>Shop</h5>
-            <Link to="/shop?line=Wellness">Wellness</Link>
-            <Link to="/shop?line=Sport">Sport</Link>
+            <Link to="/wellness">Wellness</Link>
+            <Link to="/sport">Sport</Link>
             <Link to="/shop">All products</Link>
           </div>
           <div>
             <h5>Trust</h5>
             <Link to="/lab-tests">Lab tests</Link>
-            <Link to="/lab-tests">How we test</Link>
+            <Link to="/check-the-testing">How we test</Link>
             <Link to="/our-story">Our story</Link>
           </div>
           <div>
             <h5>Support</h5>
-            <a href="#newsletter">Subscriptions</a>
+            <Link to="/subscriptions">Subscriptions</Link>
             <Link to="/shipping">Shipping & returns</Link>
+            <Link to="/faq">FAQ</Link>
             <Link to="/contact">Contact</Link>
           </div>
         </div>
@@ -33,6 +34,7 @@ export default function Footer() {
           <span style={{ display: "flex", gap: 14 }}>
             <Link to="/privacy" style={{ color: "inherit" }}>Privacy</Link>
             <Link to="/terms" style={{ color: "inherit" }}>Terms</Link>
+            <Link to="/disclaimer" style={{ color: "inherit" }}>Disclaimer</Link>
           </span>
         </div>
       </div>

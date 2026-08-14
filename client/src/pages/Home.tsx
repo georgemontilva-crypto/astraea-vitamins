@@ -108,13 +108,13 @@ export default function Home() {
               <div className="k">Wellness</div>
               <h3>For the daily foundation</h3>
               <p>Multivitamins, minerals, and single-ingredient capsules in forms your body can actually use.</p>
-              <Link to="/shop?line=Wellness">Shop Wellness</Link>
+              <Link to="/wellness">Shop Wellness</Link>
             </div>
             <div className="lineblk s">
               <div className="k">Sport</div>
               <h3>For the work you put in</h3>
               <p>Creatine, protein, and pre-workout. Tested for what's in them, and what isn't.</p>
-              <Link to="/shop?line=Sport">Shop Sport</Link>
+              <Link to="/sport">Shop Sport</Link>
             </div>
           </div>
         </div>

@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useMe } from "../lib/useMe";
 
 export default function Nav() {
   const location = useLocation();
-  const [params] = useSearchParams();
-  const line = params.get("line");
   const { itemCount, openCart } = useCart();
   const { user } = useMe();
   const isAdmin = user?.role === "admin";
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const onShop = location.pathname === "/shop" || location.pathname.startsWith("/products/");
-  const onWellness = onShop && line === "Wellness";
-  const onSport = onShop && line === "Sport";
-  const onShopRoot = onShop && !line;
+  const onWellness = location.pathname === "/wellness";
+  const onSport = location.pathname === "/sport";
+  const onShopRoot = location.pathname === "/shop";
 
   // Close the mobile menu whenever the route changes (link clicks, back/forward).
   useEffect(() => setMobileOpen(false), [location.pathname, location.search]);
@@ -34,8 +32,8 @@ export default function Nav() {
             </NavLink>
             <div className="navdrop-panel">
               <Link to="/shop" className={onShopRoot ? "on" : ""}>All products</Link>
-              <Link to="/shop?line=Wellness" className={onWellness ? "on" : ""}>Wellness</Link>
-              <Link to="/shop?line=Sport" className={onSport ? "on" : ""}>Sport</Link>
+              <Link to="/wellness" className={onWellness ? "on" : ""}>Wellness</Link>
+              <Link to="/sport" className={onSport ? "on" : ""}>Sport</Link>
             </div>
           </div>
           <NavLink to="/lab-tests" className={({ isActive }) => (isActive ? "on" : "")}>Lab Tests</NavLink>
@@ -65,8 +63,8 @@ export default function Nav() {
         <div className="nav-mobile-panel">
           <NavLink to="/" end className={({ isActive }) => (isActive ? "on" : "")}>Home</NavLink>
           <NavLink to="/shop" className={onShopRoot ? "on" : ""}>All products</NavLink>
-          <Link to="/shop?line=Wellness" className={onWellness ? "on" : ""}>Wellness</Link>
-          <Link to="/shop?line=Sport" className={onSport ? "on" : ""}>Sport</Link>
+          <Link to="/wellness" className={onWellness ? "on" : ""}>Wellness</Link>
+          <Link to="/sport" className={onSport ? "on" : ""}>Sport</Link>
           <NavLink to="/lab-tests" className={({ isActive }) => (isActive ? "on" : "")}>Lab Tests</NavLink>
           <NavLink to="/our-story" className={({ isActive }) => (isActive ? "on" : "")}>Our Story</NavLink>
           <NavLink to="/account" className={({ isActive }) => (isActive ? "on" : "")}>Account</NavLink>
