@@ -76,10 +76,7 @@ export default function LabTests() {
         {isLoading && <p style={{ marginTop: 24 }}>Loading…</p>}
 
         {productHandle && !isLoading && labData?.batches.length === 0 && (
-          <div className="empty">
-            No published batches for this product yet. A lot only appears here once it passes
-            testing and clears the publishing SOP.
-          </div>
+          <div className="empty">Lab results will publish here at launch.</div>
         )}
 
         {!batch && productHandle === "" && (
