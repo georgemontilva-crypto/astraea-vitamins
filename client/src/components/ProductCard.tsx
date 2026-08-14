@@ -13,6 +13,7 @@ export type ProductCardData = {
   servingSupply: string | null;
   priceOneTime: string | null;
   imageUrl?: string | null;
+  tested?: boolean;
 };
 
 export default function ProductCard({ product }: { product: ProductCardData }) {
@@ -56,7 +57,7 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
         <div className="dose">{product.servingSupply}</div>
         <div className="foot">
           <span className="price">{product.priceOneTime ? `$${product.priceOneTime}` : "Price TBD"}</span>
-          <span className="tested">TESTED</span>
+          {product.tested && <span className="tested">TESTED</span>}
         </div>
       </div>
     </Link>

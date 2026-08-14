@@ -1,6 +1,13 @@
-// Seeds sample batch/COA records — copied from the client's own prototype
-// sample data (design-reference/mockups/storefront.html, the `LAB` object),
-// not invented here. Replace with real lab data before launch.
+// DEMO DATA ONLY -- do not run this against production / a client-facing
+// environment. This seeds the SAME prototype sample data the client
+// explicitly flagged as showing up on the live site looking like real lab
+// results (fake Ashwagandha lot 26-0114, etc.). It now inserts as
+// published: false, and is intentionally NOT part of `npm run db:seed` --
+// run it manually only to demo the Lab Tests UI locally / in a staging DB
+// that customers never see. Real batches belong in the admin panel
+// (/admin/lab-reports), created from actual COAs and explicitly published
+// once a lab confirms PASS.
+//
 // Run with: tsx server/src/db/seed-batches.ts (after seed.ts)
 import "dotenv/config";
 import { db } from "./client.js";
@@ -76,7 +83,7 @@ async function main() {
         pass: lot.pass,
         labName: "[ACCREDITED LAB NAME]",
         panels: lot.panels,
-        published: true,
+        published: false,
       });
     }
   }

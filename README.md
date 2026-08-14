@@ -73,6 +73,7 @@ npm install
 npm run db:generate        # genera migraciones drizzle desde schema.ts
 npm run db:migrate
 npm run db:seed 2>/dev/null || tsx server/src/db/seed.ts
+npm run db:seed-demo-batches  # optional, local only — sample lab results to demo /lab-tests; never run in production
 ADMIN_EMAIL=vos@astraeavitamins.com ADMIN_PASSWORD=cambiala123 tsx server/src/db/seed-admin.ts
 npm run dev                 # server :3000 + vite :5173 (proxy /api -> :3000)
 ```
@@ -86,9 +87,11 @@ npm run dev                 # server :3000 + vite :5173 (proxy /api -> :3000)
 4. Build: Nixpacks detecta `npm run build` / `npm run start` automáticamente
    (ver `railway.json`). Build command real: `npm run build`, start: `npm run start`.
 5. Correr migraciones una vez desplegado: `railway run npm run db:migrate`, luego
-   `railway run npm run db:seed` para cargar los 37 productos + un puñado de
-   batches de muestra (los mismos datos placeholder que ya trae `storefront.html`,
-   para que Lab Tests sea demostrable de una).
+   `railway run npm run db:seed` para cargar las categorías + los 37 productos.
+   **No** corras `db:seed-demo-batches` en producción — son los mismos datos de
+   muestra del prototipo (lote 26-0114 de ashwagandha, etc.), y el cliente ya
+   los reportó como confusos al verlos en el sitio real. Los batches reales se
+   cargan desde `/admin/lab-reports`.
 6. Crear el primer admin: `railway run bash -c "ADMIN_EMAIL=vos@astraeavitamins.com ADMIN_PASSWORD=elegiUnaBuena tsx server/src/db/seed-admin.ts"`,
    después entrás en `/admin/login`.
 
