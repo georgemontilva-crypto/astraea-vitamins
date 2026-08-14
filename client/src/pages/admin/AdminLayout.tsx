@@ -32,7 +32,9 @@ export default function AdminLayout() {
         <button className="logout" onClick={() => logout.mutate()}>Log out ({user.email})</button>
       </aside>
       <main className="admin-main">
-        <Outlet />
+        <div className="admin-main-inner">
+          <Outlet />
+        </div>
       </main>
     </div>
   );
