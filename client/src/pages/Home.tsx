@@ -128,6 +128,7 @@ export default function Home() {
 
 function TestBand() {
   const { data: bgUrl } = trpc.settings.get.useQuery("home_testband_bg");
+  const { data: sideImg } = trpc.settings.get.useQuery("home_testband_side_img");
   const { data: featured, isLoading } = trpc.labTests.featured.useQuery();
 
   return (
@@ -144,41 +145,53 @@ function TestBand() {
       }
     >
       <div className="wrap">
-        <div className="eyebrow">Why one code, and why it never changes</div>
-        <h2>The QR on every bottle shows every batch, so we can't hand-pick a flattering one.</h2>
-        <p>
-          Our testing is done by an independent, ISO 17025-accredited lab. We don't own it, and
-          we don't pay it based on results. If a batch fails, it doesn't ship, and its lot number
-          is retired. That's the whole promise, and you can check it any time.
-        </p>
-        {!isLoading && (
-          <div className="mini">
-            <div
-              className="qr"
-              style={{
-                outlineColor: "var(--star)",
-                background:
-                  "conic-gradient(var(--star) 0 25%,transparent 0 50%,var(--star) 0 75%,transparent 0) 0 0/15px 15px,var(--ink2)",
-              }}
-            />
-            {featured ? (
-              <div>
-                <div className="b">{featured.productName.toUpperCase()} · LOT {featured.lot}</div>
-                <div className="r">
-                  {featured.panelCount} OF {featured.panelCount} PANELS · {featured.allPass ? "PASS" : "SEE FULL REPORT"}
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className="b">LAB RESULTS COMING AT LAUNCH</div>
-                <div className="r">
-                  Every batch is tested before it ships. Results publish here as soon as the first
-                  lots clear the lab.
-                </div>
+        <div className="testband-cols">
+          <div>
+            <div className="eyebrow">Why one code, and why it never changes</div>
+            <h2>The QR on every bottle shows every batch, so we can't hand-pick a flattering one.</h2>
+            <p>
+              Our testing is done by an independent, ISO 17025-accredited lab. We don't own it, and
+              we don't pay it based on results. If a batch fails, it doesn't ship, and its lot number
+              is retired. That's the whole promise, and you can check it any time.
+            </p>
+            {!isLoading && (
+              <div className="mini">
+                <div
+                  className="qr"
+                  style={{
+                    outlineColor: "var(--star)",
+                    background:
+                      "conic-gradient(var(--star) 0 25%,transparent 0 50%,var(--star) 0 75%,transparent 0) 0 0/15px 15px,var(--ink2)",
+                  }}
+                />
+                {featured ? (
+                  <div>
+                    <div className="b">{featured.productName.toUpperCase()} · LOT {featured.lot}</div>
+                    <div className="r">
+                      {featured.panelCount} OF {featured.panelCount} PANELS · {featured.allPass ? "PASS" : "SEE FULL REPORT"}
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="b">LAB RESULTS COMING AT LAUNCH</div>
+                    <div className="r">
+                      Every batch is tested before it ships. Results publish here as soon as the first
+                      lots clear the lab.
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
-        )}
+          <div
+            className="testband-side-img"
+            style={
+              sideImg
+                ? { backgroundImage: `url(${sideImg})`, backgroundSize: "cover", backgroundPosition: "center" }
+                : undefined
+            }
+          />
+        </div>
       </div>
     </section>
   );

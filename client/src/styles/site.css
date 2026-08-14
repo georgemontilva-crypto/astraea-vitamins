@@ -136,6 +136,9 @@ button { font-family: inherit; cursor: pointer; }
 .testband .mini { margin-top: 26px; background: var(--ink2); border: 1px solid #24344d; padding: 18px 20px; display: flex; gap: 16px; align-items: center; max-width: 520px; }
 .testband .mini .b { font-family: var(--mono); font-size: 11px; color: var(--verifyBright); letter-spacing: .1em; }
 .testband .mini .r { font-family: var(--mono); font-size: 11px; color: var(--star); line-height: 1.7; }
+.testband-cols { display: grid; grid-template-columns: 1.15fr 1fr; gap: 54px; align-items: center; }
+.testband-side-img { background: var(--ink2); border: 1px solid #24344d; border-radius: var(--radius); min-height: 340px; }
+@media (max-width: 920px) { .testband-cols { grid-template-columns: 1fr; } .testband-side-img { min-height: 220px; order: -1; } }
 
 /* ---------- EMAIL ---------- */
 .email { padding: 70px 0; text-align: center; border-top: 1px solid var(--hair); }

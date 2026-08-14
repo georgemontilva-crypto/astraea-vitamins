@@ -1,5 +1,6 @@
 export const IMAGE_SLOTS = [
   { key: "home_testband_bg", label: "Home — \"Why we test\" banner background" },
+  { key: "home_testband_side_img", label: "Home — \"Why we test\" side image" },
   { key: "home_hero_bg", label: "Home — Hero background" },
   { key: "our_story_hero_bg", label: "Our Story — Hero background" },
   { key: "our_story_promise_img", label: "Our Story — \"Why Astraea\" side image" },
