@@ -133,6 +133,7 @@ export default function AdminProducts() {
               <th>Name</th>
               <th>Category</th>
               <th>Family</th>
+              <th>QR</th>
               <th>Stock</th>
               <th>Price (1x)</th>
               <th>Price (sub)</th>
@@ -172,6 +173,21 @@ export default function AdminProducts() {
                       style={{ width: 90 }}
                       onChange={(e) => setEdits((s) => ({ ...s, [p.id]: { ...s[p.id], familyKey: e.target.value } }))}
                     />
+                  </td>
+                  <td>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <img
+                        src={`/api/admin/qr/${p.handle}?format=png`}
+                        alt="QR"
+                        width={32}
+                        height={32}
+                        style={{ border: "1px solid var(--hair)", background: "#fff" }}
+                      />
+                      <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                        <a href={`/api/admin/qr/${p.handle}?format=svg&download=1`} style={{ fontSize: 10 }}>SVG</a>
+                        <a href={`/api/admin/qr/${p.handle}?format=png&download=1`} style={{ fontSize: 10 }}>PNG</a>
+                      </div>
+                    </div>
                   </td>
                   <td>
                     <input

@@ -5,6 +5,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "./router/index.js";
 import { createContext } from "./trpc.js";
 import { uploadRouter } from "./routes/upload.js";
+import { qrRouter } from "./routes/qr.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -14,6 +15,7 @@ const app = express();
 app.use(cookieParser());
 app.use("/api/trpc", createExpressMiddleware({ router: appRouter, createContext }));
 app.use("/api/upload", uploadRouter);
+app.use("/api/admin/qr", qrRouter);
 
 app.get("/healthz", (_req, res) => res.json({ ok: true }));
 
