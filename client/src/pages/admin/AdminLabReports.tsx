@@ -10,8 +10,18 @@ export default function AdminLabReports() {
   const utils = trpc.useUtils();
   const { data: batches, isLoading } = trpc.admin.batches.listAll.useQuery();
   const { data: products } = trpc.admin.products.listAll.useQuery();
-  const publish = trpc.admin.batches.publish.useMutation({ onSuccess: () => utils.admin.batches.listAll.invalidate() });
-  const unpublish = trpc.admin.batches.unpublish.useMutation({ onSuccess: () => utils.admin.batches.listAll.invalidate() });
+  const publish = trpc.admin.batches.publish.useMutation({
+    onSuccess: () => {
+      utils.admin.batches.listAll.invalidate();
+      utils.admin.batches.log.invalidate();
+    },
+  });
+  const unpublish = trpc.admin.batches.unpublish.useMutation({
+    onSuccess: () => {
+      utils.admin.batches.listAll.invalidate();
+      utils.admin.batches.log.invalidate();
+    },
+  });
   const create = trpc.admin.batches.create.useMutation({
     onSuccess: () => {
       utils.admin.batches.listAll.invalidate();
@@ -220,6 +230,55 @@ export default function AdminLabReports() {
           </tbody>
         </table>
       </div>
+
+      <BatchLog />
+    </div>
+  );
+}
+
+function BatchLog() {
+  const { data: log, isLoading } = trpc.admin.batches.log.useQuery();
+
+  return (
+    <div className="admin-card admin-table-wrap">
+      <h2>Batch Log</h2>
+      <p style={{ fontSize: 13, color: "var(--muted)", marginBottom: 14 }}>
+        Per SOP-02 step 7: a permanent record of every lot ever published, who published it, and
+        when — kept even if a lot is later unpublished (e.g. a recall).
+      </p>
+      {isLoading && <p>Loading…</p>}
+      {!isLoading && log?.length === 0 && <p style={{ color: "var(--muted)", fontSize: 14 }}>No batches published yet.</p>}
+      {log && log.length > 0 && (
+        <table>
+          <thead>
+            <tr>
+              <th>Lot #</th>
+              <th>Product</th>
+              <th>Test Date</th>
+              <th>Published By / Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {log.map((entry, i) => (
+              <tr key={i}>
+                <td className="n">{entry.lot}</td>
+                <td>{entry.product}</td>
+                <td className="n">{entry.testedAt}</td>
+                <td className="n">
+                  {entry.publishedBy ?? "—"}
+                  {entry.publishedAt ? ` · ${new Date(entry.publishedAt).toLocaleDateString()}` : ""}
+                </td>
+                <td>
+                  <span className="pass" style={!entry.currentlyPublished ? { color: "var(--muted)", borderColor: "var(--hair)" } : {}}>
+                    {entry.currentlyPublished ? "LIVE" : "UNPUBLISHED"}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }

@@ -31,6 +31,17 @@ export const appRouter = router({
     byHandle: publicProcedure.input(z.string()).query(async ({ input }) => {
       return db.query.products.findFirst({ where: eq(products.handle, input) });
     }),
+    // Powers the PDP format switcher (jar <-> stick box) — other products
+    // sharing the same familyKey are the same underlying product in a
+    // different format.
+    siblingsOf: publicProcedure.input(z.string()).query(async ({ input }) => {
+      const product = await db.query.products.findFirst({ where: eq(products.handle, input) });
+      if (!product?.familyKey) return [];
+      const rows = await db.query.products.findMany({
+        where: eq(products.familyKey, product.familyKey),
+      });
+      return rows.filter((p) => p.id !== product.id);
+    }),
   }),
 
   labTests: router({

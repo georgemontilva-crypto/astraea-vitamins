@@ -67,6 +67,7 @@ export const products = mysqlTable("products", {
   stock: int("stock").default(0),
   imageUrl: varchar("image_url", { length: 500 }), // Cloudflare R2 URL
   labelPdfUrl: varchar("label_pdf_url", { length: 500 }),
+  familyKey: varchar("family_key", { length: 100 }), // products sharing this key are the same product in a different format (jar vs. on-the-go stick) — PDP shows a format switcher between them
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
@@ -87,6 +88,8 @@ export const batches = mysqlTable("batches", {
   coaPdfUrl: varchar("coa_pdf_url", { length: 500 }), // R2 url
   supplierCoaUrl: varchar("supplier_coa_url", { length: 500 }),
   published: boolean("published").default(false), // SOP: only publish after PASS
+  publishedBy: varchar("published_by", { length: 191 }), // admin email — SOP-02 step 7: "Record who published and when"
+  publishedAt: timestamp("published_at"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 

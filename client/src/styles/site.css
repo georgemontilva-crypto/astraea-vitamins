@@ -111,8 +111,8 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- FILTERS ---------- */
 .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
-.filters button { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 8px 15px; border: 1px solid var(--hair); background: #fff; color: var(--ink); }
-.filters button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.filters button, .filters a { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 8px 15px; border: 1px solid var(--hair); background: #fff; color: var(--ink); text-decoration: none; }
+.filters button.on, .filters a.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 /* ---------- SPLIT LINES ---------- */
 .lines { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -357,7 +357,7 @@ input, select, textarea { border-radius: calc(var(--radius) - 4px); }
 
 /* ---------- TAGS / BADGES / PILLS — fully rounded ---------- */
 .card .tested, .ptag, .buyopt .save, .freefrom span, .lab .pass, .pass,
-.filters button, .navcart, .lineblk .k, .eyebrow.chip {
+.filters button, .filters a, .navcart, .lineblk .k, .eyebrow.chip {
   border-radius: var(--radius-pill) !important;
 }
 .pass { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--verify); border: 1px solid var(--verify); padding: 2px 8px; display: inline-block; }

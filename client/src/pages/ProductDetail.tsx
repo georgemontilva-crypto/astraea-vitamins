@@ -9,6 +9,7 @@ type SupplementFact = { name: string; amount: string; unit?: string; dv?: string
 export default function ProductDetail() {
   const { handle } = useParams();
   const { data: product, isLoading } = trpc.products.byHandle.useQuery(handle!, { enabled: !!handle });
+  const { data: siblings } = trpc.products.siblingsOf.useQuery(handle!, { enabled: !!handle });
   const [mode, setMode] = useState<"subscribe" | "one_time">("subscribe");
   const { addItem } = useCart();
 
@@ -51,6 +52,18 @@ export default function ProductDetail() {
             <span className="ptag">{product.line}</span>
             <h1>{product.name}</h1>
             <div className="dose">{product.servingSupply}</div>
+            {siblings && siblings.length > 0 && (
+              <div className="filters" style={{ margin: "12px 0" }}>
+                <Link to={`/products/${product.handle}`} className="on" style={{ display: "inline-block" }}>
+                  {product.format === "stick" ? "On-the-Go" : "Jar"}
+                </Link>
+                {siblings.map((s) => (
+                  <Link key={s.id} to={`/products/${s.handle}`} style={{ display: "inline-block" }}>
+                    {s.format === "stick" ? "On-the-Go" : "Jar"}
+                  </Link>
+                ))}
+              </div>
+            )}
             <p className="blurb">{product.blurb}</p>
             <div className="price">{mode === "subscribe" ? priceSubscribe : priceOneTime}</div>
 

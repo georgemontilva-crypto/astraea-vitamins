@@ -2,7 +2,7 @@ import { useState } from "react";
 import { trpc } from "../../lib/trpc";
 import { uploadFile } from "../../lib/upload";
 
-type Edit = { stock?: string; priceOneTime?: string; priceSubscribe?: string };
+type Edit = { stock?: string; priceOneTime?: string; priceSubscribe?: string; familyKey?: string };
 
 export default function AdminProducts() {
   const utils = trpc.useUtils();
@@ -132,6 +132,7 @@ export default function AdminProducts() {
               <th>SKU</th>
               <th>Name</th>
               <th>Category</th>
+              <th>Family</th>
               <th>Stock</th>
               <th>Price (1x)</th>
               <th>Price (sub)</th>
@@ -163,6 +164,15 @@ export default function AdminProducts() {
                   <td className="n">{p.sku}</td>
                   <td>{p.name}</td>
                   <td>{p.category}</td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="—"
+                      defaultValue={p.familyKey ?? ""}
+                      style={{ width: 90 }}
+                      onChange={(e) => setEdits((s) => ({ ...s, [p.id]: { ...s[p.id], familyKey: e.target.value } }))}
+                    />
+                  </td>
                   <td>
                     <input
                       type="number"
@@ -198,6 +208,7 @@ export default function AdminProducts() {
                           stock: edit.stock !== undefined ? Number(edit.stock) : undefined,
                           priceOneTime: edit.priceOneTime,
                           priceSubscribe: edit.priceSubscribe,
+                          familyKey: edit.familyKey,
                         })
                       }
                     >

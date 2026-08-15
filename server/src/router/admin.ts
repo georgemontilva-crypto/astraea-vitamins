@@ -21,6 +21,7 @@ export const adminRouter = router({
           servingSupply: z.string().optional(),
           headline: z.string().optional(),
           blurb: z.string().optional(),
+          familyKey: z.string().optional(),
         })
       )
       .mutation(async ({ input }) => {
@@ -45,6 +46,7 @@ export const adminRouter = router({
           priceSubscribe: z.string().optional(),
           imageUrl: z.string().optional(),
           labelPdfUrl: z.string().optional(),
+          familyKey: z.string().optional(),
           active: z.boolean().optional(),
         })
       )
@@ -134,16 +136,43 @@ export const adminRouter = router({
       }),
     // Explicit publish step (SOP-05): only PASS batches should be published;
     // a failed batch stays visible to admins only, never to the storefront.
-    publish: adminProcedure.input(z.number()).mutation(async ({ input }) => {
+    // SOP-02 step 7: "Record who published and when" — stamped here, not
+    // left to a spreadsheet someone has to remember to update.
+    publish: adminProcedure.input(z.number()).mutation(async ({ input, ctx }) => {
       const batch = await db.query.batches.findFirst({ where: eq(batches.id, input) });
       if (!batch) throw new Error("Batch not found");
       if (!batch.pass) throw new Error("Cannot publish a failed batch — it must not ship.");
-      await db.update(batches).set({ published: true }).where(eq(batches.id, input));
+      await db
+        .update(batches)
+        .set({ published: true, publishedBy: ctx.user.email, publishedAt: new Date() })
+        .where(eq(batches.id, input));
       return { ok: true };
     }),
     unpublish: adminProcedure.input(z.number()).mutation(async ({ input }) => {
       await db.update(batches).set({ published: false }).where(eq(batches.id, input));
       return { ok: true };
+    }),
+    // SOP-02's "Batch Log" — a permanent record of every lot ever published,
+    // who published it, and when. Unpublishing a batch later (e.g. a recall)
+    // doesn't erase this history — that's the point of an audit trail.
+    log: adminProcedure.query(async () => {
+      const rows = await db.query.batches.findMany({
+        where: (b, { isNotNull }) => isNotNull(b.publishedAt),
+        orderBy: (b, { desc }) => desc(b.publishedAt),
+      });
+      const productIds = [...new Set(rows.map((r) => r.productId))];
+      const prods = productIds.length
+        ? await db.query.products.findMany({ where: (p, { inArray }) => inArray(p.id, productIds) })
+        : [];
+      const nameById = new Map(prods.map((p) => [p.id, p.name]));
+      return rows.map((r) => ({
+        lot: r.lot,
+        product: nameById.get(r.productId) ?? `#${r.productId}`,
+        testedAt: r.testedAt,
+        publishedBy: r.publishedBy,
+        publishedAt: r.publishedAt,
+        currentlyPublished: r.published,
+      }));
     }),
   }),
 });
