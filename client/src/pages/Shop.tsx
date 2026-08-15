@@ -9,6 +9,7 @@ const FILTERS = [
   { key: "capsule", label: "Capsules" },
   { key: "tablet", label: "Tablets" },
   { key: "powder", label: "Powders" },
+  { key: "stick", label: "Sticks" },
   { key: "gummy", label: "Gummies" },
 ] as const;
 

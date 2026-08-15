@@ -87,7 +87,10 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- PRODUCT GRID / CARD ---------- */
 .grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
-.card { background: #fff; border: 1px solid var(--hair); text-align: left; padding: 0; display: flex; flex-direction: column; transition: .16s; overflow: hidden; text-decoration: none; color: inherit; }
+.card { background: #fff; border: 1px solid var(--hair); text-align: left; padding: 0; display: flex; flex-direction: column; transition: .16s; overflow: hidden; text-decoration: none; color: inherit; position: relative; }
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 1; }
+.card.wellness::before { background: var(--star); }
+.card.sport::before { background: var(--ember); }
 .card:hover { border-color: var(--ink); transform: translateY(-2px); }
 .card .thumb { background: var(--paper2); border-bottom: 1px solid var(--hair); padding: 22px 0; display: flex; justify-content: center; }
 .quick-add {
