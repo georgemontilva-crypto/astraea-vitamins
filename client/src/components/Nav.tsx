@@ -11,9 +11,10 @@ export default function Nav() {
   const isAdmin = user?.role === "admin";
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const onShop = location.pathname === "/shop" || location.pathname.startsWith("/products/");
-  const onWellness = location.pathname === "/wellness";
-  const onSport = location.pathname === "/sport";
+  const onShop =
+    location.pathname === "/shop" ||
+    location.pathname.startsWith("/products/") ||
+    location.pathname.startsWith("/collections/");
   const onShopRoot = location.pathname === "/shop";
 
   // Close the mobile menu whenever the route changes (link clicks, back/forward).
@@ -32,8 +33,9 @@ export default function Nav() {
             </NavLink>
             <div className="navdrop-panel">
               <Link to="/shop" className={onShopRoot ? "on" : ""}>All products</Link>
-              <Link to="/wellness" className={onWellness ? "on" : ""}>Wellness</Link>
-              <Link to="/sport" className={onSport ? "on" : ""}>Sport</Link>
+              <Link to="/collections/daily-shake">Daily Shake</Link>
+              <Link to="/collections/sleep-gummy">Sleep Gummy</Link>
+              <Link to="/collections/variety-packs">Variety Packs</Link>
             </div>
           </div>
           <NavLink to="/lab-tests" className={({ isActive }) => (isActive ? "on" : "")}>Lab Tests</NavLink>
@@ -63,8 +65,9 @@ export default function Nav() {
         <div className="nav-mobile-panel">
           <NavLink to="/" end className={({ isActive }) => (isActive ? "on" : "")}>Home</NavLink>
           <NavLink to="/shop" className={onShopRoot ? "on" : ""}>All products</NavLink>
-          <Link to="/wellness" className={onWellness ? "on" : ""}>Wellness</Link>
-          <Link to="/sport" className={onSport ? "on" : ""}>Sport</Link>
+          <Link to="/collections/daily-shake">Daily Shake</Link>
+          <Link to="/collections/sleep-gummy">Sleep Gummy</Link>
+          <Link to="/collections/variety-packs">Variety Packs</Link>
           <NavLink to="/lab-tests" className={({ isActive }) => (isActive ? "on" : "")}>Lab Tests</NavLink>
           <NavLink to="/our-story" className={({ isActive }) => (isActive ? "on" : "")}>Our Story</NavLink>
           <NavLink to="/account" className={({ isActive }) => (isActive ? "on" : "")}>Account</NavLink>

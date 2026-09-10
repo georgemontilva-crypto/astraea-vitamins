@@ -43,6 +43,13 @@
       "when": 1786760655223,
       "tag": "0005_massive_sabra",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1789000261173,
+      "tag": "0006_numerous_hannibal_king",
+      "breakpoints": true
     }
   ]
 }

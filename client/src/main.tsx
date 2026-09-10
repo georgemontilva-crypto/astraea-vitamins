@@ -15,6 +15,9 @@ import Wellness from "./pages/Wellness";
 import Sport from "./pages/Sport";
 import ProductDetail from "./pages/ProductDetail";
 import LabTests from "./pages/LabTests";
+import DailyShake from "./pages/DailyShake";
+import SleepGummy from "./pages/SleepGummy";
+import VarietyPacks from "./pages/VarietyPacks";
 import CheckTheTesting from "./pages/CheckTheTesting";
 import Subscriptions from "./pages/Subscriptions";
 import FAQ from "./pages/FAQ";
@@ -54,7 +57,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <Route path="/wellness" element={<Wellness />} />
                 <Route path="/sport" element={<Sport />} />
                 <Route path="/products/:handle" element={<ProductDetail />} />
+                <Route path="/collections/daily-shake" element={<DailyShake />} />
+                <Route path="/collections/sleep-gummy" element={<SleepGummy />} />
+                <Route path="/collections/variety-packs" element={<VarietyPacks />} />
+                {/* Canonical printed Lab Tests URL. Never change these paths:
+                    they are printed on packaging and cannot be reissued. */}
+                <Route path="/lab/:handle" element={<LabTests />} />
                 <Route path="/lab-tests" element={<LabTests />} />
+                {/* Server 301s this to /lab/:handle; kept so a client-side
+                    navigation to the old shape still renders. */}
+                <Route path="/lab-tests/:handle" element={<LabTests />} />
                 <Route path="/check-the-testing" element={<CheckTheTesting />} />
                 <Route path="/subscriptions" element={<Subscriptions />} />
                 <Route path="/faq" element={<FAQ />} />

@@ -23,8 +23,12 @@ qrRouter.get("/:handle", requireAdmin, async (req, res) => {
   const product = await db.query.products.findFirst({ where: eq(products.handle, req.params.handle) });
   if (!product) return res.status(404).json({ error: "Product not found." });
 
-  const siteUrl = process.env.SITE_URL || `${req.protocol}://${req.get("host")}`;
-  const targetUrl = `${siteUrl}/lab-tests?product=${product.handle}`;
+  // Printed on packaging and unchangeable once a carton runs, so this must not
+  // inherit whatever host the admin happens to be browsing (a Railway preview
+  // domain would get printed). Falls back to the canonical domain the client
+  // fixed in the 2026-08-26 brief, never to req.host.
+  const siteUrl = (process.env.SITE_URL || "https://astraeavitamins.com").replace(/\/+$/, "");
+  const targetUrl = `${siteUrl}/lab/${product.handle}`;
   const format = req.query.format === "png" ? "png" : "svg";
 
   try {

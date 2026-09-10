@@ -53,7 +53,10 @@ export const products = mysqlTable("products", {
   name: varchar("name", { length: 191 }).notNull(),
   line: mysqlEnum("line", ["Wellness", "Sport"]).notNull(),
   category: varchar("category", { length: 100 }).notNull(), // matches categories.name
-  format: mysqlEnum("format", ["capsule", "tablet", "powder", "stick", "gummy"]).notNull(),
+  // sachet/pouch are the wave-one formats (2026-08-26 rescope). The jar/stick
+  // formats stay in the enum: the 37-SKU catalog returns in a later wave, so
+  // dropping them would mean a destructive migration for no gain.
+  format: mysqlEnum("format", ["capsule", "tablet", "powder", "stick", "gummy", "sachet", "pouch"]).notNull(),
   servingSupply: varchar("serving_supply", { length: 191 }), // "2 tablets · 28-day"
   headline: varchar("headline", { length: 255 }),
   blurb: text("blurb"),
@@ -67,7 +70,11 @@ export const products = mysqlTable("products", {
   stock: int("stock").default(0),
   imageUrl: varchar("image_url", { length: 500 }), // Cloudflare R2 URL
   labelPdfUrl: varchar("label_pdf_url", { length: 500 }),
-  familyKey: varchar("family_key", { length: 100 }), // products sharing this key are the same product in a different format (jar vs. on-the-go stick) — PDP shows a format switcher between them
+  familyKey: varchar("family_key", { length: 100 }), // groups the flavors of one formula family ("daily-shake", "sleep-gummy"); also grouped jar/stick siblings in the pre-rescope catalog
+  // A variety pack carton physically contains the other flavors of its family.
+  // Its Lab Tests page must therefore show every member flavor's lots, grouped
+  // by flavor — one dropdown of mixed lots would make the customer guess.
+  isVarietyPack: boolean("is_variety_pack").default(false),
   active: boolean("active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
