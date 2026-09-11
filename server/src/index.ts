@@ -18,6 +18,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 app.use(cookieParser());
+// Needed by the access-gate form, which posts urlencoded. Mounted before the
+// gate so req.body is populated by the time it checks the submitted password.
+app.use(express.urlencoded({ extended: false }));
 
 // Before every route, API included: an unauthenticated tRPC call would
 // otherwise hand out the whole pre-launch catalog.
