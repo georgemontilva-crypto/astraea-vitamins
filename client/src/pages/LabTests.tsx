@@ -48,7 +48,12 @@ export default function LabTests() {
 
   const batch = batchIndex !== null ? activeGroup?.batches[batchIndex] : undefined;
   const panels = (batch?.panels as Panel[] | null) ?? [];
-  const noLotsYet = !!productHandle && !isLoading && groups.every((g) => g.batches.length === 0);
+  const noLotsYet =
+    !!productHandle && !isLoading && !!labData && groups.every((g) => g.batches.length === 0);
+  // An unknown handle is not the same as a known product with no lots yet.
+  // A printed URL that resolves to nothing has to say so plainly rather than
+  // reassure the customer that results are coming.
+  const unknownProduct = !!productHandle && !isLoading && labData === null;
 
   return (
     <section className="lab">
@@ -135,6 +140,13 @@ export default function LabTests() {
         )}
 
         {isLoading && <p style={{ marginTop: 24 }}>Loading…</p>}
+
+        {unknownProduct && (
+          <div className="empty">
+            We can't find that product. Check the URL printed on your pack, or pick the product
+            from the list above.
+          </div>
+        )}
 
         {noLotsYet && <div className="empty">Lab results will publish here at launch.</div>}
 
